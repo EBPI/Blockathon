@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hyper42 - About</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css" th:src="@{webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
+          type="text/css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" th:src="@{css/custom.css}" type="text/css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-sm navbar-dark navbar-custom">
+    <a class="navbar-brand" href="/">Hyper42</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">About</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="basic-template">
+        <h1>Hyper42 web application - about</h1>
+        <h2>
+            <span th:text=${aboutMessage1}></span>
+        </h2>
+        <h3>
+            <span th:text=${aboutMessage2}></span>
+        </h3>
+        <img class="team" src="img/team.jpeg" th:src="@{img/team.jpeg}" alt="Cat"/>
+    </div>
+
+</div> <!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+        th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

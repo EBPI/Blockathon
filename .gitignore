@@ -1,0 +1,23 @@
+.DS_Store
+composer-logs/
+*.bna
+.vscode
+.project
+.classpath
+.cache-main
+.cache-tests
+eclipse-target/
+target/
+.settings/
+*.iml
+.idea/
+.springBeans
+bin/
+build/
+overlays/
+log4j.properties
+logback-test.xml
+.cache
+dependency-reduced-pom.xml
+# jvm dumps
+hs_err_pid*.log
