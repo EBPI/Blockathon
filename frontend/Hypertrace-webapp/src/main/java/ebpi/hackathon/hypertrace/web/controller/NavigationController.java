@@ -1,7 +1,5 @@
 package ebpi.hackathon.hypertrace.web.controller;
 
-import com.google.gson.Gson;
-import ebpi.hackathon.hypertrace.web.domein.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,10 +26,6 @@ public class NavigationController {
      */
     @RequestMapping("/login")
     public String login(Map<String, Object> model) {
-        String message1 = "This is just a boring login page...";
-        String message2 = "Hyper42 is the best team ever!";
-        model.put("loginMessage1", message1);
-        model.put("loginMessage2", message2);
         return "login";
     }
 
