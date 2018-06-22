@@ -27,7 +27,7 @@ function doSendShipment(sendShipment){
     newShipment.Customer = factory.newRelationship('org.ebpi.blockathon', 'Orderer', costID);
     newShipment.Supplier =factory.newRelationship('org.ebpi.blockathon', 'Manufacturer', manuID);
     newShipment.Weight= originalWeight;
-    newShipment.ShipmentID= uuidv4;
+    newShipment.ShipmentID= uuidv4();
 
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentRegistry) {
