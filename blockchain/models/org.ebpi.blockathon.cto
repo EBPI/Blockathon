@@ -49,6 +49,7 @@ asset Shipment identified by ShipmentID {
   --> Product [] ShippedProducts
   --> Transporter [] transporterList
   --> Order order
+  o String Weight
 }
 
 enum ShipmentState {
