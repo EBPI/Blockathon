@@ -4,8 +4,6 @@
 * @param {org.ebpi.blockathon.sendShipment} sendShipment
 * @transaction
 */
-
-
 function doSendShipment(sendShipment){
     const manufacturer= getCurrentParticipant();
     const manuID = manufacturer.PartnerID;
@@ -36,6 +34,21 @@ function doSendShipment(sendShipment){
         })
         
     }
+
+/**
+* Sample transaction
+* @param {org.ebpi.blockathon.acceptShipment} acceptShipment
+* @transaction
+*/
+    function doAcceptShipment(acceptShipment){
+acceptShipment.shipment
+acceptShipment.state
+    }
+
+
+
+
+
 
     function uuidv4() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

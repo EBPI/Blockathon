@@ -44,8 +44,20 @@ asset Shipment identified by ShipmentID {
   --> Orderer Customer
   --> Manufacturer Supplier
   o String Weight
+  o Handover [] handoverArray default = ""
 }
 
+asset Handover identified by HandoverID {
+  o String HandoverID
+  --> TradePartner giving
+  --> TradePartner reciever
+  o Boolean confirmed
+  o ShipmentState stateGiving
+  o ShipmentState stateReciever
+
+
+
+}
 
 transaction sendShipment {
 o String DocumentHash
