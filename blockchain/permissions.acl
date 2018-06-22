@@ -40,9 +40,9 @@ description: "Allow a manufacturer to create a product"
 
 rule ManufactereShipment {
 description: "Allow a manufacturer to create a shipment"
-participant:"org.ebpi.blockathon.Manufacturer"
+participant (p):"org.ebpi.blockathon.Manufacturer"
   operation: CREATE, READ
-  resource: "org.ebpi.blockathon.Shipment"
+  resource (r): "org.ebpi.blockathon.Shipment"
   condition: (r.Sender.getIdentifier() == p.getIdentifier())
   action: ALLOW
 }
