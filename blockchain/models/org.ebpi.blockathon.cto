@@ -78,25 +78,20 @@ enum ShipmentState {
     o BROKEN
     o OPEN
     o BAD
+    o undefined
 }
 
-
-
-transaction acceptShipment {
---> Shipment shipment
-o ShipmentState state
-}
 
 
 transaction startHandover {
 --> Shipment shipment
---> Transporter nextHandler
+--> TradePartner nextHandler
 o ShipmentState state
 }
 
 transaction acceptHandover {
 --> Shipment shipment
---> Transporter previousHandler
+--> TradePartner previousHandler
 o ShipmentState state
 }
 
