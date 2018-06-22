@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hypertrace - login</title>
+    <title>Hypertrace - Order status</title>
 
     <!-- Bootstrap core CSS -->
     <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css" th:src="@{webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
@@ -31,7 +31,10 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="/status">View status</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -44,14 +47,9 @@
 <div class="container">
 
     <div class="basic-template">
-        <h1>Hypertrace web application - login</h1>
-        <h2>
-            <span th:text=${loginMessage1}></span>
-        </h2>
-        <h3>
-            <span th:text=${loginMessage2}></span>
-        </h3>
-        <img class="team" src="img/team.jpeg" th:src="@{img/team.jpeg}" alt="Team"/>
+        <h1>
+            <span th:text="'Welcome! ' + ${orderStatusMessage}"></span>
+        </h1>
     </div>
 
 </div> <!-- /.container -->
@@ -60,7 +58,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
-<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"Order
         th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 
 </body>
