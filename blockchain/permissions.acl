@@ -21,7 +21,7 @@ rule TradePartner {
     action: ALLOW
 }
 
-ruleDouane {
+rule Douane {
 description: "Allow douane te read it all"
   participant: "org.ebpi.blockathon.Douane"
   operation:READ
@@ -43,10 +43,17 @@ description: "Allow a manufacturer to create a shipment"
 participant:"org.ebpi.blockathon.Manufacturer"
   operation: CREATE, READ
   resource: "org.ebpi.blockathon.Shipment"
+  transaction(tx): "org.ebpi.blockathon.sendShipment"
   condition: (r.Sender.getIdentifier() == p.getIdentifier())
   action: ALLOW
 }
-
+rule ManufactereSendShipment{
+description: "Allow a manufacturer to create sendShipment"
+participant:"org.ebpi.blockathon.Manufacturer"
+  operation: CREATE
+  resource: "org.ebpi.blockathon.sendShipment"
+  action: ALLOW
+}
 
 rule SystemACL {
     description:  "System ACL to permit all access"

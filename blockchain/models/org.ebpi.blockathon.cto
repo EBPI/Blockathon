@@ -46,6 +46,17 @@ asset Shipment identified by ShipmentID {
   o String Weight
 }
 
+
+transaction sendShipment {
+o String DocumentHash
+o String DocumentLocation
+--> Product [] ShippedProducts
+--> Transporter [] transporterList
+o String Destination
+--> Orderer Customer
+o String Weight
+}
+
 enum ShipmentState {
     o MINT
     o GOOD
@@ -58,16 +69,6 @@ enum ShipmentState {
 }
 
 
-
-transaction sendShipment {
-o String DocumentHash
-o String DocumentLocation
---> Product [] prodcutList
---> Orderer Customer
-o String destignation
---> Transporter [] handlers
-o ShipmentState state
-}
 
 transaction acceptShipment {
 --> Shipment shipment

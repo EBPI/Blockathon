@@ -1,0 +1,5 @@
+ {
+    "$class": "org.ebpi.blockathon.Manufacturer",
+    "Name": "string",
+    "PartnerID": "string"
+  }

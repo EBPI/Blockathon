@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+   <changeSet id="CS1" author="Hyper42">
+      <createTable tableName="ORDER_BASE">
+         <column name="ID" type="VARCHAR(80)">
+            <constraints nullable="false" primaryKey="true" primaryKeyName="ID" />
+         </column>
+         <column name="MANUFACTURER" type="VARCHAR(256)">
+            <constraints nullable="false" />
+         </column>
+      </createTable>
+      <createTable tableName="ORDER_PRODUCTS">
+         <column name="ORDER_ID" type="VARCHAR(80)">
+            <constraints nullable="false" />
+         </column>
+         <column name="PRODUCT_ID" type="VARCHAR(256)">
+            <constraints nullable="false" />
+         </column>
+      </createTable>      
+   </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,16 @@
+  {
+    "$class": "org.ebpi.blockathon.Shipment",
+    "ShipmentID": "string",
+    "DocumentHash": "string",
+    "DocumentLocation": "string",
+    "ShippedProducts": [
+      "string"
+    ],
+    "transporterList": [
+      "string"
+    ],
+    "Destination": "string",
+    "Customer": "string",
+    "Supplier": "string",
+    "Weight": "string"
+  }

@@ -3,7 +3,8 @@ package nl.ebpi.hypertrace.backend.utils;
 public enum BlockchainRestUrl {
 
 	PRODUCT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Product/{id}"),
-	PRODUCTS("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Product");
+	PRODUCTS("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Product"),
+	ADD_SHIPMENT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Shipment");
 
 	private final String url;
 
