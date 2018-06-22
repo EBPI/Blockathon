@@ -3,13 +3,13 @@
 
 
     /**
-     *  Placer Order
+     * Sample transaction
      * @param {org.ebpi.blockathon.sendShipment} sendShipment
      * @transaction
      */
 
 
-    function doSendShipment(shipment){
+    function doSendShipment(sendShipment){
         const manufacturer= getCurrentParticipant()
         const manuID = manufacturer.PartnerID
         const hash = shipment.DocumentHash
