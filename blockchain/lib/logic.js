@@ -4,12 +4,12 @@
 
     /**
      *  Placer Order
-     * @param {org.ebpi.blockathon.Shipment} sendShipment
+     * @param {org.ebpi.blockathon.sendShipment} sendShipment
      * @transaction
      */
 
 
-    function sendShipment(shipment){
+    function doSendShipment(shipment){
         const manufacturer= getCurrentParticipant()
         const manuID = manufacturer.PartnerID
         const hash = shipment.DocumentHash
@@ -17,22 +17,22 @@
         const procductList = shipment.ShippedProducts
         const transprterList = shipment.transporterList
         const destination= shipment.Destination
-        const customer = shipment.Customer
+        const costumer = shipment.Customer
         const costID = costumer.PartnerID
         const originalWeight = shipment.Weight
         let factory = getFactory()
         let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment')
-        newshipment.DocumentHash = hash
-        newshipment.DocumentLocation =docLoc
-        newshipment.ShippedProducts=procductList
-        newshipment.transporterList=transprterList
-        newshipment.Destination=destination
-        newshipment.Customer = factory.newRelationship('org.ebpi.blockathon', 'Orderer', costID)
-        newshipment.Supplier =factory.newRelationship('org.ebpi.blockathon', 'Manufacturer', manuID)
-        newshipment.Weight= originalWeight
+        newShipment.DocumentHash = hash
+        newShipment.DocumentLocation =docLoc
+        newShipment.ShippedProducts=procductList
+        newShipment.transporterList=transprterList
+        newShipment.Destination=destination
+        newShipment.Customer = factory.newRelationship('org.ebpi.blockathon', 'Orderer', costID)
+        newShipment.Supplier =factory.newRelationship('org.ebpi.blockathon', 'Manufacturer', manuID)
+        newShipment.Weight= originalWeight
         return getAssetRegistry('org.ebpi.blockathon.Shipment')
             .then(function (shipmentRegistry) {
-                return shipmentRegistry.add(newshipment)
+                return shipmentRegistry.add(newShipment)
             })
     }
 }
