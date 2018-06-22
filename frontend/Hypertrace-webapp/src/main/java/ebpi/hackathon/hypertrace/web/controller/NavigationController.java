@@ -3,7 +3,9 @@ package ebpi.hackathon.hypertrace.web.controller;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import ebpi.hackathon.hypertrace.web.domein.User;
+import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,9 @@ import static org.apache.commons.codec.Charsets.UTF_8;
 
 @Controller
 public class NavigationController {
+
+    @Autowired
+    HyperledgerRestService ledgerService;
 
     /**
      * Homepage for non logged-in user
@@ -62,14 +68,16 @@ public class NavigationController {
      * @return logged in home or same page
      */
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute(value = "user") User user, @RequestParam("type") String type, Map<String, Object> model, HttpServletResponse response) throws IOException {
+    public String loginSubmit(@ModelAttribute(value = "user") User user, @RequestParam("type") String type, Map<String, Object> model, HttpServletResponse response) throws IOException, URISyntaxException {
         // clear cookies
-        user.setType(type);
+        user = loginCheck(user);
 
-        response.addCookie(new Cookie("username", user.getUsername()));
-        response.addCookie(new Cookie("type", user.getType()));
-
-        if (loginCheck(user)) {
+        if (user != null) {
+            user.setType(type);
+            ledgerService.getParticipant(user);
+            response.addCookie(new Cookie("username", user.getUsername()));
+            response.addCookie(new Cookie("fullName", user.getFullName()));
+            response.addCookie(new Cookie("type", user.getType()));
             return loggedIn(model, user);
         } else {
             return home(model);
@@ -82,19 +90,18 @@ public class NavigationController {
      * @return boolean that indicates a correct login
      * @throws IOException exception that can normally occur during json parsing, nothing of interest here
      */
-    private boolean loginCheck(User user) throws IOException {
+    private User loginCheck(User user) throws IOException {
         InputStream inputStream = getClass().getResourceAsStream("/users.json");
         String usersJson = IOUtils.toString(inputStream, UTF_8);
         Type listType = new TypeToken<ArrayList<User>>() {
         }.getType();
         List<User> users = new Gson().fromJson(usersJson, listType);
-        boolean loginValid = false;
         for (User existing : users) {
-            if (!loginValid && existing.getUsername().equals(user.getUsername()) && (existing.getPassword().equals(user.getPassword()))) {
-                loginValid = true;
+            if (existing.getFullName() != null && existing.getUsername().equals(user.getUsername()) && (existing.getPassword().equals(user.getPassword()))) {
+                return user;
             }
         }
-        return loginValid;
+        return null;
     }
 
     /**
