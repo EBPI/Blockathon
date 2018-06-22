@@ -36,6 +36,8 @@ asset Order identified by OrderID {
 
 asset Product identified by ProductID {
   o String ProductID
+  o String Description
+  o String Value
   o String EnforcementDBUrl
   --> Manufacturer Creator
 }
@@ -45,8 +47,8 @@ asset Shipment identified by ShipmentID {
   o String DocumentHash
   o String DocumentLocation
   --> Product [] ShippedProducts
-  --> Manufacturer Sender
   --> Transporter [] transporterList
+  --> Order order
 }
 
 transaction PlaceOrder {
