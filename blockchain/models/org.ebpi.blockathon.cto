@@ -58,11 +58,6 @@ enum ShipmentState {
 }
 
 
-transaction PlaceOrder {
---> Manufacturer manufacturer
---> Product [] productList
-o String Destination
-}
 
 transaction sendShipment {
 o String DocumentHash
