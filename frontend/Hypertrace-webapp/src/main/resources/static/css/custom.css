@@ -8,6 +8,7 @@
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
     color: #00ff00;
+    font-size: 
 }
 
 * {
@@ -16,6 +17,7 @@
 
 .navbar-brand {
 	font-family: "Bungee";
+    font-size: 28px;
 }
 
 /* change the link color */

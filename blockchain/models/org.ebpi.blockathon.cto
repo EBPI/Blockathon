@@ -26,14 +26,6 @@ participant Orderer extends TradePartner {
   o String Name
 }
 
-asset Order identified by OrderID {
-  o String OrderID
-  --> Product [] OrderedProducts
-  o String Destination
-  --> Orderer Customer
-  --> Manufacturer Supplier
-}
-
 asset Product identified by ProductID {
   o String ProductID
   o String Description
@@ -48,7 +40,10 @@ asset Shipment identified by ShipmentID {
   o String DocumentLocation
   --> Product [] ShippedProducts
   --> Transporter [] transporterList
-  --> Order order
+  o String Destination
+  --> Orderer Customer
+  --> Manufacturer Supplier
+  o String Weight
 }
 
 enum ShipmentState {
@@ -63,11 +58,6 @@ enum ShipmentState {
 }
 
 
-transaction PlaceOrder {
---> Manufacturer manufacturer
---> Product [] productList
-o String Destination
-}
 
 transaction sendShipment {
 o String DocumentHash

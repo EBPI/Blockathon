@@ -18,15 +18,20 @@
 
 <body>
 
-<!--/*/ <th:block th:include="fragments/navbar-loggedin.html">
+<!--/*/ <th:block th:include="fragments/navbar.html">
         </th:block> /*/-->
-        
+
 <div class="container">
 
     <div class="basic-template">
         <h1>
-            <span th:text="'Welcome! ' + ${loggedInMessage}"></span>
+            <span th:text="'Welcome! ' + ${homeMessage}"></span>
         </h1>
+        <div id="async">Checking for camera status</div>
+		<form action="server.cgi" method="post" enctype="multipart/form-data">
+			<input type="file" name="image" accept="image/*" capture="user">
+			<input type="submit" value="Upload">
+		</form>
     </div>
 
 </div> <!-- /.container -->
