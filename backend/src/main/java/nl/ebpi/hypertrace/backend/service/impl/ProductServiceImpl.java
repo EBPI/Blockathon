@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 public class ProductServiceImpl implements ProductService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 	@Autowired
 	private RestTemplate restTemplate;
 
