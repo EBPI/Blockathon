@@ -1,7 +1,13 @@
 package ebpi.hackathon.hypertrace.web.controller;
 
+import com.google.gson.Gson;
+import ebpi.hackathon.hypertrace.web.domein.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -25,8 +31,22 @@ public class NavigationController {
      * @return loginpage
      */
     @RequestMapping("/login")
-    public String login(Map<String, Object> model) {
+    public String login(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
         return "login";
+    }
+
+    /**
+     * Homepage Submits a loggedIn user
+     * @param user
+     * @return logged in home or same page
+     */
+    @PostMapping("/login")
+    public String loginSubmit(@ModelAttribute(value="user") User user, @RequestParam("type") String type) {
+        user.setType(type);
+        System.out.println(new Gson().toJson(user));
+        return "home";
     }
 
     /**
