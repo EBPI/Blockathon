@@ -10,11 +10,9 @@ participant TradePartner identified by PartnerID {
   o String PartnerID
 }
 
-
-participant Douane identified by DouaneID{
-    o String DouaneID
-    o String Name
-    }
+participant Douane extends TradePartner {
+  o String Name
+}
 
 participant Transporter extends TradePartner {
   o String Name
