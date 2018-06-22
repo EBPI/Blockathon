@@ -1,16 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee|Exo+2:400,500,700,800,900');
+
 .navbar-custom {
-    background-color: #000080;
+    background-color: #370D4E;
 }
 
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-    color: rgba(255, 255, 255, .8);
+    color: #00ff00;
+}
+
+* {
+	font-family: "Exo 2";
+}
+
+.navbar-brand {
+	font-family: "Bungee";
 }
 
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, .5);
+    color: rgba(255, 255, 255, 0.5);
     text-align: center;
 }
 
@@ -21,7 +31,7 @@
 
 .navbar-custom .nav-item.active .nav-link {
     color: #ffffff;
-    background-color: #000355;
+    background-color: #1C0529;
 }
 
 .basic-template {

@@ -1,0 +1,6 @@
+{
+	"$class": "org.ebpi.blockathon.Product",
+	"ProductID": "NIKESHOE001",
+	"EnforcementDBUrl": "http://www.nike.com",
+	"Creator": "resource:org.ebpi.blockathon.Manufacturer#NIKE001"
+}
