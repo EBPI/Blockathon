@@ -26,14 +26,6 @@ participant Orderer extends TradePartner {
   o String Name
 }
 
-asset Order identified by OrderID {
-  o String OrderID
-  --> Product [] OrderedProducts
-  o String Destination
-  --> Orderer Customer
-  --> Manufacturer Supplier
-}
-
 asset Product identified by ProductID {
   o String ProductID
   o String Description
@@ -48,8 +40,23 @@ asset Shipment identified by ShipmentID {
   o String DocumentLocation
   --> Product [] ShippedProducts
   --> Transporter [] transporterList
-  --> Order order
+  o String Destination
+  --> Orderer Customer
+  --> Manufacturer Supplier
+  o String Weight
 }
+
+enum ShipmentState {
+    o MINT
+    o GOOD
+    o WET
+    o WATER_DAMAGE
+    o TEARED
+    o BROKEN
+    o OPEN
+    o BAD
+}
+
 
 transaction PlaceOrder {
 --> Manufacturer manufacturer
@@ -64,24 +71,34 @@ o String DocumentLocation
 --> Orderer Customer
 o String destignation
 --> Transporter [] handlers
+o ShipmentState state
 }
 
 transaction acceptShipment {
 --> Shipment shipment
+o ShipmentState state
 }
 
 
 transaction startHandover {
 --> Shipment shipment
 --> Transporter nextHandler
+o ShipmentState state
 }
 
 transaction acceptHandover {
 --> Shipment shipment
 --> Transporter previousHandler
+o ShipmentState state
 }
 
 transaction deliverPackage{
 --> Shipment shipment
+o ShipmentState state
 o String reciever
+}
+
+transaction recievePagage{
+-->Shipment shipment
+  o ShipmentState state
 }
