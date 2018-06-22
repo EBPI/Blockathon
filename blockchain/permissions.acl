@@ -47,15 +47,6 @@ participant:"org.ebpi.blockathon.Manufacturer"
   action: ALLOW
 }
 
-rule OrderCreatment{
-description: "Allow only a Orderer to create an Order"
-  participant (p):"org.ebpi.blockathon.Orderer"
-  operation: CREATE, UPDATE
-  resource (r):"org.ebpi.blockathon.Order"
-  condition:(r.Costumer.getIdentiefier()==p.getIdentifier())
-  action:ALLOW
-}
-
 
 
 rule SystemACL {
