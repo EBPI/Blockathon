@@ -71,10 +71,10 @@ function doStartHandover(startHandover) {
 
 /**
  * Sample transaction
- * @param {org.ebpi.blockathon.acceptShipment} acceptShipment
+ * @param {org.ebpi.blockathon.acceptHandover} acceptHandover
  * @transaction
  */
-function doAcceptShipment(acceptShipment) {
+function doAcceptShipment(acceptHandover) {
     acceptShipment.shipment
     acceptShipment.state
 }
