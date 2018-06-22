@@ -98,10 +98,10 @@ o ShipmentState state
 transaction deliverPackage{
 --> Shipment shipment
 o ShipmentState state
-o String reciever
+o String receiver
 }
 
-transaction recievePagage{
+transaction receivePackage{
 -->Shipment shipment
   o ShipmentState state
 }

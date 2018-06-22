@@ -30,7 +30,7 @@ function doSendShipment(sendShipment) {
 
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentRegistry) {
-            return ShipmentRegistry.add(newShipment).ShipmentID
+             ShipmentRegistry.add(newShipment) .then (function () { return identifier } )
         })
 
 }
