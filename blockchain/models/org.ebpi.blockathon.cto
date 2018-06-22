@@ -44,7 +44,7 @@ asset Shipment identified by ShipmentID {
   --> Orderer Customer
   --> Manufacturer Supplier
   o String Weight
-  o Handover [] handoverArray default = ""
+  o Handover [] handoverArray
 }
 
 asset Handover identified by HandoverID {
