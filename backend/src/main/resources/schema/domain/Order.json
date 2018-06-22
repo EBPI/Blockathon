@@ -1,0 +1,8 @@
+ {
+	"Products": [
+		"productId",
+		"productId"
+	],
+	"Manufacturer": "PartnerID",
+	"Orderer": "PartnerID"
+}
