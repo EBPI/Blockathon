@@ -47,7 +47,13 @@ participant:"org.ebpi.blockathon.Manufacturer"
   condition: (r.Sender.getIdentifier() == p.getIdentifier())
   action: ALLOW
 }
-
+rule ManufactereSendShipment{
+description: "Allow a manufacturer to create sendShipment"
+participant:"org.ebpi.blockathon.Manufacturer"
+  operation: CREATE
+  resource: "org.ebpi.blockathon.sendShipment"
+  action: ALLOW
+}
 
 rule SystemACL {
     description:  "System ACL to permit all access"
