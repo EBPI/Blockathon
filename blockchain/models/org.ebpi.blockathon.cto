@@ -51,6 +51,18 @@ asset Shipment identified by ShipmentID {
   --> Order order
 }
 
+enum ShipmentState {
+    o MINT
+    o GOOD
+    o WET
+    o WATER_DAMAGE
+    o TEARED
+    o BROKEN
+    o OPEN
+    o BAD
+}
+
+
 transaction PlaceOrder {
 --> Manufacturer manufacturer
 --> Product [] productList
@@ -64,24 +76,34 @@ o String DocumentLocation
 --> Orderer Customer
 o String destignation
 --> Transporter [] handlers
+o ShipmentState state
 }
 
 transaction acceptShipment {
 --> Shipment shipment
+o ShipmentState state
 }
 
 
 transaction startHandover {
 --> Shipment shipment
 --> Transporter nextHandler
+o ShipmentState state
 }
 
 transaction acceptHandover {
 --> Shipment shipment
 --> Transporter previousHandler
+o ShipmentState state
 }
 
 transaction deliverPackage{
 --> Shipment shipment
+o ShipmentState state
 o String reciever
+}
+
+transaction recievePagage{
+-->Shipment shipment
+  o ShipmentState state
 }
