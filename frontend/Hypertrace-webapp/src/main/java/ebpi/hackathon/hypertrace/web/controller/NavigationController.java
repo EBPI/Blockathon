@@ -1,5 +1,7 @@
 package ebpi.hackathon.hypertrace.web.controller;
 
+import com.google.gson.Gson;
+import ebpi.hackathon.hypertrace.web.domein.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
