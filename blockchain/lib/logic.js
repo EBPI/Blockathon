@@ -18,7 +18,8 @@ function doSendShipment(sendShipment){
     const costID = costumer.PartnerID;
     const originalWeight = sendShipment.Weight;
     let factory = getFactory();
-    let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment');
+    const identifier = uuidv4();
+    let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment', identifier);
     newShipment.DocumentHash = hash;
     newShipment.DocumentLocation =docLoc;
     newShipment.ShippedProducts=procductList;
@@ -27,7 +28,7 @@ function doSendShipment(sendShipment){
     newShipment.Customer = factory.newRelationship('org.ebpi.blockathon', 'Orderer', costID);
     newShipment.Supplier =factory.newRelationship('org.ebpi.blockathon', 'Manufacturer', manuID);
     newShipment.Weight= originalWeight;
-    newShipment.ShipmentID= uuidv4();
+    newShipment.ShipmentID= identifier;
 
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentRegistry) {
