@@ -12,15 +12,51 @@
  * limitations under the License.
  */
 
-rule Member {
-    description: "Allow the member read access"
+// deze moet aangepast worden
+rule TradePartner {
+    description: "Allow the TradePartner read access"
     participant: "org.ebpi.blockathon.TradePartner"
     operation: READ
     resource: "org.ebpi.blockathon.*"
     action: ALLOW
 }
 
-// systemrules
+ruleDouane {
+description: "Allow douane te read it all"
+  participant: "org.ebpi.blockathon.Douane"
+  operation:READ
+  resource: "org.ebpi.blockathon.*"
+  action: ALLOW
+}
+
+rule ManufacturerProduct {
+description: "Allow a manufacturer to create a product"
+  participant(p):"org.ebpi.blockathon.Manufacturer"
+  operation: CREATE, READ
+  resource(r): "org.ebpi.blockathon.Product"
+  condition: (r.Creator.getIdentifier() == p.getIdentifier())
+  action: ALLOW
+}
+
+rule ManufactereShipment {
+description: "Allow a manufacturer to create a shipment"
+participant:"org.ebpi.blockathon.Manufacturer"
+  operation: CREATE, READ
+  resource: "org.ebpi.blockathon.Shipment"
+  condition: (r.Sender.getIdentifier() == p.getIdentifier())
+  action: ALLOW
+}
+
+rule OrderCreatment{
+description: "Allow only a Orderer to create an Order"
+  participant (p):"org.ebpi.blockathon.Orderer"
+  operation: CREATE, UPDATE
+  resource (r):"org.ebpi.blockathon.Order"
+  condition:(r.Costumer.getIdentiefier()==p.getIdentifier())
+  action:ALLOW
+}
+
+
 
 rule SystemACL {
     description:  "System ACL to permit all access"

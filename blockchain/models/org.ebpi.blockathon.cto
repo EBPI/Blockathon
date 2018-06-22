@@ -10,6 +10,12 @@ participant TradePartner identified by PartnerID {
   o String PartnerID
 }
 
+
+participant Douane identified by DouaneID{
+    o String DouaneID
+    o String Name
+    }
+
 participant Transporter extends TradePartner {
   o String Name
 }
@@ -32,6 +38,7 @@ asset Order identified by OrderID {
 asset Product identified by ProductID {
   o String ProductID
   o String EnforcementDBUrl
+  --> Manufacturer Creator
 }
 
 asset Shipment identified by ShipmentID {
@@ -39,4 +46,5 @@ asset Shipment identified by ShipmentID {
   o String DocumentHash
   o String DocumentLocation
   o Product [] ShippedProducts
+  --> Manufacturer Sender
 }
