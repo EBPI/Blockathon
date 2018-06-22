@@ -1,4 +1,4 @@
-package ebpi.hackathon.poc.hyper42ledger.web;
+package ebpi.hackathon.hypertrace.web;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

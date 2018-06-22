@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ebpi.hackathon.poc</groupId>
-    <artifactId>hyper42ledger</artifactId>
+    <artifactId>hypertrace</artifactId>
 
-    <name>PoC Hyper42ledger</name>
-    <description>Root pom of Hyper42ledger, a PoC for the Hackathon</description>
+    <name>Hypertrace webapp</name>
+    <description>Root pom of Hypertrace, the transport blockchain solution</description>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 

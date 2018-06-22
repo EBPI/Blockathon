@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hyper42 - About</title>
+    <title>Hypertrace - login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css" th:src="@{webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
@@ -19,7 +19,7 @@
 <body>
 
 <nav class="navbar navbar-expand-sm navbar-dark navbar-custom">
-    <a class="navbar-brand" href="/">Hyper42</a>
+    <a class="navbar-brand" href="/">Hypertrace</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Login</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -44,14 +44,14 @@
 <div class="container">
 
     <div class="basic-template">
-        <h1>Hyper42 web application - about</h1>
+        <h1>Hypertrace web application - login</h1>
         <h2>
-            <span th:text=${aboutMessage1}></span>
+            <span th:text=${loginMessage1}></span>
         </h2>
         <h3>
-            <span th:text=${aboutMessage2}></span>
+            <span th:text=${loginMessage2}></span>
         </h3>
-        <img class="team" src="img/team.jpeg" th:src="@{img/team.jpeg}" alt="Cat"/>
+        <img class="team" src="img/team.jpeg" th:src="@{img/team.jpeg}" alt="Team"/>
     </div>
 
 </div> <!-- /.container -->
