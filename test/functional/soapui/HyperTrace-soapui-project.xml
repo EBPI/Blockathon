@@ -689,32 +689,25 @@
     <con:properties/>
     <con:reportParameters/>
   </con:testSuite>
-  <con:testSuite id="61564801-b136-48d7-9368-701f8c7b878b" name="PlaceOrder" disabled="true">
+  <con:testSuite id="61564801-b136-48d7-9368-701f8c7b878b" name="Handover">
     <con:description>PlaceOrder</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Orders" searchProperties="true">
       <con:description>Ophalen alle Orders</con:description>
       <con:settings/>
-      <con:testStep type="httprequest" name="Ophalen Order" id="43561982-c846-4cb1-8dc2-ecb7a74929e4">
+      <con:testStep type="httprequest" name="Ophalen Handover" id="43561982-c846-4cb1-8dc2-ecb7a74929e4">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Order" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Handover" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
           <con:encoding xsi:nil="true"/>
-          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.PlaceOrder</con:endpoint>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Handover</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Nike">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Leeg">
             <con:configuration>
-              <token>Nike</token>
-              <ignoreCase>false</ignoreCase>
-              <useRegEx>false</useRegEx>
-            </con:configuration>
-          </con:assertion>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="NIKE001">
-            <con:configuration>
-              <token>NIKE001</token>
+              <token/>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -730,7 +723,7 @@
       <con:properties/>
       <con:reportParameters/>
     </con:testCase>
-    <con:testCase id="b364d9eb-1605-45d1-ad2b-dd00f054000e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Order" searchProperties="true">
+    <con:testCase id="b364d9eb-1605-45d1-ad2b-dd00f054000e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Handover" searchProperties="true" disabled="true">
       <con:description>Het opvoeren en controleren Orders</con:description>
       <con:settings/>
       <con:testStep type="datagen" name="DataGen" id="eb8a98c8-4c82-48c8-b948-ff0224c6407a">
@@ -764,14 +757,14 @@
           </con:property>
         </con:config>
       </con:testStep>
-      <con:testStep type="httprequest" name="Opvoeren Order" id="9703c2a4-9695-4606-9703-f1b1bf0e8be7">
+      <con:testStep type="httprequest" name="Opvoeren Handover" id="9703c2a4-9695-4606-9703-f1b1bf0e8be7">
         <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Order" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Handover" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
           <con:encoding xsi:nil="true"/>
-          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.PlaceOrder</con:endpoint>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Handover</con:endpoint>
           <con:request>[
   {
     "$class": "org.ebpi.blockathon.PlaceOrder",
@@ -811,13 +804,13 @@
           <delay>${#Project#verwerkingsDelay}</delay>
         </con:config>
       </con:testStep>
-      <con:testStep type="httprequest" name="Ophalen Order" id="9230cdec-db07-4454-9a0c-c7c76a2d443a">
+      <con:testStep type="httprequest" name="Ophalen Handover" id="9230cdec-db07-4454-9a0c-c7c76a2d443a">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Order" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Handover" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.PlaceOrder</con:endpoint>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Handover</con:endpoint>
           <con:request/>
           <con:assertion type="Simple Contains" id="5e9671ee-053b-4baa-ac37-a76e99b41824" name="Product${DataGen#Naam}">
             <con:configuration>
@@ -1068,11 +1061,11 @@
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Shipment</con:endpoint>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.sendShipment</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Destination = Brussel">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="org.ebpi.blockathon.sendShipment">
             <con:configuration>
-              <token>Brussel</token>
+              <token>org.ebpi.blockathon.sendShipment</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1262,7 +1255,7 @@
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase id="438cc7d9-3b17-47fb-9585-41dd150ef5e0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle startHandover" searchProperties="true">
-      <con:description>Ophalen alle Manufacturer</con:description>
+      <con:description>Ophalen alle acceptShipment</con:description>
       <con:settings/>
       <con:testStep type="httprequest" name="Ophalen startHandover" id="b15f0d7d-7b0e-4061-958b-14b17ef27d85">
         <con:settings/>
@@ -1273,16 +1266,120 @@
           <con:encoding xsi:nil="true"/>
           <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.startHandover</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Nike">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Leeg">
             <con:configuration>
-              <token>Nike</token>
+              <token/>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="NIKE001">
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite id="3e417a0e-3b0d-4f55-8830-cdd08e21d64d" name="acceptHandover">
+    <con:description>acceptHandover</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="a92b0110-6e87-4e41-ac7f-65467518555e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle acceptHandover" searchProperties="true">
+      <con:description>Ophalen alle Manufacturer</con:description>
+      <con:settings/>
+      <con:testStep type="httprequest" name="Ophalen acceptHandover" id="fe35dad9-4b71-4b40-a84f-32cf08b36f39">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen acceptHandover" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.acceptHandover</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="16a213e8-13b3-41ba-a186-baf8973b990b" name="Leeg">
             <con:configuration>
-              <token>NIKE001</token>
+              <token/>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite id="d7fd5ef8-dec8-4515-ab5e-41d744fbd808" name="acceptShipment">
+    <con:description>acceptShipment</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="4c47d887-b52c-4b15-a4df-b3e2b9d55d20" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle acceptShipment" searchProperties="true">
+      <con:description>Ophalen alle acceptShipment</con:description>
+      <con:settings/>
+      <con:testStep type="httprequest" name="Ophalen acceptShipment" id="00ef798e-fd55-4fe3-9ab7-e4fbf58f6773">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen acceptShipment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.acceptShipment</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Leeg">
+            <con:configuration>
+              <token/>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite id="1c5e69b5-3ca5-4ade-9329-d9625d20c597" name="deliverPackage">
+    <con:description>deliverPackage</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="6df9c200-06ac-451f-937c-e1cc0414bc3e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle deliverPackage" searchProperties="true">
+      <con:description>Ophalen alle acceptShipment</con:description>
+      <con:settings/>
+      <con:testStep type="httprequest" name="Ophalen deliverPackage" id="5a6dc256-0a5f-4973-a1f1-6d77c20bcf90">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen deliverPackage" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.deliverPackage</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Leeg">
+            <con:configuration>
+              <token/>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
