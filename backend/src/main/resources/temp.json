@@ -1,0 +1,16 @@
+{
+	"ShipmentID": "2bbed119-d25e-47f3-b4a7-7ac5189c7a12",
+	"DocumentHash": "41dcb68e8cd6887f2fb3cafebd8bd45139aea78f0d12d877d1b1ea62d535d174",
+	"DocumentLocation": "doclocation",
+	"ShippedProducts": [
+		"resource:org.ebpi.blockathon.Product#auto001"
+	],
+	"transporterList": [
+		"resource:org.ebpi.blockathon.Transporter#TID2109",
+		"resource:org.ebpi.blockathon.Transporter#TID4412",
+		"resource:org.ebpi.blockathon.Transporter#POSTNL001"
+	],
+	"Destination": "autoworld - Brussel",
+	"Customer": "resource:org.ebpi.blockathon.Orderer#OrdererID3108",
+	"Supplier": "resource:org.ebpi.blockathon.Manufacturer#MID2386"
+}
