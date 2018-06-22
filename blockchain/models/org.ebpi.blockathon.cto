@@ -44,6 +44,29 @@ asset Shipment identified by ShipmentID {
   --> Orderer Customer
   --> Manufacturer Supplier
   o String Weight
+  o Handover [] handoverArray
+}
+
+asset Handover identified by HandoverID {
+  o String HandoverID
+  --> TradePartner giving
+  --> TradePartner reciever
+  o Boolean confirmed
+  o ShipmentState stateGiving
+  o ShipmentState stateReciever
+
+
+
+}
+
+transaction sendShipment {
+o String DocumentHash
+o String DocumentLocation
+--> Product [] ShippedProducts
+--> Transporter [] transporterList
+o String Destination
+--> Orderer Customer
+o String Weight
 }
 
 enum ShipmentState {
@@ -55,45 +78,30 @@ enum ShipmentState {
     o BROKEN
     o OPEN
     o BAD
+    o undefined
 }
 
-
-
-transaction sendShipment {
-o String DocumentHash
-o String DocumentLocation
---> Product [] prodcutList
---> Orderer Customer
-o String destignation
---> Transporter [] handlers
-o ShipmentState state
-}
-
-transaction acceptShipment {
---> Shipment shipment
-o ShipmentState state
-}
 
 
 transaction startHandover {
 --> Shipment shipment
---> Transporter nextHandler
+--> TradePartner nextHandler
 o ShipmentState state
 }
 
 transaction acceptHandover {
 --> Shipment shipment
---> Transporter previousHandler
+--> TradePartner previousHandler
 o ShipmentState state
 }
 
 transaction deliverPackage{
 --> Shipment shipment
 o ShipmentState state
-o String reciever
+o String receiver
 }
 
-transaction recievePagage{
+transaction receivePackage{
 -->Shipment shipment
   o ShipmentState state
 }

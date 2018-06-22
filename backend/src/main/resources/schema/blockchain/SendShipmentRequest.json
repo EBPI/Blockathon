@@ -1,0 +1,13 @@
+{
+	"DocumentHash": "dsfsg",
+	"DocumentLocation": "thuis",
+	"ShippedProducts": [
+		"auto001"
+	],
+	"transporterList": [
+		"POSTNL001"
+	],
+	"Destination": "de maan",
+	"Customer": "ZAL001",
+	"Weight": "12"
+}

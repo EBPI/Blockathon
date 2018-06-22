@@ -46,7 +46,23 @@
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-devtools</artifactId>
       </dependency>
-
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-jdbc</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.liquibase</groupId>
+         <artifactId>liquibase-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.derby</groupId>
+         <artifactId>derby</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>com.google.guava</groupId>
+         <artifactId>guava</artifactId>
+         <version>25.1-jre</version>
+      </dependency>
    </dependencies>
 
    <properties>
@@ -73,6 +89,7 @@
                      <targetPackage>nl.ebpi.hypertrace.backend.generated.blockchain</targetPackage>
                      <classNamePrefix>BlockChain</classNamePrefix>
                      <outputDirectory>${project.build.directory}/generated-sources/jsonschema2pojo</outputDirectory>
+                     <includeAdditionalProperties>false</includeAdditionalProperties>
                   </configuration>
                   <goals>
                      <goal>generate</goal>
@@ -85,6 +102,7 @@
                      <sourceType>json</sourceType>
                      <targetPackage>nl.ebpi.hypertrace.backend.generated.domain</targetPackage>
                      <outputDirectory>${project.build.directory}/generated-sources/jsonschema2pojo</outputDirectory>
+                     <includeAdditionalProperties>false</includeAdditionalProperties>
                   </configuration>
                   <goals>
                      <goal>generate</goal>

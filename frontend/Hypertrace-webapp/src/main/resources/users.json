@@ -1,0 +1,22 @@
+[
+  {
+    "username":"orderUser",
+    "password":"pass",
+    "fullName":"Orderer Account"
+  },
+  {
+    "username":"manufacturingUser",
+    "password":"pass",
+    "fullName":"Manufacturer Account"
+  },
+  {
+    "username":"transportUser",
+    "password":"pass",
+    "fullName":"Transporter Account"
+  },
+  {
+    "username":"customsUser",
+    "password":"pass",
+    "fullName":"Customs Account"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "$class": "org.ebpi.blockathon.sendShipment",
+  "DocumentHash": "hashing",
+  "DocumentLocation": "hier",
+  "ShippedProducts": [
+    "auto001"
+  ],
+  "transporterList": [
+    "TID2109",
+    "TID4412",
+    "POSTNL001"
+  ],
+  "Destination": "Autoworld - Brussel",
+  "Customer": "OrdererID3108",
+  "Weight": "10KG",
+  "transactionId": "7233daa4279a13a2f1bf4a2039da3ff37273164d3bad6270993cef699e7d80f3"
+}
