@@ -1055,6 +1055,252 @@
     <con:properties/>
     <con:reportParameters/>
   </con:testSuite>
+  <con:testSuite id="0b941100-ec4e-4b56-8b7c-94d8d37546ad" name="Shipment">
+    <con:description>Shipment</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="381b29c8-e0ed-4b62-b234-cdecd52c988b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Shipment" searchProperties="true">
+      <con:description>Ophalen alle Shipment</con:description>
+      <con:settings/>
+      <con:testStep type="httprequest" name="Ophalen Shipment" id="0d63a32c-141a-4aaf-8690-f5210d2217e6">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Shipment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Shipment</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Destination = Brussel">
+            <con:configuration>
+              <token>Brussel</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase id="b643ceb7-6445-4c68-9911-846c3bfd114f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Shipment" searchProperties="true" disabled="true">
+      <con:description>Het opvoeren en controleren van manufacturer</con:description>
+      <con:settings/>
+      <con:testStep type="datagen" name="DataGen" id="8126b27d-b26c-4f32-9bc6-994bcc68e9bf">
+        <con:settings/>
+        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000000</start>
+              <end>99999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Naam</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>1000</start>
+              <end>9999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>PartnerID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Opvoeren Shipment" id="47982627-6511-4351-845a-8338ba56c5ad">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Shipment" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Manufacturer</con:endpoint>
+          <con:request>[
+  {
+    "$class": "org.ebpi.blockathon.Manufacturer",
+    "Name": "Manufacturer${DataGen#Naam}",
+    "PartnerID": "MID${DataGen#PartnerID}"
+  }
+]</con:request>
+          <con:assertion type="JsonPath Match" id="2291e795-ff98-434b-949d-eb629b832f61" name="Manufacturer${DataGen#Naam}">
+            <con:configuration>
+              <path>$[0].Name</path>
+              <content>Manufacturer${DataGen#Naam}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="MID${DataGen#PartnerID}">
+            <con:configuration>
+              <path>$[0].PartnerID</path>
+              <content>MID${DataGen#PartnerID}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="delay" name="Wacht op verwerking" id="2aa3308a-8b93-419b-bcd5-a81e867b3ac5">
+        <con:settings/>
+        <con:config>
+          <delay>${#Project#verwerkingsDelay}</delay>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Ophalen Shipment" id="7fb41d7f-400e-42c3-a8bb-3f6ecb3dc3d8">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Shipment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.Manufacturer</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="5e9671ee-053b-4baa-ac37-a76e99b41824" name="Manufacturer${DataGen#Naam}">
+            <con:configuration>
+              <token>Manufacturer${DataGen#Naam}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="MID${DataGen#PartnerID}">
+            <con:configuration>
+              <token>MID${DataGen#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite id="45c281be-e4fb-4419-897f-6b769f805b73" name="sendShipment">
+    <con:description>sendShipment</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="4173fda2-46c5-46bf-9db7-2908369798de" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle sendShipments" searchProperties="true">
+      <con:description>Ophalen alle sendShipments</con:description>
+      <con:settings/>
+      <con:testStep type="httprequest" name="Ophalen sendShipments" id="7b0854b6-76aa-4ac5-9521-4bf9670f6cbe">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen sendShipments" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.sendShipment</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="transactionId">
+            <con:configuration>
+              <token>a308768aeb10f19269d5765adf6ee21800b77e8079bcc118db88d3257305b37e</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:testSuite id="8554ebda-46d3-4d75-a767-f8de32542bba" name="startHandover">
+    <con:description>startHandover</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="438cc7d9-3b17-47fb-9585-41dd150ef5e0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle startHandover" searchProperties="true">
+      <con:description>Ophalen alle Manufacturer</con:description>
+      <con:settings/>
+      <con:testStep type="httprequest" name="Ophalen startHandover" id="b15f0d7d-7b0e-4061-958b-14b17ef27d85">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen startHandover" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>http://192.168.0.103:3000/api/org.ebpi.blockathon.startHandover</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Nike">
+            <con:configuration>
+              <token>Nike</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="NIKE001">
+            <con:configuration>
+              <token>NIKE001</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
   <con:requirements/>
   <con:properties/>
   <con:wssContainer/>
