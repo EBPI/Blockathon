@@ -31,6 +31,7 @@ asset Order identified by OrderID {
   --> Product [] OrderedProducts
   o String Destination
   --> Orderer Customer
+  --> Manufacturer Supplier
 }
 
 asset Product identified by ProductID {
@@ -45,4 +46,40 @@ asset Shipment identified by ShipmentID {
   o String DocumentLocation
   --> Product [] ShippedProducts
   --> Manufacturer Sender
+  --> Transporter [] transporterList
+}
+
+transaction PlaceOrder {
+--> Manufacturer manufacturer
+--> Product [] productList
+o String Destination
+}
+
+transaction sendShipment {
+o String DocumentHash
+o String DocumentLocation
+--> Product [] prodcutList
+--> Orderer Customer
+o String destignation
+--> Transporter [] handlers
+}
+
+transaction acceptShipment {
+--> Shipment shipment
+}
+
+
+transaction startHandover {
+--> Shipment shipment
+--> Transporter nextHandler
+}
+
+transaction acceptHandover {
+--> Shipment shipment
+--> Transporter previousHandler
+}
+
+transaction deliverPackage{
+--> Shipment shipment
+o String reciever
 }
