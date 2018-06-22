@@ -22,3 +22,4 @@ dependency-reduced-pom.xml
 # jvm dumps
 hs_err_pid*.log
 derby.log
+HyperTraceDB/
