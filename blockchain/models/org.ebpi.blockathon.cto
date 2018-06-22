@@ -28,7 +28,7 @@ participant Orderer extends TradePartner {
 
 asset Order identified by OrderID {
   o String OrderID
-  o Product [] OrderedProducts
+  --> Product [] OrderedProducts
   o String Destination
   --> Orderer Customer
 }
@@ -43,6 +43,6 @@ asset Shipment identified by ShipmentID {
   o String ShipmentID
   o String DocumentHash
   o String DocumentLocation
-  o Product [] ShippedProducts
+  --> Product [] ShippedProducts
   --> Manufacturer Sender
 }
