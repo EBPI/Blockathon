@@ -1,7 +1,8 @@
 /**
  * Sample transaction
  * @param {org.ebpi.blockathon.sendShipment} sendShipment
- * @transaction
+ * @identifier
+ *
  */
 function doSendShipment(sendShipment) {
     const manufacturer = getCurrentParticipant();
