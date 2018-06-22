@@ -4,7 +4,7 @@
 
     /**
      *  Placer Order
-     * @param {org.ebpi.blockathon.Order} PlaceOrder
+     * @param {org.ebpi.blockathon.Shipment} sendShipment
      * @transaction
      */
 
