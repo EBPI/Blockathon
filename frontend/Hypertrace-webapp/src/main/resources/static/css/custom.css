@@ -1,4 +1,6 @@
+/* import fonts for logo and body */
 @import url('https://fonts.googleapis.com/css?family=Bungee|Exo+2:400,500,700,800,900');
+
 
 .navbar-custom {
     background-color: #370D4E;
@@ -11,6 +13,7 @@
     font-size: 
 }
 
+/* All fonts to Exo 2, except brand font. Brand font to Bungee */
 * {
 	font-family: "Exo 2";
 }
@@ -22,13 +25,15 @@
 
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
     text-align: center;
+    transition: 0.3s;
 }
 
 /* change the color of active or hovered links */
 .navbar-custom .nav-item:hover .nav-link {
-    color: #ffffff;
+    color: #00ff00;
+    transition: 0.3s;
 }
 
 .navbar-custom .nav-item.active .nav-link {
@@ -36,12 +41,36 @@
     background-color: #1C0529;
 }
 
-.basic-template {
+*.basic-template {
     padding: 3rem 1.5rem;
     text-align: center;
-    font-size: xx-large;
+    font-size: medium;
 }
 
+/*
 img.team {
     width: 500px;
 }
+*/
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255,255,255,1);
+    border-color: rgba(255,255,255,1);
+	transition: 0.3s;
+	border: 0;
+}
+
+.navbar-dark .navbar-toggler:hover {
+	background-color: #170322;
+	transition: 0.3s;
+
+}
+
+.navbar-toggler-icon {
+	stroke: white;
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
