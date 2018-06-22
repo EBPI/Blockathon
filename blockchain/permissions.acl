@@ -43,7 +43,7 @@ description: "Allow a manufacturer to create a shipment"
 participant (p):"org.ebpi.blockathon.Manufacturer"
   operation: CREATE, READ
   resource (r): "org.ebpi.blockathon.Shipment"
-  condition: (r.Sender.getIdentifier() == p.getIdentifier())
+  condition: (r.Supplier.getIdentifier() == p.getIdentifier())
   action: ALLOW
 }
 rule ManufactereSendShipment{
