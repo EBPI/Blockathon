@@ -235,7 +235,7 @@
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
-    <con:testCase id="aced2649-d8ea-41e5-a806-85e32ef7c649" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Douane Bulk" searchProperties="true" disabled="true">
+    <con:testCase id="aced2649-d8ea-41e5-a806-85e32ef7c649" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren testdata Douane" searchProperties="true" disabled="true">
       <con:description>Het opvoeren en controleren van Douane</con:description>
       <con:settings/>
       <con:testStep type="datasource" name="DataSource" id="af3ab68e-c391-403d-bf17-55f6ccbd5f8c">
@@ -249,7 +249,8 @@
               <ignoreEmpty>true</ignoreEmpty>
             </con:configuration>
           </con:dataSource>
-          <con:property>Douane</con:property>
+          <con:property>Name</con:property>
+          <con:property>PartnerID</con:property>
           <con:restartOnRun>true</con:restartOnRun>
         </con:config>
       </con:testStep>
@@ -294,21 +295,19 @@
           <con:endpoint>${#Project#Douane}</con:endpoint>
           <con:request>{
   "$class": "org.ebpi.blockathon.Douane",
-  "Name": "${DataSource#Douane}",
-  "PartnerID": "DID${DataGen#PartnerID}"
+  "Name": "${DataSource#Name}",
+  "PartnerID": "${DataSource#PartnerID}"
 }</con:request>
-          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="${DataGen#Naam}">
+          <con:assertion type="Simple Contains" id="4fa16967-ea4b-4565-b2be-6643718d9c8d" name="${DataSource#Name}">
             <con:configuration>
-              <path>$.Name</path>
-              <content>${DataSource#Douane}</content>
-              <allowWildcards>false</allowWildcards>
-              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-              <ignoreComments>false</ignoreComments>
+              <token>${DataSource#Name}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="DID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="b8063f0a-21e5-4668-9ce8-053ba029cd58" name="${DataSource#PartnerID}">
             <con:configuration>
-              <token>DID${DataGen#PartnerID}</token>
+              <token>${DataSource#PartnerID}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -336,9 +335,16 @@
           <con:encoding xsi:nil="true"/>
           <con:endpoint>${#Project#Douane}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="DID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataSource#PartnerID}">
             <con:configuration>
-              <token>DID${DataGen#PartnerID}</token>
+              <token>${DataSource#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="6c9a2c4b-4afb-4e9d-a504-3f58c81e3f86" name="${DataSource#Name}">
+            <con:configuration>
+              <token>${DataSource#Name}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -351,7 +357,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="1c95185e-2bfa-4d5b-ae75-72079f98a4b1">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="1c95185e-2bfa-4d5b-ae75-72079f98a4b1" disabled="true">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
@@ -724,7 +730,7 @@
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
-    <con:testCase id="bfa3a4cd-36b6-4145-a3a1-78aab1e53e16" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Manufacturer Bulk" searchProperties="true" disabled="true">
+    <con:testCase id="bfa3a4cd-36b6-4145-a3a1-78aab1e53e16" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren testdata Manufacturer" searchProperties="true" disabled="true">
       <con:description>Het opvoeren en controleren van manufacturer</con:description>
       <con:settings/>
       <con:testStep type="datasource" name="DataSource" id="fe5de30c-50da-4a50-99a1-49b8bff81782">
@@ -738,7 +744,8 @@
               <ignoreEmpty>true</ignoreEmpty>
             </con:configuration>
           </con:dataSource>
-          <con:property>Manufacturer</con:property>
+          <con:property>Name</con:property>
+          <con:property>PartnerID</con:property>
           <con:restartOnRun>true</con:restartOnRun>
         </con:config>
       </con:testStep>
@@ -784,22 +791,20 @@
           <con:request>[
   {
     "$class": "org.ebpi.blockathon.Manufacturer",
-    "Name": "${DataSource#Manufacturer}",
-    "PartnerID": "MID${DataGen#PartnerID}"
+    "Name": "${DataSource#Name}",
+    "PartnerID": "${DataSource#PartnerID}"
   }
 ]</con:request>
-          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="MID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="${DataSource#PartnerID}">
             <con:configuration>
-              <path>$[0].PartnerID</path>
-              <content>MID${DataGen#PartnerID}</content>
-              <allowWildcards>false</allowWildcards>
-              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-              <ignoreComments>false</ignoreComments>
+              <token>${DataSource#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="${DataSource#Manufacturer}">
+          <con:assertion type="Simple Contains" id="d84cb60c-fd32-44c3-9315-1393377998e1" name="${DataSource#Name}">
             <con:configuration>
-              <token>${DataSource#Manufacturer}</token>
+              <token>${DataSource#Name}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -826,9 +831,16 @@
           </con:settings>
           <con:endpoint>${#Project#Manufacturer}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="MID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataSource#PartnerID}">
             <con:configuration>
-              <token>MID${DataGen#PartnerID}</token>
+              <token>${DataSource#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="921d73a3-f57a-4ada-a7a5-7bdc907ca5a5" name="${DataSource#Name}">
+            <con:configuration>
+              <token>${DataSource#Name}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -841,7 +853,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="af3eab3e-2a0b-4783-a772-4f6b7f787608">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="af3eab3e-2a0b-4783-a772-4f6b7f787608" disabled="true">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
@@ -1050,7 +1062,7 @@
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
-    <con:testCase id="96aabaea-745b-4262-bc5c-4b8f1ac44c3f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Orderer Bulk" searchProperties="true" disabled="true">
+    <con:testCase id="96aabaea-745b-4262-bc5c-4b8f1ac44c3f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren testdata Orderer" searchProperties="true" disabled="true">
       <con:description>Het opvoeren en controleren van Orderer bulk</con:description>
       <con:settings/>
       <con:testStep type="datasource" name="DataSource" id="76ffbf14-2fe0-4e63-9372-0a36f2c6a793">
@@ -1064,7 +1076,8 @@
               <ignoreEmpty>true</ignoreEmpty>
             </con:configuration>
           </con:dataSource>
-          <con:property>Orderer</con:property>
+          <con:property>Name</con:property>
+          <con:property>PartnerID</con:property>
           <con:restartOnRun>true</con:restartOnRun>
         </con:config>
       </con:testStep>
@@ -1110,22 +1123,20 @@
           <con:request>[
   {
     "$class": "org.ebpi.blockathon.Orderer",
-    "Name": "${DataSource#Orderer}",
-    "PartnerID": "OrdererID${DataGen#PartnerID}"
+    "Name": "${DataSource#Name}",
+    "PartnerID": "${DataSource#PartnerID}"
   }
 ]</con:request>
-          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="OrdererID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="e7c6a27c-ad6c-4d5b-9ebb-34150da91f29" name="${DataSource#Name}">
             <con:configuration>
-              <path>$[0].PartnerID</path>
-              <content>OrdererID${DataGen#PartnerID}</content>
-              <allowWildcards>false</allowWildcards>
-              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-              <ignoreComments>false</ignoreComments>
+              <token>${DataSource#Name}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="42cf70f2-7f5f-49af-ad55-3c0e94621317" name="${DataSource#Orderer}">
+          <con:assertion type="Simple Contains" id="b81a8a6a-d926-4400-b327-5478bca905a3" name="${DataSource#PartnerID}">
             <con:configuration>
-              <token>${DataSource#Orderer}</token>
+              <token>${DataSource#PartnerID}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1153,16 +1164,16 @@
           <con:encoding xsi:nil="true"/>
           <con:endpoint>${#Project#Orderer}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="OrdererID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataSource#Name}">
             <con:configuration>
-              <token>OrdererID${DataGen#PartnerID}</token>
+              <token>${DataSource#Name}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="c9bc9e3c-df2f-437c-b1e2-a055dfa0459e" name="${DataSource#Orderer}">
+          <con:assertion type="Simple Contains" id="c9bc9e3c-df2f-437c-b1e2-a055dfa0459e" name="${DataSource#PartnerID}">
             <con:configuration>
-              <token>${DataSource#Orderer}</token>
+              <token>${DataSource#PartnerID}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1175,7 +1186,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="c5731415-b319-4b09-8019-ecc3ac429865">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="c5731415-b319-4b09-8019-ecc3ac429865" disabled="true">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
@@ -1399,6 +1410,208 @@
       </con:breakPoints>
       <con:breakPoints>
         <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
+    <con:testCase id="d5e020e1-b504-440a-8050-ba6e30963c85" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Product Bulk" searchProperties="true" disabled="true">
+      <con:description>Het opvoeren en controleren van Product</con:description>
+      <con:settings/>
+      <con:testStep type="datasource" name="DataSource" id="6c780de5-3788-4e88-95a6-313f7671ff49">
+        <con:settings/>
+        <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:dataSource type="Excel">
+            <con:configuration>
+              <file>C:/Source/Blockathon_hyper42/test/testdata.xlsx</file>
+              <worksheet>Product</worksheet>
+              <cell>A2</cell>
+              <ignoreEmpty>true</ignoreEmpty>
+            </con:configuration>
+          </con:dataSource>
+          <con:property>Product</con:property>
+          <con:property>Value</con:property>
+          <con:restartOnRun>true</con:restartOnRun>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datagen" name="DataGen" id="c977ee7b-b262-4d9f-8575-394e65430ce9">
+        <con:settings/>
+        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000000</start>
+              <end>99999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Description</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>1000</start>
+              <end>9999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>ProductID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000</start>
+              <end>99999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Value</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>100000</start>
+              <end>999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>EnforcementDBUrl</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Opvoeren Product bulk" id="5b6d10b4-76f9-426e-bb0c-9ff58b90ed69">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Product bulk" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Product}</con:endpoint>
+          <con:request>{
+  "$class": "org.ebpi.blockathon.Product",
+  "ProductID": "ProductID${DataGen#ProductID}",
+  "Description": "${DataSource#Product}",
+  "Value": "${DataSource#Value}",
+  "EnforcementDBUrl": "https://hyper42.nl/${DataGen#EnforcementDBUrl}",
+  "Creator": "resource:org.ebpi.blockathon.Manufacturer#NIKE001"
+}</con:request>
+          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="ProductID${DataGen#ProductID}">
+            <con:configuration>
+              <path>$.ProductID</path>
+              <content>ProductID${DataGen#ProductID}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="${DataSource#Product}">
+            <con:configuration>
+              <token>${DataSource#Product}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="e18ab54d-42c4-4613-b54a-5300e565e0e4" name="${DataSource#Value}">
+            <con:configuration>
+              <token>${DataSource#Value}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="delay" name="Wacht op verwerking" id="a0fdd8c0-59af-49f9-845e-d7eac6656526">
+        <con:settings/>
+        <con:config>
+          <delay>${#Project#verwerkingsDelay}</delay>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Ophalen Product" id="602db5e0-4d0f-490f-afe0-fe3889de76ef">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Product" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Product}</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataSource#Value}">
+            <con:configuration>
+              <token>${DataSource#Value}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="4987cca0-5b6b-4d36-8e56-c082593dc772" name="${DataSource#Product}">
+            <con:configuration>
+              <token>${DataSource#Product}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="fc228413-79a6-4684-bea0-4a3e65301a7b" name="ProductID${DataGen#ProductID}">
+            <con:configuration>
+              <token>ProductID${DataGen#ProductID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="5f18c97c-adc3-4361-a3b0-e232401a16f2" disabled="true">
+        <con:settings/>
+        <con:config>
+          <dataSourceStep>DataSource</dataSourceStep>
+          <targetStep>DataGen</targetStep>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fe5de30c-50da-4a50-99a1-49b8bff81782</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f277cd1e-dacf-465a-8508-8fa967bda270</con:testStepId>
         <con:status>NONE</con:status>
         <con:properties/>
       </con:breakPoints>
@@ -2033,9 +2246,15 @@ df.format(new Date());</script>
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
-    <con:testCase id="081bab9d-cc02-47ce-a284-ef3a36af708f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Transporter Bulk" searchProperties="true" disabled="true">
+    <con:testCase id="081bab9d-cc02-47ce-a284-ef3a36af708f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren testdata Transporter" searchProperties="true" disabled="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="">
       <con:description>Het opvoeren en controleren van Transporter</con:description>
-      <con:settings/>
+      <con:settings>
+        <con:setting id="IncludeOverview">true</con:setting>
+        <con:setting id="IncludeResults">true</con:setting>
+        <con:setting id="FlowLayout">false</con:setting>
+        <con:setting id="ErrorDetails">true</con:setting>
+        <con:setting id="IncludeCoverage">true</con:setting>
+      </con:settings>
       <con:testStep type="datasource" name="DataSource" id="6c1b8e5f-4c34-44f1-84a0-192dccf99693">
         <con:settings/>
         <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -2047,7 +2266,8 @@ df.format(new Date());</script>
               <ignoreEmpty>true</ignoreEmpty>
             </con:configuration>
           </con:dataSource>
-          <con:property>Transporter</con:property>
+          <con:property>Name</con:property>
+          <con:property>PartnerID</con:property>
           <con:restartOnRun>true</con:restartOnRun>
         </con:config>
       </con:testStep>
@@ -2090,17 +2310,15 @@ df.format(new Date());</script>
           </con:settings>
           <con:encoding xsi:nil="true"/>
           <con:endpoint>${#Project#Transporter}</con:endpoint>
-          <con:request>[
-  {
-    "$class": "org.ebpi.blockathon.Transporter",
-    "Name": "${DataSource#Transporter}",
-    "PartnerID": "TransID${DataGen#PartnerID}"
-  }
-]</con:request>
-          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="TransID${DataGen#PartnerID}">
+          <con:request>{
+  "$class": "org.ebpi.blockathon.Transporter",
+  "Name": "${DataSource#Name}",
+  "PartnerID": "${DataSource#PartnerID}"
+}</con:request>
+          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="${DataSource#PartnerID}">
             <con:configuration>
-              <path>$[0].PartnerID</path>
-              <content>TransID${DataGen#PartnerID}</content>
+              <path>$.PartnerID</path>
+              <content>${DataSource#PartnerID}</content>
               <allowWildcards>false</allowWildcards>
               <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
               <ignoreComments>false</ignoreComments>
@@ -2135,9 +2353,16 @@ df.format(new Date());</script>
           </con:settings>
           <con:endpoint>${#Project#Transporter}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="MID${DataGen#PartnerID}">
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataSource#Manufacturer}">
             <con:configuration>
-              <token>TransID${DataGen#PartnerID}</token>
+              <token>${DataSource#Manufacturer}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="7edd7a92-a6d2-4482-b07c-2f4c4867a9c5" name="${DataSource#PartnerID}">
+            <con:configuration>
+              <token>${DataSource#PartnerID}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
