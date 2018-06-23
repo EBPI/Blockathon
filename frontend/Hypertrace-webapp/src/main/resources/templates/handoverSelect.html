@@ -30,10 +30,12 @@
         <form action="#" th:action="@{/manufacturerselect}" method="post">
             <div class="row">
                 <div class="col-sm">
-                    <b>Receiver ID:</b> <span th:text="${receiverId}"></span>
+                    <input class="form-control" th:value="'ReceiverID: ' + ${receiverId}" name="receiver" title="receiver"
+                           required="required" readonly>
                 </div>
                 <div class="col-sm">
-                    <b>Shipment ID:</b> <span th:text="${shipmentId}"></span>
+                    <input class="form-control" th:value="'ShipmentIdID: ' + ${shipmentId}" name="shipment" title="shipment"
+                           required="required" readonly>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">

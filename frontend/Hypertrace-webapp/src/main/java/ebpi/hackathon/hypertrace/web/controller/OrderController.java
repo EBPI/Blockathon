@@ -91,7 +91,7 @@ public class OrderController {
     public String getQrSelect(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
         model.put("receiverId", receiver);
         model.put("shipmentId", shipment);
-        return "handover-select";
+        return "handoverSelect";
     }
 
     @RequestMapping("/manufacturerselect")
@@ -102,7 +102,7 @@ public class OrderController {
         } else {
             result = "handover declined!";
         }
-        model.put("loggedInMessage", result);
+        model.put("homeMessage", result);
         return "home";
     }
 }
