@@ -74,6 +74,24 @@ condition:(p.getIdentifier() == r.giving.getIdentifier() || p.getIdentifier() ==
 action: ALLOW
 }
 
+rule updateManufacturer{
+description: "Allow Transporter to change a manufacturer"
+participant (p):"org.ebpi.blockathon.Transporter"
+  operation: UPDATE
+  resource (r): "org.ebpi.blockathon.Manufacturer"
+  condition: (true)
+  action: ALLOW
+}
+
+rule dochangeReputation{
+description: "Allow Transporter to change a manufacturer"
+participant (p):"org.ebpi.blockathon.Transporter"
+  operation: CREATE
+  resource (r): "org.ebpi.blockathon.changeReputation"
+  condition: (true)
+  action: ALLOW
+}
+
 
 
 rule acceptHandover{
