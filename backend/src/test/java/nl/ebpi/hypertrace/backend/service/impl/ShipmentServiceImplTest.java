@@ -54,7 +54,7 @@ public class ShipmentServiceImplTest {
 						.string(StringContains.containsString("\"ShippedProducts\":[\"auto001\",\"auto002\"]")))
 				.andExpect(
 						MockRestRequestMatchers.content()
-								.string(StringContains.containsString("\"transporterList\":[\"Transporter46618096\",\"Transporter11030988\",\"PostNL\"]")))
+								.string(StringContains.containsString("\"transporterList\":[\"TransID009\",\"TransID010\",\"TransID003\"]")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Destination\":\"Autoworld - Brussel\"")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Customer\":\"OrdererID3108\"")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Weight\":\"10KG\"")))
@@ -70,9 +70,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#auto002\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID3108\",\n" +
@@ -91,9 +91,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#auto001\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID3108\",\n" +
@@ -111,7 +111,7 @@ public class ShipmentServiceImplTest {
 						.string(StringContains.containsString("\"ShippedProducts\":[\"auto003\",\"auto004\"]")))
 				.andExpect(
 						MockRestRequestMatchers.content()
-								.string(StringContains.containsString("\"transporterList\":[\"Transporter46618096\",\"Transporter11030988\",\"PostNL\"]")))
+								.string(StringContains.containsString("\"transporterList\":[\"TransID009\",\"TransID010\",\"TransID003\"]")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Destination\":\"Autoworld - Brussel\"")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Customer\":\"OrdererID3108\"")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Weight\":\"10KG\"")))
@@ -125,9 +125,9 @@ public class ShipmentServiceImplTest {
 								"    \"auto001\"\n" +
 								"  ],\n" +
 								"  \"transporterList\": [\n" +
-								"    \"Transporter46618096\",\n" +
-								"    \"Transporter11030988\",\n" +
-								"    \"PostNL\"\n" +
+								"    \"TransID009\",\n" +
+								"    \"TransID010\",\n" +
+								"    \"TransID003\"\n" +
 								"  ],\n" +
 								"  \"Destination\": \"Autoworld - Brussel\",\n" +
 								"  \"Customer\": \"OrdererID3108\",\n" +
@@ -153,9 +153,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#auto002\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID3108\",\n" +
@@ -174,9 +174,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#auto001\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID3108\",\n" +
@@ -210,7 +210,7 @@ public class ShipmentServiceImplTest {
 						.string(StringContains.containsString("\"ShippedProducts\":[\"auto001\"]")))
 				.andExpect(
 						MockRestRequestMatchers.content()
-								.string(StringContains.containsString("\"transporterList\":[\"Transporter46618096\",\"Transporter11030988\",\"PostNL\"]")))
+								.string(StringContains.containsString("\"transporterList\":[\"TransID009\",\"TransID010\",\"TransID003\"]")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Destination\":\"Autoworld - Brussel\"")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Customer\":\"OrdererID3108\"")))
 				.andExpect(MockRestRequestMatchers.content().string(StringContains.containsString("\"Weight\":\"10KG\"")))
@@ -226,9 +226,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#auto001\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID3108\",\n" +
@@ -256,9 +256,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#auto002\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID3108\",\n" +
@@ -286,7 +286,7 @@ public class ShipmentServiceImplTest {
 	public void testFindShipments() throws Exception {
 		mockServer
 				.expect(MockRestRequestMatchers.requestTo(
-						getUrlWithFilter(BlockchainRestUrl.QUERY_SHIPMENT_ON_TRANSPORTERID.getUrl(), "resource:org.ebpi.blockathon.Transporter%23PostNL")))
+						getUrlWithFilter(BlockchainRestUrl.QUERY_SHIPMENT_ON_TRANSPORTERID.getUrl(), "resource:org.ebpi.blockathon.Transporter%23TransID003")))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
 				.andRespond(MockRestResponseCreators.withSuccess(
 						" [\n" +
@@ -300,9 +300,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#ProductID4685\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#Zalando\",\n" +
@@ -312,8 +312,8 @@ public class ShipmentServiceImplTest {
 								"      {\n" +
 								"        \"$class\": \"org.ebpi.blockathon.Handover\",\n" +
 								"        \"HandoverID\": \"29e9e0c1-1274-4a6f-81d0-950fd982f2fb\",\n" +
-								"        \"giving\": \"resource:org.ebpi.blockathon.TradePartner#PostNL\",\n" +
-								"        \"reciever\": \"resource:org.ebpi.blockathon.TradePartner#PostNL\",\n" +
+								"        \"giving\": \"resource:org.ebpi.blockathon.TradePartner#TransID003\",\n" +
+								"        \"reciever\": \"resource:org.ebpi.blockathon.TradePartner#TransID003\",\n" +
 								"        \"confirmed\": false,\n" +
 								"        \"stateGiving\": \"MINT\",\n" +
 								"        \"stateReciever\": \"undefined\",\n" +
@@ -332,9 +332,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#ProductID1027\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID5725\",\n" +
@@ -353,9 +353,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#Shirt001\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID5725\",\n" +
@@ -374,9 +374,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#ProductID4685\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#Zalando\",\n" +
@@ -395,9 +395,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#ProductID4685\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#Zalando\",\n" +
@@ -417,9 +417,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#ProductID5076\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#OrdererID5725\",\n" +
@@ -438,9 +438,9 @@ public class ShipmentServiceImplTest {
 								"      \"resource:org.ebpi.blockathon.Product#ProductID4685\"\n" +
 								"    ],\n" +
 								"    \"transporterList\": [\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter46618096\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#Transporter11030988\",\n" +
-								"      \"resource:org.ebpi.blockathon.Transporter#PostNL\"\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID009\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID010\",\n" +
+								"      \"resource:org.ebpi.blockathon.Transporter#TransID003\"\n" +
 								"    ],\n" +
 								"    \"Destination\": \"Autoworld - Brussel\",\n" +
 								"    \"Customer\": \"resource:org.ebpi.blockathon.Orderer#Zalando\",\n" +
@@ -452,7 +452,7 @@ public class ShipmentServiceImplTest {
 								"]\n" +
 								"\n",
 						MediaType.APPLICATION_JSON));
-		TransporterResponse shipments = shipmentService.findShipments("PostNL");
+		TransporterResponse shipments = shipmentService.findShipments("TransID003");
 		Assert.assertEquals(6, shipments.getShipments().size());
 	}
 
