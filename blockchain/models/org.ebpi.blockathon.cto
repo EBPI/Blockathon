@@ -20,6 +20,7 @@ participant Transporter extends TradePartner {
 
 participant Manufacturer extends TradePartner {
   o String Name
+  o Integer Reputation default = 100
 }
 
 participant Orderer extends TradePartner {
@@ -56,7 +57,7 @@ asset Handover identified by HandoverID {
   o Boolean confirmed
   o ShipmentState stateGiving
   o ShipmentState stateReciever
-  o Boolean final default = false
+  o Boolean finalHandover default = false
 
 
 
@@ -95,13 +96,18 @@ transaction startHandover {
 --> Shipment shipment
 --> TradePartner nextHandler
 o ShipmentState state default = "OK"
-o Boolean final default = false
+o Boolean finalHandover default = false
 }
 
 transaction acceptHandover {
 --> Shipment shipment
 --> TradePartner previousHandler
 o ShipmentState state default ="OK"
-o Boolean final default = false
+o Boolean finalHandover default = false
 }
 
+transaction changeReputation{
+--> Manufacturer manufacturer
+o Boolean good
+optional String message
+}

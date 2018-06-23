@@ -48,7 +48,7 @@ function doStartHandover(startHandover) {
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
     newHandover.stateReciever = "undefined"
-    newHandover.final = startHandover.final
+    newHandover.finalHandover = startHandover.finalHandover
     var ontvangenShipment = startHandover.shipment
     ontvangenShipment.handoverArray.push(newHandover);
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
@@ -73,12 +73,12 @@ function doAcceptHandover(acceptHandover) {
     var deHandover = deArray[deArray.length - 1]
     deHandover.confirmed =(deHandover.giving == vorigeOwner && deHandover.reciever == ikke)
 
-    if (acceptHandover.final && deHandover.final) {
+    if (acceptHandover.finalHandover && deHandover.finalHandover) {
         ontvangenShipment.completed = true
-        deHandover.final=true
+        deHandover.finalHandover=true
     }
     else {
-        deHandover.final = false
+        deHandover.finalHandover = false
     }
     deHandover.stateReciever = status
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
@@ -86,6 +86,23 @@ function doAcceptHandover(acceptHandover) {
             return ShipmentAssetRegistry.update(ontvangenShipment);
         })
 }
+
+/**
+ * Sample transaction
+ * @param {org.ebpi.blockathon.changeReputation} changeReputation
+ * @transaction
+ */
+function doChangeReputation(changeReputation) {
+var mutatedManufacturer = changeReputation.manufacturer;
+if (changeReputation.good){mutatedManufacturer.Reputation++;}
+else{mutatedManufacturer.Reputation--}
+    return getAssetRegistry('org.ebpi.blockathon.Manufacturer')
+        .then(function (ManufacturerAssetRegistry) {
+            return ManufacturerAssetRegistry.update(mutatedManufacturer);
+        })
+}
+
+
 
 
 function uuidv4() {
