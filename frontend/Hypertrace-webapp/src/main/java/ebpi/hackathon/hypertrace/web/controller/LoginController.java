@@ -27,10 +27,13 @@ import java.util.Map;
 import static org.apache.commons.codec.Charsets.UTF_8;
 
 @Controller
-public class NavigationController {
+public class LoginController {
 
     @Autowired
-    HyperledgerRestService ledgerService;
+    private HyperledgerRestService ledgerService;
+
+    @Autowired
+    private UserUtils userUtils;
 
     /**
      * Homepage for non logged-in user
@@ -46,7 +49,7 @@ public class NavigationController {
             model.put("homeMessage", message);
             return "home";
         } else {
-            User loggedIn = getUserFromCookie(request);
+            User loggedIn = userUtils.getUserFromCookie(request);
             return loggedIn(model, loggedIn);
         }
     }
@@ -147,43 +150,6 @@ public class NavigationController {
     }
 
     /**
-     * Check if user type and decide what kind of status is returned (order status or transport status)
-     *
-     * @param model models to insert into the thymeleaf template
-     * @return status page for orders or transport
-     */
-    @RequestMapping("/status")
-    public String status(Map<String, Object> model) {
-        return orderStatus(model);
-    }
-
-    /**
-     * Order status for customer
-     *
-     * @param model models to insert into the thymeleaf template
-     * @return status page for orders
-     */
-    @RequestMapping("/statusOrder")
-    public String orderStatus(Map<String, Object> model) {
-        String orderStatusMessage = "{{order_status}}";
-        model.put("orderStatusMessage", orderStatusMessage);
-        return "statusOrder";
-    }
-
-    /**
-     * Order status for company
-     *
-     * @param model models to insert into the thymeleaf template
-     * @return status page for transport
-     */
-    @RequestMapping("/statusTransport")
-    public String transportStatus(Map<String, Object> model) {
-        String transportStatusMessage = "{{transport_status}}";
-        model.put("transportStatusMessage", transportStatusMessage);
-        return "statusTransport";
-    }
-
-    /**
      * Logout page
      *
      * @param model    models to insert into the thymeleaf template
@@ -193,49 +159,9 @@ public class NavigationController {
      */
     @RequestMapping("/logout")
     public String logout(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
-        removeCookies(request, response);
+        userUtils.removeCookies(request, response);
         String message = "You have succesfully logged out.";
         model.put("homeMessage", message);
         return "home";
-    }
-
-    /**
-     * Remove all cookies from session
-     *
-     * @param request  used for getting all cookies in session
-     * @param response used for setting all cookies ready for deletion in response
-     */
-    private void removeCookies(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                cookie.setValue("");
-                cookie.setMaxAge(0);
-                cookie.setPath("/");
-                response.addCookie(cookie);
-            }
-        }
-    }
-
-    /**
-     * Construct User from cookie values
-     *
-     * @param request request needed to read cookies
-     * @return User object
-     */
-    private User getUserFromCookie(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        User loggedIn = new User();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("username")) {
-                loggedIn.setUsername(cookie.getValue());
-            }
-            if (cookie.getName().equals("fullName")) {
-                loggedIn.setFullName(cookie.getValue());
-            }
-            if (cookie.getName().equals("type")) {
-                loggedIn.setType(cookie.getValue());
-            }
-        }
-        return loggedIn;
     }
 }
