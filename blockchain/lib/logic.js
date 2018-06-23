@@ -71,15 +71,11 @@ function doAcceptHandover(acceptHandover) {
 
     var deArray = ontvangenShipment.handoverArray
     var deHandover = deArray[deArray.length - 1]
-    if (deHandover.giving == vorigeOwner && deHandover.reciever == ikke) {
-        confirmed = true
-    }
-    else {
-        confirmed = false
-    }
+    ontvangenShipment.confirmed =(deHandover.giving == vorigeOwner && deHandover.reciever == ikke)
 
     if (acceptHandover.final && deHandover.final) {
         ontvangenShipment.completed = true
+        deHandover.final=true
     }
     else {
         deHandover.final = false
@@ -88,10 +84,7 @@ function doAcceptHandover(acceptHandover) {
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
             return ShipmentAssetRegistry.update(ontvangenShipment);
-
         })
-
-
 }
 
 
