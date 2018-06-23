@@ -54,13 +54,14 @@ public class ShipmentServiceImpl implements ShipmentService {
 		if (size == 1) {
 			createShipmentRequest(orderInfo, products);
 		} else if (size > 1) {
-			splitShipment(orderInfo, products, size);
+			splitShipment(orderInfo, products);
 		}
 		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderInfo.orderId));
 		return shipmentIds;
 	}
 
-	private void splitShipment(OrderInformation orderInfo, List<String> products, int size) {
+	private void splitShipment(OrderInformation orderInfo, List<String> products) {
+		int size = products.size();
 		int part = size / 2;
 		createShipmentRequest(orderInfo, products.subList(0, part));
 		createShipmentRequest(orderInfo, products.subList(part, size));
