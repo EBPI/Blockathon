@@ -23,6 +23,7 @@ public class BackendService {
     private static final String BACKEND_SERVICE_IP = "http://192.168.0.101:8070";
     private static final URI BACKEND_SERVICE_ORDER = URI.create(BACKEND_SERVICE_IP + "/order");
     private static final URI BACKEND_SERVICE_SHIPMENT = URI.create(BACKEND_SERVICE_IP + "/shipment");
+    private static final URI BACKEND_SERVICE_QR = URI.create(BACKEND_SERVICE_IP + "/receiver/qrcode");
 
     @Autowired
     private RestTemplate restTemplate;
@@ -71,5 +72,22 @@ public class BackendService {
         ResponseEntity<String> shipmentResponse = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         System.out.println(shipmentResponse.getBody());
         return new Gson().fromJson(shipmentResponse.getBody(), Shipments.class);
+    }
+
+    /**
+     * Get qr code uri
+     *
+     * @param receiver receiver of order
+     * @param shipment shipment to be validated
+     * @return uri for backend call
+     */
+    public String getQr(String receiver, String shipment) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR.toString())
+                .queryParam("receiver", receiver)
+                .queryParam("shipment", shipment).toUriString();
+        System.out.println(uri);
+        return uri;
     }
 }

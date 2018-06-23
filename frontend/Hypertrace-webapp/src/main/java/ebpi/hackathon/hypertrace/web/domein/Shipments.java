@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shipments {
-    private List<Shipment> shipments = new ArrayList<Shipment>();
+    private List<Shipment> Shipments = new ArrayList<Shipment>();
 
     public List<Shipment> getShipments() {
-        return shipments;
+        return Shipments;
     }
 
     public void setShipments(List<Shipment> shipments) {
-        this.shipments = shipments;
+        this.Shipments = shipments;
     }
 }

@@ -39,6 +39,7 @@
             </thead>
             <tbody>
             <th:block th:each="shipment : ${shipments}">
+                <form action="#" th:action="@{/handoverqr}" method="get">
                 <tr>
                     <td>
                         <input class="form-control" th:value="${shipment.givingPartnerId}" name="givingPartnerId" title="givingPartnerId"
@@ -52,6 +53,7 @@
                         <button class="btn btn-primary" type="submit">Handover</button>
                     </td>
                 </tr>
+                </form>
             </th:block>
             </tbody>
         </table>

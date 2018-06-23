@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hypertrace - Order status</title>
+    <title>Hypertrace - Handover</title>
 
     <!-- Bootstrap core CSS -->
     <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css" th:src="@{webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
@@ -20,23 +20,23 @@
 
 <!--/*/ <th:block th:include="fragments/navbar-loggedin.html">
         </th:block> /*/-->
-        
+
 <div class="container">
 
     <div class="basic-template">
         <h1>
-            <span th:text="'Welcome! ' + ${orderStatusMessage}"></span>
+            Handover page
         </h1>
-    </div>
 
-</div> <!-- /.container -->
+        <img class="qr" th:src="${url}" alt="QR image"/>
+    </div> <!-- /.container -->
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
-<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"Order
-        th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+            th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 
 </body>
 </html>
