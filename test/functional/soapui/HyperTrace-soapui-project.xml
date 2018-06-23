@@ -249,7 +249,7 @@
     <con:description>PlaceOrder</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Orders" searchProperties="true">
+    <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Handovers" searchProperties="true">
       <con:description>Ophalen alle Orders</con:description>
       <con:settings/>
       <con:testStep type="httprequest" name="Ophalen Handover" id="43561982-c846-4cb1-8dc2-ecb7a74929e4">
@@ -580,6 +580,158 @@
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
+    <con:testCase id="bfa3a4cd-36b6-4145-a3a1-78aab1e53e16" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Manufacturer Bulk" searchProperties="true" disabled="true">
+      <con:description>Het opvoeren en controleren van manufacturer</con:description>
+      <con:settings/>
+      <con:testStep type="datasource" name="DataSource" id="fe5de30c-50da-4a50-99a1-49b8bff81782">
+        <con:settings/>
+        <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:dataSource type="Excel">
+            <con:configuration>
+              <file>C:/Source/Blockathon_hyper42/test/testdata.xlsx</file>
+              <worksheet>Manufacturer</worksheet>
+              <cell>A2</cell>
+              <ignoreEmpty>true</ignoreEmpty>
+            </con:configuration>
+          </con:dataSource>
+          <con:property>Manufacturer</con:property>
+          <con:restartOnRun>true</con:restartOnRun>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datagen" name="DataGen" id="3bc82143-6e51-41c7-b74c-6f731625d351">
+        <con:settings/>
+        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000000</start>
+              <end>99999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Naam</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>1000</start>
+              <end>9999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>PartnerID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Opvoeren Manufacturer bulk" id="7c3a1347-2842-48a1-9680-93524ad9bb44">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Manufacturer bulk" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Manufacturer}</con:endpoint>
+          <con:request>[
+  {
+    "$class": "org.ebpi.blockathon.Manufacturer",
+    "Name": "${DataSource#Manufacturer}",
+    "PartnerID": "MID${DataGen#PartnerID}"
+  }
+]</con:request>
+          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="MID${DataGen#PartnerID}">
+            <con:configuration>
+              <path>$[0].PartnerID</path>
+              <content>MID${DataGen#PartnerID}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="${DataSource#Manufacturer}">
+            <con:configuration>
+              <token>${DataSource#Manufacturer}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="delay" name="Wacht op verwerking" id="0b9573f6-c0b6-48d4-acb9-a08e88ce3943">
+        <con:settings/>
+        <con:config>
+          <delay>${#Project#verwerkingsDelay}</delay>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Ophalen Manufacturer" id="f277cd1e-dacf-465a-8508-8fa967bda270">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Manufacturer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${#Project#Manufacturer}</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="MID${DataGen#PartnerID}">
+            <con:configuration>
+              <token>MID${DataGen#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="af3eab3e-2a0b-4783-a772-4f6b7f787608">
+        <con:settings/>
+        <con:config>
+          <dataSourceStep>DataSource</dataSourceStep>
+          <targetStep>DataGen</targetStep>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fe5de30c-50da-4a50-99a1-49b8bff81782</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f277cd1e-dacf-465a-8508-8fa967bda270</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
     <con:properties/>
     <con:reportParameters/>
   </con:testSuite>
@@ -587,12 +739,12 @@
     <con:description>Orderer</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="92d72c48-7177-441b-ac93-a9e8aae81074" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Orderer" searchProperties="true">
+    <con:testCase id="92d72c48-7177-441b-ac93-a9e8aae81074" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle orderer" searchProperties="true">
       <con:description>Ophalen alle Orderer</con:description>
       <con:settings/>
-      <con:testStep type="httprequest" name="Ophalen Orderer" id="e082571c-1a93-4cd9-9d55-9e11d1312495">
+      <con:testStep type="httprequest" name="Ophalen alle orderer" id="e082571c-1a93-4cd9-9d55-9e11d1312495">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen alle orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -624,7 +776,7 @@
       <con:properties/>
       <con:reportParameters/>
     </con:testCase>
-    <con:testCase id="efe4267c-6526-491e-b7b5-326bf68bce88" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Orderer" searchProperties="true">
+    <con:testCase id="efe4267c-6526-491e-b7b5-326bf68bce88" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren orderer" searchProperties="true">
       <con:description>Het opvoeren en controleren van Orderer</con:description>
       <con:settings/>
       <con:testStep type="datagen" name="DataGen" id="d12e3686-100e-422e-9838-e6911f3eaa56">
@@ -658,9 +810,9 @@
           </con:property>
         </con:config>
       </con:testStep>
-      <con:testStep type="httprequest" name="Opvoeren Orderer" id="406821cd-ae48-4720-b5dc-554b3fbef5c6">
+      <con:testStep type="httprequest" name="Opvoeren orderer" id="406821cd-ae48-4720-b5dc-554b3fbef5c6">
         <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Orderer" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren orderer" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -705,9 +857,9 @@
           <delay>${#Project#verwerkingsDelay}</delay>
         </con:config>
       </con:testStep>
-      <con:testStep type="httprequest" name="Ophalen Orderer" id="6c608749-9113-4fd3-bc1c-8ebe6cd61b5b">
+      <con:testStep type="httprequest" name="Ophalen opgevoerde orderer" id="6c608749-9113-4fd3-bc1c-8ebe6cd61b5b">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen opgevoerde orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -750,6 +902,166 @@
       </con:breakPoints>
       <con:breakPoints>
         <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
+    <con:testCase id="96aabaea-745b-4262-bc5c-4b8f1ac44c3f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Orderer Bulk" searchProperties="true" disabled="true">
+      <con:description>Het opvoeren en controleren van Orderer bulk</con:description>
+      <con:settings/>
+      <con:testStep type="datasource" name="DataSource" id="76ffbf14-2fe0-4e63-9372-0a36f2c6a793">
+        <con:settings/>
+        <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:dataSource type="Excel">
+            <con:configuration>
+              <file>C:/Source/Blockathon_hyper42/test/testdata.xlsx</file>
+              <worksheet>Orderer</worksheet>
+              <cell>A2</cell>
+              <ignoreEmpty>true</ignoreEmpty>
+            </con:configuration>
+          </con:dataSource>
+          <con:property>Orderer</con:property>
+          <con:restartOnRun>true</con:restartOnRun>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datagen" name="DataGen" id="6267b510-f692-41c8-b09f-6288e3d32499">
+        <con:settings/>
+        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000000</start>
+              <end>99999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Naam</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>1000</start>
+              <end>9999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>PartnerID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Opvoeren Orderer bulk" id="59a1e8e1-504d-48bb-993c-a50da2dfc280">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Orderer bulk" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Orderer}</con:endpoint>
+          <con:request>[
+  {
+    "$class": "org.ebpi.blockathon.Orderer",
+    "Name": "${DataSource#Orderer}",
+    "PartnerID": "OrdererID${DataGen#PartnerID}"
+  }
+]</con:request>
+          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="OrdererID${DataGen#PartnerID}">
+            <con:configuration>
+              <path>$[0].PartnerID</path>
+              <content>OrdererID${DataGen#PartnerID}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="42cf70f2-7f5f-49af-ad55-3c0e94621317" name="${DataSource#Orderer}">
+            <con:configuration>
+              <token>${DataSource#Orderer}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="delay" name="Wacht op verwerking" id="3a2ceb50-c9f7-4e9d-a099-20968bf708e8">
+        <con:settings/>
+        <con:config>
+          <delay>${#Project#verwerkingsDelay}</delay>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Ophalen Orderer" id="a823bc1e-306a-4f80-8138-75913b9df68b">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Orderer}</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="OrdererID${DataGen#PartnerID}">
+            <con:configuration>
+              <token>OrdererID${DataGen#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="c9bc9e3c-df2f-437c-b1e2-a055dfa0459e" name="${DataSource#Orderer}">
+            <con:configuration>
+              <token>${DataSource#Orderer}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="c5731415-b319-4b09-8019-ecc3ac429865">
+        <con:settings/>
+        <con:config>
+          <dataSourceStep>DataSource</dataSourceStep>
+          <targetStep>DataGen</targetStep>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fe5de30c-50da-4a50-99a1-49b8bff81782</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f277cd1e-dacf-465a-8508-8fa967bda270</con:testStepId>
         <con:status>NONE</con:status>
         <con:properties/>
       </con:breakPoints>
@@ -1005,7 +1317,7 @@
           <con:request/>
           <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="transactionId">
             <con:configuration>
-              <token>a308768aeb10f19269d5765adf6ee21800b77e8079bcc118db88d3257305b37e</token>
+              <token>445950a7b35a1b31aad386d86eca78f92de336c92af76e7479ec5427bc25221f</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1020,6 +1332,160 @@
       </con:testStep>
       <con:properties/>
       <con:reportParameters/>
+    </con:testCase>
+    <con:testCase id="b643ceb7-6445-4c68-9911-846c3bfd114f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Shipment" searchProperties="true">
+      <con:description>Het opvoeren en controleren van manufacturer</con:description>
+      <con:settings/>
+      <con:testStep type="datagen" name="DataGen" id="8126b27d-b26c-4f32-9bc6-994bcc68e9bf">
+        <con:settings/>
+        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000000</start>
+              <end>99999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Naam</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>1000</start>
+              <end>9999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>PartnerID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Script">
+            <con:configuration>
+              <script>UUID.randomUUID()</script>
+            </con:configuration>
+            <con:name>ClientReference</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Script">
+            <con:configuration>
+              <script>UUID.randomUUID()</script>
+            </con:configuration>
+            <con:name>ShipmentID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Script">
+            <con:configuration>
+              <script>import java.text.SimpleDateFormat
+import java.util.Date
+
+java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+// explicitly set timezone of input if needed
+df.setTimeZone(java.util.TimeZone.getTimeZone("Zulu"));
+df.format(new Date());</script>
+            </con:configuration>
+            <con:name>Timestamp</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Opvoeren Shipment" id="47982627-6511-4351-845a-8338ba56c5ad">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Shipment" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#sendShipment}</con:endpoint>
+          <con:request>{
+  "ClientReference": "${DataGen#ClientReference}",
+  "DocumentHash": "${DataGen#ShipmentID}",
+  "DocumentLocation": "Ypenburg",
+  "ShippedProducts": ["NIKE001"],
+  "transporterList": ["POSTNL001"],
+  "Destination": "Autoworld - Brussel",
+  "Customer": "OrdererID8376",
+  "Weight": "25KG"
+}</con:request>
+          <con:assertion type="JsonPath Match" id="2291e795-ff98-434b-949d-eb629b832f61" name="${DataGen#ClientReference}">
+            <con:configuration>
+              <path>$.ClientReference</path>
+              <content>${DataGen#ClientReference}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="delay" name="Wacht op verwerking" id="2aa3308a-8b93-419b-bcd5-a81e867b3ac5">
+        <con:settings/>
+        <con:config>
+          <delay>${#Project#verwerkingsDelay}</delay>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Ophalen Shipment" id="7fb41d7f-400e-42c3-a8bb-3f6ecb3dc3d8">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Shipment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#sendShipment}</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataGen#ClientReference}">
+            <con:configuration>
+              <token>${DataGen#ClientReference}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataGen#ShipmentID}">
+            <con:configuration>
+              <token>${DataGen#ShipmentID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
     </con:testCase>
     <con:properties/>
     <con:reportParameters/>
@@ -1056,135 +1522,6 @@
       </con:testStep>
       <con:properties/>
       <con:reportParameters/>
-    </con:testCase>
-    <con:testCase id="b643ceb7-6445-4c68-9911-846c3bfd114f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Shipment" searchProperties="true" disabled="true">
-      <con:description>Het opvoeren en controleren van manufacturer</con:description>
-      <con:settings/>
-      <con:testStep type="datagen" name="DataGen" id="8126b27d-b26c-4f32-9bc6-994bcc68e9bf">
-        <con:settings/>
-        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:property type="Number">
-            <con:configuration>
-              <start>10000000</start>
-              <end>99999999</end>
-              <step/>
-              <pattern/>
-              <random>true</random>
-              <persist>false</persist>
-            </con:configuration>
-            <con:name>Naam</con:name>
-            <con:mode>STEP</con:mode>
-            <con:shared>false</con:shared>
-          </con:property>
-          <con:property type="Number">
-            <con:configuration>
-              <start>1000</start>
-              <end>9999</end>
-              <step/>
-              <pattern/>
-              <random>true</random>
-              <persist>false</persist>
-            </con:configuration>
-            <con:name>PartnerID</con:name>
-            <con:mode>STEP</con:mode>
-            <con:shared>false</con:shared>
-          </con:property>
-        </con:config>
-      </con:testStep>
-      <con:testStep type="httprequest" name="Opvoeren Shipment" id="47982627-6511-4351-845a-8338ba56c5ad">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Shipment" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:encoding xsi:nil="true"/>
-          <con:endpoint>${#Project#Shipment}</con:endpoint>
-          <con:request>[
-  {
-    "$class": "org.ebpi.blockathon.Manufacturer",
-    "Name": "Manufacturer${DataGen#Naam}",
-    "PartnerID": "MID${DataGen#PartnerID}"
-  }
-]</con:request>
-          <con:assertion type="JsonPath Match" id="2291e795-ff98-434b-949d-eb629b832f61" name="Manufacturer${DataGen#Naam}">
-            <con:configuration>
-              <path>$[0].Name</path>
-              <content>Manufacturer${DataGen#Naam}</content>
-              <allowWildcards>false</allowWildcards>
-              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-              <ignoreComments>false</ignoreComments>
-            </con:configuration>
-          </con:assertion>
-          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="MID${DataGen#PartnerID}">
-            <con:configuration>
-              <path>$[0].PartnerID</path>
-              <content>MID${DataGen#PartnerID}</content>
-              <allowWildcards>false</allowWildcards>
-              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-              <ignoreComments>false</ignoreComments>
-            </con:configuration>
-          </con:assertion>
-          <con:credentials>
-            <con:authType>No Authorization</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep>
-      <con:testStep type="delay" name="Wacht op verwerking" id="2aa3308a-8b93-419b-bcd5-a81e867b3ac5">
-        <con:settings/>
-        <con:config>
-          <delay>${#Project#verwerkingsDelay}</delay>
-        </con:config>
-      </con:testStep>
-      <con:testStep type="httprequest" name="Ophalen Shipment" id="7fb41d7f-400e-42c3-a8bb-3f6ecb3dc3d8">
-        <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Shipment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${#Project#Shipment}</con:endpoint>
-          <con:request/>
-          <con:assertion type="Simple Contains" id="5e9671ee-053b-4baa-ac37-a76e99b41824" name="Manufacturer${DataGen#Naam}">
-            <con:configuration>
-              <token>Manufacturer${DataGen#Naam}</token>
-              <ignoreCase>false</ignoreCase>
-              <useRegEx>false</useRegEx>
-            </con:configuration>
-          </con:assertion>
-          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="MID${DataGen#PartnerID}">
-            <con:configuration>
-              <token>MID${DataGen#PartnerID}</token>
-              <ignoreCase>false</ignoreCase>
-              <useRegEx>false</useRegEx>
-            </con:configuration>
-          </con:assertion>
-          <con:credentials>
-            <con:authType>No Authorization</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep>
-      <con:properties/>
-      <con:reportParameters/>
-      <con:breakPoints>
-        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
     </con:testCase>
     <con:properties/>
     <con:reportParameters/>
@@ -1226,7 +1563,7 @@
     <con:properties/>
     <con:reportParameters/>
   </con:testSuite>
-  <con:testSuite id="df9d9eb9-f200-4027-a4cf-e37abfb538ab" name="TradePartner">
+  <con:testSuite id="df9d9eb9-f200-4027-a4cf-e37abfb538ab" name="TradePartner" disabled="true">
     <con:description>TradePartner</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
