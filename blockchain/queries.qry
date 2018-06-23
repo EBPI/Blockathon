@@ -2,5 +2,6 @@ query Q17 {
     description: "Select all shpments for a transporter which are about to come"
     statement:
         SELECT org.ebpi.blockathon.Shipment
-            WHERE (transporterList CONTAINS _$PartnerID)
+            WHERE (transporterList CONTAINS [ _$PartnerID ])
 }
+
