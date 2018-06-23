@@ -52,23 +52,28 @@
                     <td>
                         €<span th:text="${product.getValue()}"></span>
                     </td>
-                    <td>
-                        <span th:text="${product.getCreator()}"></span>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" id="quantity">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" type="submit">Order</button>
-                    </td>
+                    <form action="#" th:action="@{/order}" method="post">
+                        <td>
+                            <div class="form-group">
+                                <span th:text="${product.getCreator()}"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select class="form-control" id="quantity">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Order</button>
+                            </div>
+                        </td>
                 </tr>
             </th:block>
             </tbody>
