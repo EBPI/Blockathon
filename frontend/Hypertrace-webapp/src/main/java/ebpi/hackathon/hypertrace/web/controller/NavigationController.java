@@ -39,10 +39,15 @@ public class NavigationController {
      * @return homepage non logged-in user
      */
     @RequestMapping("/")
-    public String home(Map<String, Object> model) {
-        String message = "This text is inserted from within the code with Thymeleaf!";
-        model.put("homeMessage", message);
-        return "home";
+    public String home(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+        if (request.getCookies() == null || request.getCookies().length != 4) {
+            String message = "This text is inserted from within the code with Thymeleaf!";
+            model.put("homeMessage", message);
+            return "home";
+        } else {
+            User loggedIn = getUserFromCookie(request);
+            return loggedIn(model, loggedIn);
+        }
     }
 
     /**
@@ -53,6 +58,7 @@ public class NavigationController {
      */
     @RequestMapping("/login")
     public String login(Model model) {
+
         User user = new User();
         model.addAttribute("user", user);
         return "login";
@@ -61,31 +67,36 @@ public class NavigationController {
     /**
      * Homepage Submits a loggedIn user
      *
-     * @param user username and password from user
-     * @param type role selection from login
-     * @param model redirect model for thymeleaf
+     * @param user     username and password from user
+     * @param type     role selection from login
+     * @param model    redirect model for thymeleaf
      * @param response HttpServletResponse used for setting cookie values
      * @return logged in home or same page
      */
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute(value = "user") User user, @RequestParam("type") String type, Map<String, Object> model, HttpServletResponse response) throws IOException, URISyntaxException {
+    public String loginSubmit(@ModelAttribute(value = "user") User user, @RequestParam("type") String type, Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException {
         // clear cookies
         user = loginCheck(user);
 
         if (user != null) {
             user.setType(type);
-            ledgerService.getParticipant(user);
-            response.addCookie(new Cookie("username", user.getUsername()));
-            response.addCookie(new Cookie("fullName", user.getFullName()));
-            response.addCookie(new Cookie("type", user.getType()));
+            String id = ledgerService.getParticipant(user);
+            System.out.println("Found ID in ledger: " + id);
+            if (id != null) {
+                response.addCookie(new Cookie("id", id));
+                response.addCookie(new Cookie("username", user.getUsername()));
+                response.addCookie(new Cookie("fullName", user.getFullName()));
+                response.addCookie(new Cookie("type", user.getType()));
+            }
             return loggedIn(model, user);
         } else {
-            return home(model);
+            return home(model, request, response);
         }
     }
 
     /**
      * Check usersfile for correct login (local solution for PoC, NOT FOR PRODUCTION!)
+     *
      * @param user Usercredentials from login
      * @return boolean that indicates a correct login
      * @throws IOException exception that can normally occur during json parsing, nothing of interest here
@@ -160,22 +171,40 @@ public class NavigationController {
      * @return homepage without cookies
      */
     @RequestMapping("/logout")
-    public String logout(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+    public String logout(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
         removeCookies(request, response);
-        return home(model);
+        String message = "You have succesfully logged out.";
+        model.put("homeMessage", message);
+        return "home";
     }
 
     /**
      * Remove all cookies from session
-     * @param request used for getting all cookies in session
+     *
+     * @param request  used for getting all cookies in session
      * @param response used for setting all cookies ready for deletion in response
      */
     private void removeCookies(HttpServletRequest request, HttpServletResponse response) {
-        for(Cookie cookie : request.getCookies()) {
+        for (Cookie cookie : request.getCookies()) {
             cookie.setValue("");
             cookie.setMaxAge(0);
             cookie.setPath("/");
             response.addCookie(cookie);
         }
+    }
+
+    /**
+     * Construct User from cookie values
+     *
+     * @param request request needed to read cookies
+     * @return User object
+     */
+    private User getUserFromCookie(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        User loggedIn = new User();
+        loggedIn.setUsername(cookies[1].getValue());
+        loggedIn.setFullName(cookies[2].getValue());
+        loggedIn.setType(cookies[3].getValue());
+        return loggedIn;
     }
 }
