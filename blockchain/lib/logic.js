@@ -96,9 +96,9 @@ function doChangeReputation(changeReputation) {
 var mutatedManufacturer = changeReputation.manufacturer;
 if (changeReputation.good){mutatedManufacturer.Reputation++;}
 else{mutatedManufacturer.Reputation--}
-    return getAssetRegistry('org.ebpi.blockathon.Manufacturer')
-        .then(function (ManufacturerAssetRegistry) {
-            return ManufacturerAssetRegistry.update(mutatedManufacturer);
+    return getParticipantRegistry('org.ebpi.blockathon.Manufacturer')
+        .then(function (ManufacturerParticipantRegistry) {
+            return ManufacturerParticipantRegistry.update(mutatedManufacturer);
         })
 }
 
