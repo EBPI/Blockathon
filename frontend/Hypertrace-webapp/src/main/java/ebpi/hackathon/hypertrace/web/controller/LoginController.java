@@ -151,6 +151,7 @@ public class LoginController {
                 return "manufacturerLoggedIn";
             case "transporter":
                 Shipments shipmentsObject = backendService.getShipmentsForTransporter(id);
+                System.out.println(shipmentsObject.getShipments());
                 model.put("shipments", shipmentsObject.getShipments());
                 return "transporterLoggedIn";
             case "customs":

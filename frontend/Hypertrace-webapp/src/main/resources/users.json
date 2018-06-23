@@ -1,6 +1,6 @@
 [
   {
-    "username":"Zalando",
+    "username":"Bamigo",
     "password":"pass",
     "fullName":"Bubbles"
   },
@@ -26,9 +26,14 @@
     "fullName":"QuickDriver"
   },
   {
-    "username":"Transporter46618096",
+    "username":"Maersk",
     "password":"pass",
     "fullName":"FastShip"
+  },
+  {
+    "username":"NipponExpress",
+    "password":"pass",
+    "fullName":"QuickDriver"
   }
 
 ]
