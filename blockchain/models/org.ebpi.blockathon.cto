@@ -98,17 +98,7 @@ o Boolean final default = false
 transaction acceptHandover {
 --> Shipment shipment
 --> TradePartner previousHandler
-o ShipmentState state
+o ShipmentState state default ="OK"
 o Boolean final default = false
 }
 
-transaction deliverPackage{
---> Shipment shipment
-o ShipmentState state default = "OK"
-o String receiver
-}
-
-transaction receivePackage{
--->Shipment shipment
-  o ShipmentState state
-}
