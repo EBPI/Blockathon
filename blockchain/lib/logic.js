@@ -88,10 +88,10 @@ function doAcceptHandover(acceptHandover) {
         confirmed = false
     }
     deHandover.stateReciever = status
+    return getAssetRegistry('org.ebpi.blockathon.Shipment')
+        .then(function (ShipmentAssetRegistry) {
+            return ShipmentAssetRegistry.update(ontvangenShipment);
 
-    return getAssetRegistry('org.ebpi.blockathon.Handover')
-        .then(function (HandoverAssetRegistry) {
-            return HandoverAssetRegistry.update(deHandover);
         })
 
 
