@@ -59,7 +59,8 @@ function doStartHandover(startHandover) {
     newHandover.stateGiving = startHandover.state
     newHandover.stateReciever = "undefined"
     var ontvangenShipment =  startHandover.shipment
-
+    console.log("logt ie uberhaubt wel")
+console.log(ontvangenShipment.ShipmentID)
     ontvangenShipment.handoverArray.push(newHandover)
 
     // return getAssetRegistry('org.ebpi.blockathon.Shipment')
