@@ -41,7 +41,7 @@ description: "Allow a manufacturer to create a product"
 rule ManufactereShipment {
 description: "Allow a manufacturer to create a shipment"
 participant (p):"org.ebpi.blockathon.Manufacturer"
-  operation: CREATE, READ
+  operation: CREATE, READ, UPDATE
   resource (r): "org.ebpi.blockathon.Shipment"
   condition: (r.Supplier.getIdentifier() == p.getIdentifier())
   action: ALLOW
