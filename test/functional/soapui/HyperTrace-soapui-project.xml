@@ -249,7 +249,7 @@
     <con:description>PlaceOrder</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Orders" searchProperties="true">
+    <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Handovers" searchProperties="true">
       <con:description>Ophalen alle Orders</con:description>
       <con:settings/>
       <con:testStep type="httprequest" name="Ophalen Handover" id="43561982-c846-4cb1-8dc2-ecb7a74929e4">
