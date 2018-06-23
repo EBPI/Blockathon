@@ -20,23 +20,68 @@
 
 <!--/*/ <th:block th:include="fragments/navbar-loggedin.html">
         </th:block> /*/-->
-        
+
 <div class="container">
 
     <div class="basic-template">
         <h1>
             <span th:text="'Welcome ' + ${loggedInMessage}"></span>
         </h1>
-    </div>
 
-</div> <!-- /.container -->
+        <h2>List of products:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Manufacturer</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Order</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="product : ${products}">
+                <tr>
+                    <td>
+                        <img class="product" src="img/product.jpeg" th:src="@{img/product.jpeg}" alt="Product image"/>
+                    </td>
+                    <td>
+                        <span th:text="${product.getDescription()}"></span>
+                    </td>
+                    <td>
+                        €<span th:text="${product.getValue()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${product.getCreator()}"></span>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" id="quantity">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" type="submit">Order</button>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
-<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
-        th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    </div> <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+            th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 
 </body>
 </html>
