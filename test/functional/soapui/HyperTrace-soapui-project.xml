@@ -739,12 +739,12 @@
     <con:description>Orderer</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="92d72c48-7177-441b-ac93-a9e8aae81074" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Orderer" searchProperties="true">
+    <con:testCase id="92d72c48-7177-441b-ac93-a9e8aae81074" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle orderer" searchProperties="true">
       <con:description>Ophalen alle Orderer</con:description>
       <con:settings/>
-      <con:testStep type="httprequest" name="Ophalen Orderer" id="e082571c-1a93-4cd9-9d55-9e11d1312495">
+      <con:testStep type="httprequest" name="Ophalen alle orderer" id="e082571c-1a93-4cd9-9d55-9e11d1312495">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen alle orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -776,7 +776,7 @@
       <con:properties/>
       <con:reportParameters/>
     </con:testCase>
-    <con:testCase id="efe4267c-6526-491e-b7b5-326bf68bce88" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Orderer" searchProperties="true">
+    <con:testCase id="efe4267c-6526-491e-b7b5-326bf68bce88" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren orderer" searchProperties="true">
       <con:description>Het opvoeren en controleren van Orderer</con:description>
       <con:settings/>
       <con:testStep type="datagen" name="DataGen" id="d12e3686-100e-422e-9838-e6911f3eaa56">
@@ -810,9 +810,9 @@
           </con:property>
         </con:config>
       </con:testStep>
-      <con:testStep type="httprequest" name="Opvoeren Orderer" id="406821cd-ae48-4720-b5dc-554b3fbef5c6">
+      <con:testStep type="httprequest" name="Opvoeren orderer" id="406821cd-ae48-4720-b5dc-554b3fbef5c6">
         <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren Orderer" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren orderer" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -857,9 +857,9 @@
           <delay>${#Project#verwerkingsDelay}</delay>
         </con:config>
       </con:testStep>
-      <con:testStep type="httprequest" name="Ophalen Orderer" id="6c608749-9113-4fd3-bc1c-8ebe6cd61b5b">
+      <con:testStep type="httprequest" name="Ophalen opgevoerde orderer" id="6c608749-9113-4fd3-bc1c-8ebe6cd61b5b">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen Orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Ophalen opgevoerde orderer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
