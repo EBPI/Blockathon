@@ -80,20 +80,25 @@ public class NavigationController {
         // clear cookies
         user = loginCheck(user);
 
-        if (user != null) {
-            user.setType(type);
-            String id = ledgerService.getParticipant(user);
-            System.out.println("Found ID in ledger: " + id);
-            if (id != null) {
-                response.addCookie(new Cookie("id", id));
-                response.addCookie(new Cookie("username", user.getUsername()));
-                response.addCookie(new Cookie("fullName", user.getFullName()));
-                response.addCookie(new Cookie("type", user.getType()));
-                return loggedIn(model, user);
+        try {
+            if (user != null) {
+                user.setType(type);
+                String id = ledgerService.getParticipant(user);
+                System.out.println("Found ID in ledger: " + id);
+                if (id != null) {
+                    response.addCookie(new Cookie("id", id));
+                    response.addCookie(new Cookie("username", user.getUsername()));
+                    response.addCookie(new Cookie("fullName", user.getFullName()));
+                    response.addCookie(new Cookie("type", user.getType()));
+                    return loggedIn(model, user);
+                }
             }
+            model.put("loginError", "Something went wrong during sign in, did you use the correct credentials?");
+            return "login";
+        } catch (Exception e) {
+            model.put("loginError", "Network error. Please contact an admin.");
+            return "login";
         }
-        model.put("loginError", "Something went wrong during sign in, did you use the correct credentials?");
-        return "login";
     }
 
     /**
