@@ -70,7 +70,6 @@ public class BackendService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> shipmentResponse = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         System.out.println(shipmentResponse.getBody());
-        Shipments shipments = new Gson().fromJson(shipmentResponse.getBody(), Shipments.class);
-        return shipments;
+        return new Gson().fromJson(shipmentResponse.getBody(), Shipments.class);
     }
 }
