@@ -5,6 +5,7 @@ import ebpi.hackathon.hypertrace.web.rest.BackendService;
 import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -88,6 +89,20 @@ public class OrderController {
 
     @RequestMapping("/manufacturer")
     public String getQrSelect(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
+        model.put("receiverId", receiver);
+        model.put("shipmentId", shipment);
         return "handover-select";
+    }
+
+    @RequestMapping("/manufacturerselect")
+    public String acceptHandover(@RequestParam("selection") String selection, @RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
+        String result;
+        if (selection.equals("accept")) {
+            result = "Handover accepted!";
+        } else {
+            result = "handover declined!";
+        }
+        model.put("loggedInMessage", result);
+        return "home";
     }
 }

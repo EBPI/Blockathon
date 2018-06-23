@@ -27,16 +27,36 @@
         <h1>
             Handover select page
         </h1>
+        <form action="#" th:action="@{/manufacturerselect}" method="post">
+            <div class="row">
+                <div class="col-sm">
+                    <b>Receiver ID:</b> <span th:text="${receiverId}"></span>
+                </div>
+                <div class="col-sm">
+                    <b>Shipment ID:</b> <span th:text="${shipmentId}"></span>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <button type="submit" name="selection" value="accept" class="btn btn-block btn-success">Accept
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-group">
+                        <button type="submit" name="selection" value="decline" class="btn btn-block btn-danger">
+                            Decline
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- /.container -->
+        </form>
 
-        <img class="qr" th:src="${url}" alt="QR image"/>
-    </div> <!-- /.container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
-    <script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
-            th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
+        <script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+                th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 
 </body>
 </html>
