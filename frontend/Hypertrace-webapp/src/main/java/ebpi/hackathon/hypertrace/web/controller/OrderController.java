@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class OrderController {
@@ -24,18 +22,52 @@ public class OrderController {
     private UserUtils userUtils;
 
     @RequestMapping("/order")
-    public String placeOrder(@RequestParam("productId") String productId, @RequestParam("manufacturer") String manufacturer, @RequestParam("quantity") String quantity, Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
-        int quantityInt = Integer.parseInt(quantity);
-        Order order = new Order();
-        order.setManufacturer(manufacturer);
-        order.setOrderer(userUtils.getUserIdFromCookie(request));
-        List<String> products = new ArrayList<>();
-        for (int i = 0; i < quantityInt; i++) {
-            products.add(productId);
-        }
-        order.setProducts(products);
-        System.out.println(new Gson().toJson(order));
+    public String placeOrder(@RequestParam("productId") String productId, @RequestParam("creator") String creator, @RequestParam("quantity") String quantity, HttpServletRequest request) {
+        String ordererId = userUtils.getUserIdFromCookie(request);
+        List<Order> orders = parseOrders(productId, creator, quantity, ordererId);
+        System.out.println(new Gson().toJson(orders));
         return "home";
+    }
+
+    private List<Order> parseOrders(String productId, String manufacturer, String quantity, String ordererId) {
+        List<Order> orderList = new ArrayList<>();
+        String[] ids = productId.split(",");
+        String[] manufacturers = manufacturer.split(",");
+        String[] quantities = quantity.split(",");
+        for (int i = 0; i < ids.length; i++) {
+            if (quantities[i].equals("0")) {
+                continue;
+            }
+            Order order = new Order();
+            order.setOrderer(ordererId);
+            order.setManufacturer(manufacturers[i]);
+            List<String> products = new ArrayList<>();
+            for (int j = 0; j < Integer.parseInt(quantities[i]); j++) {
+                products.add(ids[i]);
+            }
+            order.setProducts(products);
+            orderList.add(order);
+        }
+        return orderByManufacturer(orderList, new HashSet<>(Arrays.asList(manufacturers)));
+    }
+
+    private List<Order> orderByManufacturer(List<Order> orders, Set<String> manufacturers) {
+        List<Order> ordersByManufacturer = new ArrayList<>();
+        for (String manufacturer : manufacturers) {
+            Order orderManufacturer = new Order();
+            for (Order order : orders) {
+                if (order.getManufacturer().equals(manufacturer)) {
+                    orderManufacturer.setManufacturer(manufacturer);
+                    orderManufacturer.setOrderer(order.getOrderer());
+                    if (orderManufacturer.getProducts() == null) {
+                        orderManufacturer.setProducts(new ArrayList<>());
+                    }
+                    orderManufacturer.getProducts().addAll(order.getProducts());
+                }
+            }
+            ordersByManufacturer.add(orderManufacturer);
+        }
+        return ordersByManufacturer;
     }
 
     /**

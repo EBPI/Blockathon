@@ -29,55 +29,52 @@
         </h1>
 
         <h2>List of products:</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Manufacturer</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Order</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="product : ${products}">
+        <form action="#" th:action="@{/order}" method="post">
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>
-                        <img class="product" src="img/product.jpeg" th:src="@{img/product.jpeg}" alt="Product image"/>
-                    </td>
-                    <td>
-                        <span th:text="${product.getDescription()}"></span>
-                    </td>
-                    <td>
-                        €<span th:text="${product.getValue()}"></span>
-                    </td>
-                    <form action="#" th:action="@{/order}" method="post">
-                        <td>
-                            <div class="form-group">
-                                <span th:text="${product.getCreator()}"></span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <select class="form-control" id="quantity">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Order</button>
-                            </div>
-                        </td>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Quantity</th>
                 </tr>
-            </th:block>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <th:block th:each="product : ${products}">
+                    <tr>
+                        <td>
+                            <img class="product" src="img/product.jpeg" th:src="@{img/product.jpeg}"
+                                 alt="Product image"/>
+                        </td>
+                        <td>
+                            <span th:text="${product.getDescription()}"></span>
+                        </td>
+                        <td>
+                            €<span th:text="${product.getValue()}"></span>
+                        </td>
+                        <td>
+                            <input class="form-control" th:value="${product.creator}" name="creator"
+                                   required="required" readonly>
+                        </td>
+                        <td>
+                            <select class="form-control" title="quantity" name="quantity">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </td>
+                        <input class="form-control" th:value="${product.productID}" name="productId"
+                               required="required" type="hidden">
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" type="submit">Order</button>
+        </form>
 
     </div> <!-- /.container -->
 
