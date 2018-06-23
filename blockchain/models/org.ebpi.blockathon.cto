@@ -109,5 +109,5 @@ o Boolean finalHandover default = false
 transaction changeReputation{
 --> Manufacturer manufacturer
 o Boolean good
-optional String message
+o String message optional
 }
