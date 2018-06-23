@@ -25,7 +25,7 @@
 
     <div class="basic-template">
         <h1>
-            <span th:text="'Welcome! ' + ${homeMessage}"></span>
+            <span th:text="${homeMessage}"></span>
         </h1>
         <div id="async">Calculating weather for Brussels...</div>
         <script src="js/checkWeatherHackathon.js" th:src="@{js/checkWeatherHackathon.js}"></script>
