@@ -1,7 +1,7 @@
 /**
  * Sample transaction
  * @param {org.ebpi.blockathon.sendShipment} sendShipment
- * @identifier
+ * @transaction
  *
  */
 function doSendShipment(sendShipment) {
@@ -15,10 +15,12 @@ function doSendShipment(sendShipment) {
     const costumer = sendShipment.Customer;
     const costID = costumer.PartnerID;
     const originalWeight = sendShipment.Weight;
+    const clientRefrerence= sendShipment.ClientRefrerence
     let factory = getFactory();
     const identifier = uuidv4();
     let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment', identifier);
     newShipment.DocumentHash = hash;
+    newShipment.ClientRefrerence=clientRefrerence
     newShipment.DocumentLocation = docLoc;
     newShipment.ShippedProducts = procductList;
     newShipment.transporterList = transprterList;

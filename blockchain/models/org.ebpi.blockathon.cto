@@ -35,6 +35,7 @@ asset Product identified by ProductID {
 }
 
 asset Shipment identified by ShipmentID {
+  o String ClientRefrerence
   o String ShipmentID
   o String DocumentHash
   o String DocumentLocation
@@ -60,6 +61,7 @@ asset Handover identified by HandoverID {
 }
 
 transaction sendShipment {
+o String ClientRefrerence
 o String DocumentHash
 o String DocumentLocation
 --> Product [] ShippedProducts
