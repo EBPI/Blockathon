@@ -24,7 +24,6 @@ public class OrderController {
 	private ShipmentService shipmentService;
 
 	@PostMapping(value = "/order", consumes = "application/json", produces = { "application/json" })
-	// public @ResponseBody OrderConfirmation placeOrder(@RequestBody Order order) {
 	public @ResponseBody OrderConfirmation placeOrder(@RequestBody Order order) {
 		LOG.debug("creating order {}", order);
 		String orderId = orderService.createOrder(order);
