@@ -25,7 +25,7 @@
 
     <div class="basic-template">
         <h1>
-            <span th:text="'Welcome ' + ${loggedInMessage}"></span>
+            <span th:text="${loggedInMessage}"></span>
         </h1>
 
         <h2>List of products:</h2>
@@ -48,13 +48,13 @@
                                  alt="Product image"/>
                         </td>
                         <td>
-                            <span th:text="${product.getDescription()}"></span>
+                            <span th:text="${product.description}"></span>
                         </td>
                         <td>
-                            €<span th:text="${product.getValue()}"></span>
+                            €<span th:text="${product.value}"></span>
                         </td>
                         <td>
-                            <input class="form-control" th:value="${product.creator}" name="creator"
+                            <input class="form-control" th:value="${product.creator}" name="creator" title="creator"
                                    required="required" readonly>
                         </td>
                         <td>

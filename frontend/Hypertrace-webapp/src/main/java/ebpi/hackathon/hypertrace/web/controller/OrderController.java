@@ -28,7 +28,7 @@ public class OrderController {
         String ordererId = userUtils.getUserIdFromCookie(request);
         List<Order> orders = parseOrders(productId, creator, quantity, ordererId);
         String message = backendService.sendOrderToBackend(orders);
-        model.put("loggedInMessage", model.put("loggedInMessage", message));
+        model.put("loggedInMessage", message);
         return "ordererLoggedIn";
     }
 

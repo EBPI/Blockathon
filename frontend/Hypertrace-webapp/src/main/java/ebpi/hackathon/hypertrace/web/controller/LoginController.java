@@ -3,7 +3,9 @@ package ebpi.hackathon.hypertrace.web.controller;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import ebpi.hackathon.hypertrace.web.domein.Product;
+import ebpi.hackathon.hypertrace.web.domein.Shipment;
 import ebpi.hackathon.hypertrace.web.domein.User;
+import ebpi.hackathon.hypertrace.web.rest.BackendService;
 import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class LoginController {
     @Autowired
     private UserUtils userUtils;
 
+    @Autowired
+    private BackendService backendService;
+
     /**
      * Homepage for non logged-in user
      *
@@ -50,8 +55,9 @@ public class LoginController {
             model.put("homeMessage", message);
             return "home";
         } else {
+            String id = userUtils.getUserIdFromCookie(request);
             User loggedIn = userUtils.getUserFromCookie(request);
-            return loggedIn(model, loggedIn);
+            return loggedIn(model, loggedIn, id);
         }
     }
 
@@ -94,7 +100,7 @@ public class LoginController {
                     response.addCookie(new Cookie("username", user.getUsername()));
                     response.addCookie(new Cookie("fullName", user.getFullName()));
                     response.addCookie(new Cookie("type", user.getType()));
-                    return loggedIn(model, user);
+                    return loggedIn(model, user, id);
                 }
             }
             model.put("loginError", "Something went wrong during sign in, did you use the correct credentials?");
@@ -134,8 +140,8 @@ public class LoginController {
      * @return homepage logged-in user
      */
     @RequestMapping("/loggedIn")
-    public String loggedIn(Map<String, Object> model, User user) {
-        model.put("loggedInMessage", user.getType() + " " + user.getUsername() + " (" + user.getFullName() + ")!");
+    public String loggedIn(Map<String, Object> model, User user, String id) {
+        model.put("loggedInMessage", "Welcome " + user.getType() + " " + user.getUsername() + " (" + user.getFullName() + ")!");
         switch (user.getType()) {
             case "orderer":
                 List<Product> products = ledgerService.getProducts();
@@ -144,6 +150,8 @@ public class LoginController {
             case "manufacturer":
                 return "manufacturerLoggedIn";
             case "transporter":
+                List<Shipment> shipments = backendService.getShipmentsForTransporter(id);
+                model.put("shipments", shipments);
                 return "transporterLoggedIn";
             case "customs":
                 return "customsLoggedIn";

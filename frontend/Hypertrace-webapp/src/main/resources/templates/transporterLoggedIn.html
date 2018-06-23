@@ -20,23 +20,47 @@
 
 <!--/*/ <th:block th:include="fragments/navbar-loggedin.html">
         </th:block> /*/-->
-        
+
 <div class="container">
 
     <div class="basic-template">
         <h1>
             <span th:text="'Welcome ' + ${loggedInMessage}"></span>
         </h1>
-    </div>
 
-</div> <!-- /.container -->
+        <h2>List of shipments:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Giving partner ID</th>
+                <th scope="col">Shipment ID</th>
+                <th scope="col">Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="shipment : ${shipments}">
+                <tr>
+                    <td>
+                        <input class="form-control" th:value="${shipment.givingPartnerId}" name="givingPartnerId" title="givingPartnerId"
+                               required="required" readonly>
+                    </td>
+                    <td>
+                        <input class="form-control" th:value="${shipment.shipmentId}" name="shipmentId" title="shipmentId"
+                               required="required" readonly>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
-<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
-        th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    </div> <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+            th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 
 </body>
 </html>

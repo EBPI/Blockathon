@@ -2,11 +2,8 @@ package ebpi.hackathon.hypertrace.web.rest;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.sun.jndi.toolkit.url.Uri;
 import ebpi.hackathon.hypertrace.web.domein.Order;
-import ebpi.hackathon.hypertrace.web.domein.Participant;
 import ebpi.hackathon.hypertrace.web.domein.Shipment;
-import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -22,8 +19,7 @@ import java.util.List;
 public class BackendService {
     private static final String BACKEND_SERVICE_IP = "http://192.168.0.101:8070";
     private static final URI BACKEND_SERVICE_ORDER = URI.create(BACKEND_SERVICE_IP + "/order");
-    private static final URI BACKEND_SERVICE_SHIPMENT = URI.create(BACKEND_SERVICE_IP + "/shipments");
-
+    private static final URI BACKEND_SERVICE_SHIPMENT = URI.create(BACKEND_SERVICE_IP + "/shipment");
 
     @Autowired
     private RestTemplate restTemplate;
