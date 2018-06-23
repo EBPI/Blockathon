@@ -585,7 +585,7 @@
           </con:assertion>
           <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="MID1082">
             <con:configuration>
-              <token>MID1082</token>
+              <token>MID0072</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -740,7 +740,7 @@
             <con:configuration>
               <file>C:/Source/Blockathon_hyper42/test/testdata.xlsx</file>
               <worksheet>Manufacturer</worksheet>
-              <cell>A2</cell>
+              <cell>A56</cell>
               <ignoreEmpty>true</ignoreEmpty>
             </con:configuration>
           </con:dataSource>
