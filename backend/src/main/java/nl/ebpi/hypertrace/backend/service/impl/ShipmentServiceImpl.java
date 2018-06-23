@@ -1,11 +1,9 @@
 package nl.ebpi.hypertrace.backend.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.hash.Hashing;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentQuery;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentRequest;
@@ -44,25 +42,34 @@ public class ShipmentServiceImpl implements ShipmentService {
 		List<String> shipmentIds = new ArrayList<>();
 
 		List<String> products = order.getProducts();
-		if (products == null || products.size() == 0) {
-			return shipmentIds;
+		if (products != null) {
+			shipmentIds.addAll(sendShipmentToBlockchain(new OrderInformation(order, orderId), products));
 		}
-		int size = products.size();
-		if (size == 1) {
-			createShipmentRequest(order, orderId, products);
-		} else {
-			int part = size / 2;
-			createShipmentRequest(order, orderId, products.subList(0, part));
-			createShipmentRequest(order, orderId, products.subList(part, size));
-		}
-
-		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderId));
 		return shipmentIds;
 	}
 
-	private void createShipmentRequest(Order order, String orderId, List<String> products) {
+	private List<String> sendShipmentToBlockchain(OrderInformation orderInfo, List<String> products) {
+		List<String> shipmentIds = new ArrayList<>();
+		int size = products.size();
+		if (size == 1) {
+			createShipmentRequest(orderInfo, products);
+		} else if (size > 1) {
+			splitShipment(orderInfo, products);
+		}
+		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderInfo.orderId));
+		return shipmentIds;
+	}
+
+	private void splitShipment(OrderInformation orderInfo, List<String> products) {
+		int size = products.size();
+		int part = size / 2;
+		createShipmentRequest(orderInfo, products.subList(0, part));
+		createShipmentRequest(orderInfo, products.subList(part, size));
+	}
+
+	private void createShipmentRequest(OrderInformation orderInfo, List<String> products) {
 		BlockChainSendShipmentRequest shipment = new BlockChainSendShipmentRequest();
-		shipment.setCustomer(order.getOrderer());
+		shipment.setCustomer(orderInfo.order.getOrderer());
 		shipment.setDocumentHash("hashing");
 		shipment.setDocumentLocation("hier");
 		shipment.setDestination("Autoworld - Brussel");
@@ -71,7 +78,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipment.getTransporterList().add("TID4412");
 		shipment.getTransporterList().add("POSTNL001");
 		shipment.setWeight("10KG");
-		shipment.setClientReference(orderId);
+		shipment.setClientReference(orderInfo.orderId);
 
 		sendToBlockchain(shipment);
 	}
@@ -91,10 +98,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	private Collection<? extends String> getShipmentIdsFromBlockchain(String orderId) {
 		try {
-			BlockChainSendShipmentQuery query = new BlockChainSendShipmentQuery();
-			BlockChainWhere where = new BlockChainWhere();
-			where.setClientReference(orderId);
-			query.setWhere(where);
+			BlockChainSendShipmentQuery query = createQuery(orderId);
 
 			// HttpEntity requestEntity = new HttpEntity();
 			ParameterizedTypeReference<List<BlockChainShipment>> returnBean = new ParameterizedTypeReference<List<BlockChainShipment>>() {
@@ -102,62 +106,28 @@ public class ShipmentServiceImpl implements ShipmentService {
 			LOG.debug(objectMapper.writeValueAsString(query));
 			ResponseEntity<List<BlockChainShipment>> exchange = restTemplate.exchange(BlockchainRestUrl.QUERY_SHIPMENT.getUrl(), HttpMethod.GET,
 					null, returnBean, objectMapper.writeValueAsString(query));
-			List<BlockChainShipment> shipments = exchange.getBody();
-			return shipments.stream().map(shipment -> shipment.getShipmentID()).collect(Collectors.toList());
+			return exchange.getBody().stream().map(shipment -> shipment.getShipmentID()).collect(Collectors.toList());
 		} catch (Exception e) {
 			LOG.error("Problem calling the blockchain", e);
 			throw new RuntimeException(e);
 		}
 	}
 
-	@Override
-	public List<String> createShipments(Order order) {
-		List<String> shipmentIds = new ArrayList<>();
-		List<String> products = order.getProducts();
-		if (products == null || products.size() == 0) {
-			return shipmentIds;
-		}
-		int size = products.size();
-		if (size == 1) {
-			shipmentIds.add(createShipment(order, products));
-		} else {
-			int part = size / 2;
-			shipmentIds.add(createShipment(order, products.subList(0, part)));
-			shipmentIds.add(createShipment(order, products.subList(part, size)));
-		}
-		return shipmentIds;
+	private BlockChainSendShipmentQuery createQuery(String orderId) {
+		BlockChainSendShipmentQuery query = new BlockChainSendShipmentQuery();
+		BlockChainWhere where = new BlockChainWhere();
+		where.setClientReference(orderId);
+		query.setWhere(where);
+		return query;
 	}
 
-	private String createShipment(Order order, List<String> products) {
-		BlockChainShipment shipment = new BlockChainShipment();
-		String id = UUID.randomUUID().toString();
-		shipment.setShipmentID(id);
-		products.stream().forEach(product -> addProductToShipment(shipment, product));
-		shipment.setDocumentHash(Hashing.sha256().hashBytes((id + shipment.getShippedProducts().toString()).getBytes()).toString());
-		shipment.setDocumentLocation("doclocation");
-		shipment.getTransporterList().add("resource:org.ebpi.blockathon.Transporter#TID2109");
-		shipment.getTransporterList().add("resource:org.ebpi.blockathon.Transporter#TID4412");
-		shipment.getTransporterList().add("resource:org.ebpi.blockathon.Transporter#POSTNL001");
-		shipment.setDestination("autoworld - Brussel");
-		shipment.setCustomer("resource:org.ebpi.blockathon.Orderer#" + order.getOrderer());
-		shipment.setSupplier("resource:org.ebpi.blockathon.Manufacturer#" + order.getManufacturer());
-		shipment.setWeight("10KG");
+	private static class OrderInformation {
+		public Order order;
+		public String orderId;
 
-		HttpEntity<BlockChainShipment> requestEntity = new HttpEntity<>(shipment);
-		ParameterizedTypeReference<BlockChainShipment> returnBean = new ParameterizedTypeReference<BlockChainShipment>() {
-		};
-		try {
-			LOG.debug(objectMapper.writeValueAsString(shipment));
-			restTemplate.exchange(BlockchainRestUrl.ADD_SHIPMENT.getUrl(), HttpMethod.POST, requestEntity, returnBean, "");
-		} catch (Exception e) {
-			LOG.error("Problem calling the blockchain", e);
-			throw new RuntimeException(e);
+		public OrderInformation(Order order, String orderId) {
+			this.order = order;
+			this.orderId = orderId;
 		}
-		return id;
 	}
-
-	private void addProductToShipment(BlockChainShipment shipment, String product) {
-		shipment.getShippedProducts().add("resource:org.ebpi.blockathon.Product#" + product);
-	}
-
 }
