@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(scanBasePackages = { "nl.ebpi.hypertrace.backend", "nl.ebpi.hypertrace.backend", "nl.ebpi.hypertrace.backend.service" })
+@SpringBootApplication(scanBasePackages = { "nl.ebpi.hypertrace.backend", "nl.ebpi.hypertrace.backend.util", "nl.ebpi.hypertrace.backend.service.impl" })
 public class Application {
 
 	public static void main(String[] args) {

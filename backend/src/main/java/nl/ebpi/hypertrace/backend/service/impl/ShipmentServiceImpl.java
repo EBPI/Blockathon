@@ -5,18 +5,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainHandoverArray;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentQuery;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentRequest;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentReturn;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainShipment;
+import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainShipmentQueryResponse;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainWhere;
 import nl.ebpi.hypertrace.backend.generated.domain.Order;
+import nl.ebpi.hypertrace.backend.generated.domain.Shipment;
 import nl.ebpi.hypertrace.backend.generated.domain.TransporterResponse;
 import nl.ebpi.hypertrace.backend.service.ShipmentService;
 import nl.ebpi.hypertrace.backend.utils.BlockchainRestUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -24,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+@PropertySource("classpath:backend.properties")
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
 
@@ -34,6 +40,13 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	@Value("${transporter_1}")
+	private String transporter1;
+	@Value("${transporter_2}")
+	private String transporter2;
+	@Value("${transporter_3}")
+	private String transporter3;
 
 	public ShipmentServiceImpl() {
 	}
@@ -75,9 +88,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipment.setDocumentLocation("hier");
 		shipment.setDestination("Autoworld - Brussel");
 		products.stream().forEach(prod -> shipment.getShippedProducts().add(prod));
-		shipment.getTransporterList().add("Transporter46618096");
-		shipment.getTransporterList().add("Transporter11030988");
-		shipment.getTransporterList().add("PostNL");
+		shipment.getTransporterList().add(transporter1);
+		shipment.getTransporterList().add(transporter2);
+		shipment.getTransporterList().add(transporter3);
 		shipment.setWeight("10KG");
 		shipment.setClientReference(orderInfo.orderId);
 
@@ -105,7 +118,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 			ParameterizedTypeReference<List<BlockChainShipment>> returnBean = new ParameterizedTypeReference<List<BlockChainShipment>>() {
 			};
 			LOG.debug(objectMapper.writeValueAsString(query));
-			ResponseEntity<List<BlockChainShipment>> exchange = restTemplate.exchange(BlockchainRestUrl.QUERY_SHIPMENT.getUrl(), HttpMethod.GET,
+			ResponseEntity<List<BlockChainShipment>> exchange = restTemplate.exchange(BlockchainRestUrl.QUERY_SHIPMENT_ON_ORDERID.getUrl(), HttpMethod.GET,
 					null, returnBean, objectMapper.writeValueAsString(query));
 			return exchange.getBody().stream().map(shipment -> shipment.getShipmentID()).collect(Collectors.toList());
 		} catch (Exception e) {
@@ -134,7 +147,60 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	@Override
 	public TransporterResponse findShipments(String transporterId) {
-		// TODO Auto-generated method stub
-		return null;
+		String queryParam = "resource:org.ebpi.blockathon.Transporter#" + transporterId;
+		LOG.debug("findShipments with queryParam {}", queryParam);
+
+		String url = BlockchainRestUrl.QUERY_SHIPMENT_ON_TRANSPORTERID.getUrl().replace("{query}",
+				queryParam);
+		LOG.debug("findShipments with url {}", url);
+		ParameterizedTypeReference<List<BlockChainShipmentQueryResponse>> returnBean = new ParameterizedTypeReference<List<BlockChainShipmentQueryResponse>>() {
+		};
+
+		ResponseEntity<List<BlockChainShipmentQueryResponse>> blockchainResponse = restTemplate.exchange(
+				BlockchainRestUrl.QUERY_SHIPMENT_ON_TRANSPORTERID.getUrl(),
+				HttpMethod.GET, null, returnBean, queryParam);
+
+		LOG.debug("queryresponse length {}", blockchainResponse.getBody().size());
+
+		TransporterResponse response = filterBlockchainResponse(blockchainResponse, transporterId);
+		return response;
+	}
+
+	private TransporterResponse filterBlockchainResponse(ResponseEntity<List<BlockChainShipmentQueryResponse>> blockchainResponse, String transporterId) {
+		List<BlockChainShipmentQueryResponse> list = blockchainResponse.getBody();
+		List<Shipment> shipments = list.stream().filter(shipment -> isNotHandover(shipment, transporterId)).map(shipment -> toResponseShipment(shipment))
+				.collect(Collectors.toList());
+
+		TransporterResponse response = new TransporterResponse();
+		response.setShipments(shipments);
+		return response;
+	}
+
+	private Shipment toResponseShipment(BlockChainShipmentQueryResponse blockchainShipment) {
+		Shipment shipment = new Shipment();
+		if (blockchainShipment.getHandoverArray() == null || blockchainShipment.getHandoverArray().size() == 0) {
+			shipment.setGivingParterId(blockchainShipment.getSupplier());
+		} else {
+			BlockChainHandoverArray blockChainHandover = blockchainShipment.getHandoverArray().get(blockchainShipment.getHandoverArray().size() - 1);
+			blockChainHandover.getReciever();
+			shipment.setGivingParterId(blockChainHandover.getReciever());
+		}
+		shipment.setShipmentId(blockchainShipment.getShipmentID());
+		return shipment;
+	}
+
+	private boolean isNotHandover(BlockChainShipmentQueryResponse shipment, String transporterId) {
+		List<BlockChainHandoverArray> handovers = shipment.getHandoverArray();
+		LOG.debug("Handovers: {}", handovers.size());
+
+		for (BlockChainHandoverArray handoverArray : handovers) {
+			LOG.debug("handover giving / receiver: {} / {}", handoverArray.getGiving(), handoverArray.getReciever());
+
+			if (handoverArray.getGiving().contains(transporterId) || handoverArray.getReciever().contains(transporterId)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

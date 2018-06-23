@@ -1,0 +1,32 @@
+[
+	{
+		"$class": "org.ebpi.blockathon.Shipment",
+		"ClientReference": "MijnReference",
+		"ShipmentID": "12345",
+		"DocumentHash": "zwarte afghaan",
+		"DocumentLocation": "niet",
+		"ShippedProducts": [
+			"resource:org.ebpi.blockathon.Product#Shirt002"
+		],
+		"transporterList": [
+			"resource:org.ebpi.blockathon.Transporter#Transporter46618096"
+		],
+		"Destination": "Huis",
+		"Customer": "resource:org.ebpi.blockathon.Orderer#Zalando",
+		"Supplier": "resource:org.ebpi.blockathon.Manufacturer#Nike",
+		"Weight": "nee",
+		"handoverArray": [
+			{
+				"$class": "org.ebpi.blockathon.Handover",
+				"HandoverID": "29e9e0c1-1274-4a6f-81d0-950fd982f2fb",
+				"giving": "resource:org.ebpi.blockathon.TradePartner#PostNL",
+				"reciever": "resource:org.ebpi.blockathon.TradePartner#PostNL",
+				"confirmed": false,
+				"stateGiving": "MINT",
+				"stateReciever": "undefined",
+				"final": false
+			}
+		],
+		"completed": false
+	}
+]
