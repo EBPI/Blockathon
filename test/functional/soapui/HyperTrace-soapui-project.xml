@@ -1414,7 +1414,7 @@
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
-    <con:testCase id="d5e020e1-b504-440a-8050-ba6e30963c85" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Product Bulk" searchProperties="true" disabled="true">
+    <con:testCase id="d5e020e1-b504-440a-8050-ba6e30963c85" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren testdata Product" searchProperties="true" disabled="true">
       <con:description>Het opvoeren en controleren van Product</con:description>
       <con:settings/>
       <con:testStep type="datasource" name="DataSource" id="6c780de5-3788-4e88-95a6-313f7671ff49">
@@ -1428,8 +1428,11 @@
               <ignoreEmpty>true</ignoreEmpty>
             </con:configuration>
           </con:dataSource>
-          <con:property>Product</con:property>
+          <con:property>ProductID</con:property>
+          <con:property>Description</con:property>
           <con:property>Value</con:property>
+          <con:property>EnforcementDBUrl</con:property>
+          <con:property>Creator</con:property>
           <con:restartOnRun>true</con:restartOnRun>
         </con:config>
       </con:testStep>
@@ -1500,31 +1503,43 @@
           <con:endpoint>${#Project#Product}</con:endpoint>
           <con:request>{
   "$class": "org.ebpi.blockathon.Product",
-  "ProductID": "ProductID${DataGen#ProductID}",
-  "Description": "${DataSource#Product}",
+  "ProductID": "${DataSource#ProductID}",
+  "Description": "${DataSource#Description}",
   "Value": "${DataSource#Value}",
-  "EnforcementDBUrl": "https://hyper42.nl/${DataGen#EnforcementDBUrl}",
-  "Creator": "resource:org.ebpi.blockathon.Manufacturer#NIKE001"
+  "EnforcementDBUrl": "${DataSource#EnforcementDBUrl}",
+  "Creator": "${DataSource#Creator}"
 }</con:request>
-          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="ProductID${DataGen#ProductID}">
+          <con:assertion type="Simple Contains" id="d3aaea4d-3739-44c7-9cc9-1f165a50c851" name="${DataSource#ProductID}">
             <con:configuration>
-              <path>$.ProductID</path>
-              <content>ProductID${DataGen#ProductID}</content>
-              <allowWildcards>false</allowWildcards>
-              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-              <ignoreComments>false</ignoreComments>
-            </con:configuration>
-          </con:assertion>
-          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="${DataSource#Product}">
-            <con:configuration>
-              <token>${DataSource#Product}</token>
+              <token>${DataSource#ProductID}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="e18ab54d-42c4-4613-b54a-5300e565e0e4" name="${DataSource#Value}">
+          <con:assertion type="Simple Contains" id="6956a9c1-eb42-4129-b47a-8613e945c7a4" name="${DataSource#Description}">
+            <con:configuration>
+              <token>${DataSource#Description}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="0624c977-f9f3-4e63-b54b-70cb10d2f763" name="${DataSource#Value}">
             <con:configuration>
               <token>${DataSource#Value}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="772e5d17-1da8-437d-845c-183a6064fdd6" name="${DataSource#EnforcementDBUrl}">
+            <con:configuration>
+              <token>${DataSource#EnforcementDBUrl}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="8ad59ccf-b273-4217-bdc1-ea8e2321234c" name="${DataSource#Creator}">
+            <con:configuration>
+              <token>${DataSource#Creator}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1552,23 +1567,37 @@
           <con:encoding xsi:nil="true"/>
           <con:endpoint>${#Project#Product}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="${DataSource#Value}">
+          <con:assertion type="Simple Contains" id="ee5da09a-3f60-4b1e-b884-74e57010d37e" name="${DataSource#Creator}">
+            <con:configuration>
+              <token>${DataSource#Creator}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="3dc2724d-501c-48bd-96e8-ccc10e6f29a5" name="${DataSource#ProductID}">
+            <con:configuration>
+              <token>${DataSource#ProductID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="cffa5995-53d6-4da5-a589-02035654fad1" name="${DataSource#Description}">
+            <con:configuration>
+              <token>${DataSource#Description}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="b00ef405-11cb-4ca6-9dd1-34dcef1ac3da" name="${DataSource#Value}">
             <con:configuration>
               <token>${DataSource#Value}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="4987cca0-5b6b-4d36-8e56-c082593dc772" name="${DataSource#Product}">
+          <con:assertion type="Simple Contains" id="61d396c2-3266-41fc-b6e0-b392baaf6f65" name="${DataSource#EnforcementDBUrl}">
             <con:configuration>
-              <token>${DataSource#Product}</token>
-              <ignoreCase>false</ignoreCase>
-              <useRegEx>false</useRegEx>
-            </con:configuration>
-          </con:assertion>
-          <con:assertion type="Simple Contains" id="fc228413-79a6-4684-bea0-4a3e65301a7b" name="ProductID${DataGen#ProductID}">
-            <con:configuration>
-              <token>ProductID${DataGen#ProductID}</token>
+              <token>${DataSource#EnforcementDBUrl}</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1581,7 +1610,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="5f18c97c-adc3-4361-a3b0-e232401a16f2" disabled="true">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="5f18c97c-adc3-4361-a3b0-e232401a16f2">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
