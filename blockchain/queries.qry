@@ -2,5 +2,5 @@ query Q17 {
     description: "Select all shpments for a transporter which are about to come"
     statement:
         SELECT org.ebpi.blockathon.Shipment
-            WHERE (Supplier == _$PartnerID)
+            WHERE (Supplier == "resource:org.ebpi.blockathon.TradePartner#"+_$PartnerID)
 }
