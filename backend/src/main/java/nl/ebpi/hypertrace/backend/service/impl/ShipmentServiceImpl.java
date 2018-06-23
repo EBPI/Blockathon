@@ -74,9 +74,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipment.setDocumentLocation("hier");
 		shipment.setDestination("Autoworld - Brussel");
 		products.stream().forEach(prod -> shipment.getShippedProducts().add(prod));
-		shipment.getTransporterList().add("TID2109");
-		shipment.getTransporterList().add("TID4412");
-		shipment.getTransporterList().add("POSTNL001");
+		shipment.getTransporterList().add("Transporter46618096");
+		shipment.getTransporterList().add("Transporter11030988");
+		shipment.getTransporterList().add("PostNL");
 		shipment.setWeight("10KG");
 		shipment.setClientReference(orderInfo.orderId);
 
