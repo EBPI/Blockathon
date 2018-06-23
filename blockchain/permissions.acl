@@ -54,15 +54,38 @@ participant:"org.ebpi.blockathon.Manufacturer"
   action: ALLOW
 }
 
+rule updateShipment {
+description: "Allow all partners to update the shipment"
+participant (p):"org.ebpi.blockathon.TradePartner"
+  operation: UPDATE
+  resource (r): "org.ebpi.blockathon.Shipment"
+  condition: (true)
+  action: ALLOW
+}
+
+
 rule startHandover{
 description: "allow a trading partner to start a handover"
 participant (p): "org.ebpi.blockathon.TradePartner"
-operation:CREATE
+operation:CREATE, UPDATE
 resource (r): "org.ebpi.blockathon.Handover"
 transaction:"org.ebpi.blockathon.startHandover"
-condition:(p.getIdentifier() == r.giving.getIdentifier())
+condition:(p.getIdentifier() == r.giving.getIdentifier() || p.getIdentifier() == r.reciever.getIdentifier())
 action: ALLOW
 }
+
+
+
+rule acceptHandover{
+description: "allow a trading partner to accept a handover"
+participant (p): "org.ebpi.blockathon.TradePartner"
+operation:CREATE, UPDATE
+resource (r): "org.ebpi.blockathon.Handover"
+transaction:"org.ebpi.blockathon.acceptHandover"
+condition:(p.getIdentifier() == r.giving.getIdentifier() || p.getIdentifier() == r.reciever.getIdentifier())
+action: ALLOW
+}
+
 
 
 rule doStartHandover{
@@ -74,6 +97,14 @@ resource (r): "org.ebpi.blockathon.startHandover"
 action: ALLOW
 }
 
+rule doAcceptHandover{
+description: "allow a trading partner to start a handover"
+participant (p): "org.ebpi.blockathon.TradePartner"
+operation:CREATE, UPDATE
+resource (r): "org.ebpi.blockathon.acceptHandover"
+condition:(p.getIdentifier() == p.getIdentifier())
+action: ALLOW
+}
 
 
 rule SystemACL {

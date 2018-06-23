@@ -15,12 +15,12 @@ function doSendShipment(sendShipment) {
     const costumer = sendShipment.Customer;
     const costID = costumer.PartnerID;
     const originalWeight = sendShipment.Weight;
-    const clientReference= sendShipment.ClientReference
+    const clientReference = sendShipment.ClientReference
     let factory = getFactory();
     const identifier = uuidv4();
     let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment', identifier);
     newShipment.DocumentHash = hash;
-    newShipment.ClientReference=clientReference
+    newShipment.ClientReference = clientReference
     newShipment.DocumentLocation = docLoc;
     newShipment.ShippedProducts = procductList;
     newShipment.transporterList = transprterList;
@@ -33,7 +33,9 @@ function doSendShipment(sendShipment) {
 
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentRegistry) {
-             ShipmentRegistry.add(newShipment) .then (function () { return identifier } )
+            ShipmentRegistry.add(newShipment).then(function () {
+                return identifier
+            })
         })
 
 }
@@ -58,25 +60,13 @@ function doStartHandover(startHandover) {
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
     newHandover.stateReciever = "undefined"
-    var ontvangenShipment =  startHandover.shipment
-    console.log("logt ie uberhaubt wel")
-console.log(ontvangenShipment.ShipmentID)
-    ontvangenShipment.handoverArray.push(newHandover)
-console.log(ontvangenShipment.handoverArray)
-    // return getAssetRegistry('org.ebpi.blockathon.Shipment')
-    //     .then(function (ShipmentAssetRegistry) {
-    //         return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
-    //     })
-    //     .then(function(Shipment) {
-    //         Shipment.handoverArray.push(newHandover)
-    //
-            return getAssetRegistry('org.ebpi.blockathon.Shipment')
-                .then(function (ShipmentAssetRegistry) {
-                    return ShipmentAssetRegistry.update(ontvangenShipment);
-                })
-        // })
+    newHandover.final = startHandover.final
+    var ontvangenShipment = startHandover.shipment
+    return getAssetRegistry('org.ebpi.blockathon.Shipment')
+        .then(function (ShipmentAssetRegistry) {
+            return ShipmentAssetRegistry.update(ontvangenShipment);
+        })
 }
-
 
 
 /**
@@ -84,9 +74,35 @@ console.log(ontvangenShipment.handoverArray)
  * @param {org.ebpi.blockathon.acceptHandover} acceptHandover
  * @transaction
  */
-function doAcceptShipment(acceptHandover) {
-    acceptShipment.shipment
-    acceptShipment.state
+function doAcceptHandover(acceptHandover) {
+    var ikke =getCurrentParticipant()
+    var ontvangenShipment = acceptHandover.shipment
+    var vorigeOwner = acceptHandover.previousHandler
+    var status = acceptHandover.state
+
+    var deArray = ontvangenShipment.handoverArray
+    var deHandover = deArray[deArray.length - 1]
+    if (deHandover.giving == vorigeOwner && deHandover.reciever == ikke) {
+        confirmed = true
+    }
+    else {
+        confirmed = false
+    }
+
+    if (acceptHandover.status && deHandover.status){
+
+    }
+    else {
+        deHandover.final = false
+    }
+    deHandover.stateReciever = status
+    return getAssetRegistry('org.ebpi.blockathon.Shipment')
+        .then(function (ShipmentAssetRegistry) {
+            return ShipmentAssetRegistry.update(ontvangenShipment);
+
+        })
+
+
 }
 
 
