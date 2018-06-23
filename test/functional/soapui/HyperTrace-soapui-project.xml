@@ -357,7 +357,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="1c95185e-2bfa-4d5b-ae75-72079f98a4b1" disabled="true">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="1c95185e-2bfa-4d5b-ae75-72079f98a4b1">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
@@ -853,7 +853,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="af3eab3e-2a0b-4783-a772-4f6b7f787608" disabled="true">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="af3eab3e-2a0b-4783-a772-4f6b7f787608">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
@@ -1186,7 +1186,7 @@
           <con:parameters/>
         </con:config>
       </con:testStep>
-      <con:testStep type="datasourceloop" name="DataSource Loop" id="c5731415-b319-4b09-8019-ecc3ac429865" disabled="true">
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="c5731415-b319-4b09-8019-ecc3ac429865">
         <con:settings/>
         <con:config>
           <dataSourceStep>DataSource</dataSourceStep>
