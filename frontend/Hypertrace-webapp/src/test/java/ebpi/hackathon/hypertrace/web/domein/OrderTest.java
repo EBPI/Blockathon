@@ -19,7 +19,7 @@ public class OrderTest {
         assert(order.getProducts().get(0).equals("hoi"));
         assert(order.getProducts().get(1).equals("tot Ziens"));
         assert(order.getManufacturer().equals("blee"));
-        assert(order.getOrderer().equals(("eurdere")));
+        assert(order.getOrderer().equals(("eurderer")));
 
 
 
