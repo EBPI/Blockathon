@@ -914,9 +914,9 @@
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="OrdererID3227">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="OrdererID0012">
             <con:configuration>
-              <token>OrdererID3227</token>
+              <token>OrdererID0012</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1239,9 +1239,9 @@
           </con:settings>
           <con:endpoint>${#Project#Product}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Creator&quot;: &quot;resource:org.ebpi.blockathon.Manufacturer#NIKE001">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Creator&quot;: &quot;resource:org.ebpi.blockathon.Manufacturer#MID0207">
             <con:configuration>
-              <token>resource:org.ebpi.blockathon.Manufacturer#NIKE001</token>
+              <token>resource:org.ebpi.blockathon.Manufacturer#MID0207</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -2134,6 +2134,13 @@ df.format(new Date());</script>
           <con:assertion type="Simple Contains" id="3a0bd148-0a9b-4bc8-877f-27ca29daa9f5" name="PostNL">
             <con:configuration>
               <token>PostNL</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="679a9a0d-22f6-4351-aa2c-aa3c7731446a" name="TransID003">
+            <con:configuration>
+              <token>TransID003</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
