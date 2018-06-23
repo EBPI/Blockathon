@@ -48,4 +48,24 @@ public class UserUtils {
         }
         return loggedIn;
     }
+
+    /**
+     * Return user ID from cookie value
+     *
+     * @param request request needed to read cookies
+     * @return UserId
+     */
+    public String getUserIdFromCookie(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String id = null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("id")) {
+                id = cookie.getValue();
+            }
+        }
+        if (id == null) {
+            throw new RuntimeException("Session expired: userID unknown");
+        }
+        return id;
+    }
 }
