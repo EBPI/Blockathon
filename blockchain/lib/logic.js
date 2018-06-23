@@ -5,21 +5,11 @@
  *
  */
 function doSendShipment(sendShipment) {
-    // const manuID = getCurrentParticipant().PartnerID;
-    // const hash = sendShipment.DocumentHash;
-    // const docLoc = sendShipment.DocumentLocation;
-    // const procductList = sendShipment.ShippedProducts;
-    // const transprterList = sendShipment.transporterList;
-    // const destination = sendShipment.Destination;
-    // const costumer = sendShipment.Customer;
-    // const costID = costumer.PartnerID;
-    // const originalWeight = sendShipment.Weight;
-    // const clientReference = sendShipment.ClientReference
     let factory = getFactory();
     const identifier = uuidv4();
     let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment', identifier);
     newShipment.DocumentHash = sendShipment.DocumentHash;
-    newShipment.ClientReference = sendShipment.ClientReference
+    newShipment.ClientReference = sendShipment.ClientReference;
     newShipment.DocumentLocation = sendShipment.DocumentLocation;
     newShipment.ShippedProducts = sendShipment.ShippedProducts;
     newShipment.transporterList = sendShipment.transporterList;
@@ -36,7 +26,6 @@ function doSendShipment(sendShipment) {
                 return identifier
             })
         })
-
 }
 
 
@@ -61,6 +50,7 @@ function doStartHandover(startHandover) {
     newHandover.stateReciever = "undefined"
     newHandover.final = startHandover.final
     var ontvangenShipment = startHandover.shipment
+    ontvangenShipment.handoverArray.push(newHandover);
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
             return ShipmentAssetRegistry.update(ontvangenShipment);
@@ -74,7 +64,7 @@ function doStartHandover(startHandover) {
  * @transaction
  */
 function doAcceptHandover(acceptHandover) {
-    var ikke =getCurrentParticipant()
+    var ikke = getCurrentParticipant()
     var ontvangenShipment = acceptHandover.shipment
     var vorigeOwner = acceptHandover.previousHandler
     var status = acceptHandover.state
@@ -88,8 +78,8 @@ function doAcceptHandover(acceptHandover) {
         confirmed = false
     }
 
-    if (acceptHandover.status && deHandover.status){
-
+    if (acceptHandover.final && deHandover.final) {
+        ontvangenShipment.completed = true
     }
     else {
         deHandover.final = false
