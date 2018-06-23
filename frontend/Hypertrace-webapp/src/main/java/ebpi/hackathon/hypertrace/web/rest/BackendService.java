@@ -3,7 +3,8 @@ package ebpi.hackathon.hypertrace.web.rest;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import ebpi.hackathon.hypertrace.web.domein.Order;
-import ebpi.hackathon.hypertrace.web.domein.Shipment;
+import ebpi.hackathon.hypertrace.web.domein.Product;
+import ebpi.hackathon.hypertrace.web.domein.Shipments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -26,6 +29,7 @@ public class BackendService {
 
     /**
      * Send a list of orders to the backend in order to create shipments
+     *
      * @param orders the orders per manufacturer
      * @return Message success of failure
      */
@@ -53,18 +57,20 @@ public class BackendService {
 
     /**
      * Get shipments from the backend for a specific transporter ID
+     *
      * @param transporterId The id of the logged in transporter
      * @return List of shipments for the given transporter ID
      */
-    public List<Shipment> getShipmentsForTransporter(String transporterId) {
+    public Shipments getShipmentsForTransporter(String transporterId) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.TEXT_PLAIN);
         String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_SHIPMENT.toString())
                 .queryParam("transporterId", transporterId).toUriString();
+        System.out.println(uri);
         HttpEntity<String> entity = new HttpEntity<>(headers);
         ResponseEntity<String> shipmentResponse = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        Type listType = new TypeToken<ArrayList<Shipment>>() {
-        }.getType();
-        return new Gson().fromJson(shipmentResponse.getBody(), listType);
+        System.out.println(shipmentResponse.getBody());
+        Shipments shipments = new Gson().fromJson(shipmentResponse.getBody(), Shipments.class);
+        return shipments;
     }
 }

@@ -1,7 +1,5 @@
 package ebpi.hackathon.hypertrace.web.domein;
 
-import java.util.List;
-
 public class Handover {
     private String HandoverId;
     private TradePartner giving;

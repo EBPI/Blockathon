@@ -3,7 +3,7 @@ package ebpi.hackathon.hypertrace.web.controller;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import ebpi.hackathon.hypertrace.web.domein.Product;
-import ebpi.hackathon.hypertrace.web.domein.Shipment;
+import ebpi.hackathon.hypertrace.web.domein.Shipments;
 import ebpi.hackathon.hypertrace.web.domein.User;
 import ebpi.hackathon.hypertrace.web.rest.BackendService;
 import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
@@ -150,8 +150,8 @@ public class LoginController {
             case "manufacturer":
                 return "manufacturerLoggedIn";
             case "transporter":
-                List<Shipment> shipments = backendService.getShipmentsForTransporter(id);
-                model.put("shipments", shipments);
+                Shipments shipmentsObject = backendService.getShipmentsForTransporter(id);
+                model.put("shipments", shipmentsObject.getShipments());
                 return "transporterLoggedIn";
             case "customs":
                 return "customsLoggedIn";
