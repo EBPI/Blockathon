@@ -60,6 +60,7 @@ function doStartHandover(startHandover) {
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
     newHandover.stateReciever = "undefined"
+    newHandover.final = startHandover.final
     var ontvangenShipment = startHandover.shipment
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
@@ -81,11 +82,18 @@ function doAcceptHandover(acceptHandover) {
 
     var deArray = ontvangenShipment.handoverArray
     var deHandover = deArray[deArray.length - 1]
-    if (deHandover.giving == vorigeOwner && deHandover.reciever == ikke && deHandover.stateGiving == status) {
+    if (deHandover.giving == vorigeOwner && deHandover.reciever == ikke) {
         confirmed = true
     }
     else {
         confirmed = false
+    }
+
+    if (acceptHandover.status && deHandover.status){
+
+    }
+    else {
+        deHandover.final = false
     }
     deHandover.stateReciever = status
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
