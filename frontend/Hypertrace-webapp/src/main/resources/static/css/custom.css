@@ -143,3 +143,66 @@ img.team {
 h1 {
 	margin-bottom: 2.5rem;
 }
+
+.glitch {
+    line-height: 1;
+    font-family: 'Bungee', sans-serif;
+    font-weight: 700;
+    position: relative;
+    top: 20px;
+    left: 100px;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    text-decoration: none;
+    color: #fff;
+}
+.glitch::before { 
+        display: block;
+        content: 'Hypertrace';
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: .8;   
+        color: #0ff;
+        z-index: -1;
+}
+.glitch::after {   
+        display: block;
+        content: 'Hypertrace';
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: .8;    
+        color: #f0f;
+        z-index: -2;
+}
+@keyframes glitch {
+    0% {
+        transform: translate(0)
+    }
+    20% {
+        transform: translate(-5px, 5px)
+    }
+    40% {
+        transform: translate(-5px, -5px)
+    }
+    60% {
+        transform: translate(5px, 5px)
+    }
+    80% {
+        transform: translate(5px, -5px)
+    }
+    to {
+        transform: translate(0)
+    }
+}
+.glitch:hover::before {
+            animation: glitch .3s cubic-bezier(.25, .46, .45, .94) both infinite
+}
+.glitch:hover::after {
+            animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both infinite
+}

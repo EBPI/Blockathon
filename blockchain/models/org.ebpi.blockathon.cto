@@ -46,6 +46,7 @@ asset Shipment identified by ShipmentID {
   --> Manufacturer Supplier
   o String Weight
   o Handover [] handoverArray
+  o Boolean completed default = false
 }
 
 asset Handover identified by HandoverID {
@@ -55,6 +56,7 @@ asset Handover identified by HandoverID {
   o Boolean confirmed
   o ShipmentState stateGiving
   o ShipmentState stateReciever
+  o Boolean final default = false
 
 
 
@@ -89,12 +91,14 @@ transaction startHandover {
 --> Shipment shipment
 --> TradePartner nextHandler
 o ShipmentState state
+o Boolean final default = false
 }
 
 transaction acceptHandover {
 --> Shipment shipment
 --> TradePartner previousHandler
 o ShipmentState state
+o Boolean final default = false
 }
 
 transaction deliverPackage{
