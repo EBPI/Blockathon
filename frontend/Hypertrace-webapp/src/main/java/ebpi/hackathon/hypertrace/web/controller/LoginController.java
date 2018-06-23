@@ -137,6 +137,7 @@ public class LoginController {
         model.put("loggedInMessage", user.getType() + " " + user.getUsername() + " (" + user.getFullName() + ")!");
         switch (user.getType()) {
             case "orderer":
+                ledgerService.getProducts();
                 return "ordererLoggedIn";
             case "manufacturer":
                 return "manufacturerLoggedIn";
