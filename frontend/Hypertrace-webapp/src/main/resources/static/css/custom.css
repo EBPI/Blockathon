@@ -46,11 +46,9 @@
     font-size: medium;
 }
 
-/*
-img.team {
-    width: 500px;
+img.product {
+    width: 50px;
 }
-*/
 
 .navbar-dark .navbar-toggler {
     color: rgba(255,255,255,1);
