@@ -91,7 +91,7 @@ enum ShipmentState {
 transaction startHandover {
 --> Shipment shipment
 --> TradePartner nextHandler
-o ShipmentState state default = OK
+o ShipmentState state default = "OK"
 o Boolean final default = false
 }
 
@@ -104,7 +104,7 @@ o Boolean final default = false
 
 transaction deliverPackage{
 --> Shipment shipment
-o ShipmentState state default = OK
+o ShipmentState state default = "OK"
 o String receiver
 }
 
