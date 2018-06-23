@@ -1,12 +1,19 @@
 package ebpi.hackathon.hypertrace.web.rest;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import ebpi.hackathon.hypertrace.web.domein.Participant;
 import ebpi.hackathon.hypertrace.web.domein.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class HyperledgerRestService {
@@ -21,11 +28,13 @@ public class HyperledgerRestService {
     private RestTemplate restTemplate;
 
     /**
-     * Get participantId from Hyperledger
-     * @param user user to get ID
+     * Get participantId from Hyperledger by type and name
+     *
+     * @param user user needed to gather ID from the ledger
+     * @return The ID of the user on the ledger
      * @throws URISyntaxException syntax exception that occurs when parcing URI's, nothing of interest here
      */
-    public void getParticipant(User user) throws URISyntaxException {
+    public String getParticipant(User user) throws URISyntaxException {
         URI url;
         switch (user.getType()) {
             case "orderer":
@@ -43,6 +52,20 @@ public class HyperledgerRestService {
             default:
                 throw new RuntimeException("Participant unknown");
         }
-        System.out.println(restTemplate.getForEntity(url, String.class));
+
+        // Not yet implemented in REST interface from Hyperledger. This is for PoC purposes only and NOT for production!
+        String participantJson = restTemplate.getForEntity(url, String.class).getBody();
+        System.out.println(participantJson);
+        Type listType = new TypeToken<ArrayList<Participant>>() {
+        }.getType();
+        List<Participant> participants = new Gson().fromJson(participantJson, listType);
+        if (participants != null) {
+            for (Participant participant : participants) {
+                if (participant.getName().equals(user.getUsername())) {
+                    return participant.getPartnerId();
+                }
+            }
+        }
+        return null;
     }
 }

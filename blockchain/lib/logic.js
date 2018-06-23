@@ -2,6 +2,7 @@
  * Sample transaction
  * @param {org.ebpi.blockathon.sendShipment} sendShipment
  * @transaction
+ *
  */
 function doSendShipment(sendShipment) {
     const manufacturer = getCurrentParticipant();
@@ -14,10 +15,12 @@ function doSendShipment(sendShipment) {
     const costumer = sendShipment.Customer;
     const costID = costumer.PartnerID;
     const originalWeight = sendShipment.Weight;
+    const clientReference= sendShipment.ClientReference
     let factory = getFactory();
     const identifier = uuidv4();
     let newShipment = factory.newResource('org.ebpi.blockathon', 'Shipment', identifier);
     newShipment.DocumentHash = hash;
+    newShipment.ClientReference=clientReference
     newShipment.DocumentLocation = docLoc;
     newShipment.ShippedProducts = procductList;
     newShipment.transporterList = transprterList;
@@ -43,6 +46,7 @@ function doSendShipment(sendShipment) {
  */
 function doStartHandover(startHandover) {
     const HandoverID = uuidv4()
+    let factory = getFactory();
     let newHandover = factory.newResource('org.ebpi.blockathon', 'Handover', HandoverID);
     const givingParty = getCurrentParticipant();
     const givingId = givingParty.PartnerID;
@@ -53,18 +57,24 @@ function doStartHandover(startHandover) {
     newHandover.reciever = factory.newRelationship('org.ebpi.blockathon', 'TradePartner', recivingId);
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
-    newHandover.stateReciever = ShipmentState.undefined
-    return getAssetRegistry('org.ebpi.blockathon.Aanlevering')
-        .then(function (AanleveringAssetRegistry) {
-            return AanleveringAssetRegistry.get(FinalStatus.Kenmerk);
-        })
-        .then(function(Aanlevering) {
-            Aanlevering.status.push(FinalStatus.newStatus)
-            return getAssetRegistry('org.ebpi.hackathon.Aanlevering')
-                .then(function (AanleveringAssetRegistry) {
-                    return AanleveringAssetRegistry.update(Aanlevering);
+    newHandover.stateReciever = "undefined"
+    var ontvangenShipment =  startHandover.shipment
+    console.log("logt ie uberhaubt wel")
+console.log(ontvangenShipment.ShipmentID)
+    ontvangenShipment.handoverArray.push(newHandover)
+
+    // return getAssetRegistry('org.ebpi.blockathon.Shipment')
+    //     .then(function (ShipmentAssetRegistry) {
+    //         return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
+    //     })
+    //     .then(function(Shipment) {
+    //         Shipment.handoverArray.push(newHandover)
+    //
+            return getAssetRegistry('org.ebpi.hackathon.Shipment')
+                .then(function (ShipmentAssetRegistry) {
+                    return ShipmentAssetRegistry.update(ontvangenShipment);
                 })
-        })
+        // })
 }
 
 

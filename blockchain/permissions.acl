@@ -54,6 +54,28 @@ participant:"org.ebpi.blockathon.Manufacturer"
   action: ALLOW
 }
 
+rule startHandover{
+description: "allow a trading partner to start a handover"
+participant (p): "org.ebpi.blockathon.TradePartner"
+operation:CREATE
+resource (r): "org.ebpi.blockathon.Handover"
+transaction:"org.ebpi.blockathon.startHandover"
+condition:(p.getIdentifier() == r.giving.getIdentifier())
+action: ALLOW
+}
+
+
+rule doStartHandover{
+description: "allow a trading partner to start a handover"
+participant (p): "org.ebpi.blockathon.TradePartner"
+operation:CREATE
+resource (r): "org.ebpi.blockathon.startHandover"
+  condition:(p.getIdentifier() == p.getIdentifier())
+action: ALLOW
+}
+
+
+
 rule SystemACL {
     description:  "System ACL to permit all access"
     participant: "org.hyperledger.composer.system.Participant"
