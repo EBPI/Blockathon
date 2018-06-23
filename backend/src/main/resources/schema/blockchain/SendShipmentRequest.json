@@ -9,5 +9,6 @@
 	],
 	"Destination": "de maan",
 	"Customer": "ZAL001",
-	"Weight": "12"
+	"Weight": "12",
+	"ClientReference": "string"
 }
