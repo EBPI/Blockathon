@@ -1,11 +1,9 @@
 
 {
-	"shipments": {
-		"shipment": [
+		"shipments": [
 			{
 				"ShipmentId": "string",
 				"GivingParterId": "string"
 			}
 		]
-	}
 }
