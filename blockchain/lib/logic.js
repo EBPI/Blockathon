@@ -57,7 +57,7 @@ function doStartHandover(startHandover) {
     newHandover.reciever = factory.newRelationship('org.ebpi.blockathon', 'TradePartner', recivingId);
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
-    newHandover.stateReciever = ShipmentState.undefined
+    newHandover.stateReciever = "undefined"
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
             return ShipmentAssetRegistry.get(startHandover.Shipment.ShipmentID);
