@@ -2768,3 +2768,459 @@ Unhandled error for request GET /api/org.ebpi.blockathon.Manufacturer?filter=Man
     at next (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/express/lib/router/index.js:275:10)
     at Function.handle (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/express/lib/router/index.js:174:3)
     at router (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/express/lib/router/index.js:47:12)
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Web server listening at: http://localhost:3004
+Browse your REST API at http://localhost:3004/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3000
+Browse your REST API at http://localhost:3000/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Web server listening at: http://localhost:3001
+Browse your REST API at http://localhost:3001/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3003
+Browse your REST API at http://localhost:3003/explorer
+Web server listening at: http://localhost:3002
+Browse your REST API at http://localhost:3002/explorer
+Unhandled error for request GET /api/queries/Q17?PartnerID=POSTNL001: Error: undefined is a required argument
+    at badArgumentError (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/lib/shared-method.js:291:13)
+    at validateInputArgument (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/lib/shared-method.js:325:13)
+    at SharedMethod.invoke (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/lib/shared-method.js:239:16)
+    at HttpContext.invoke (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/lib/http-context.js:297:12)
+    at phaseInvoke (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/lib/remote-objects.js:685:9)
+    at runHandler (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/loopback-phase/lib/phase.js:135:5)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:3110:16
+    at replenish (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:1011:17)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:1016:9
+    at eachLimit$1 (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:3196:24)
+    at Object.<anonymous> (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:1046:16)
+    at runHandlers (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/loopback-phase/lib/phase.js:144:13)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:3110:16
+    at replenish (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:1011:17)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:1016:9
+    at eachLimit$1 (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/strong-remoting/node_modules/async/dist/async.js:3196:24)
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3001
+Browse your REST API at http://localhost:3001/explorer
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3000
+Browse your REST API at http://localhost:3000/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Web server listening at: http://localhost:3003
+Browse your REST API at http://localhost:3003/explorer
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Web server listening at: http://localhost:3004
+Browse your REST API at http://localhost:3004/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3002
+Browse your REST API at http://localhost:3002/explorer
+Unhandled error for request GET /api/queries/Q17?SearchPartner=resource%3Aorg.ebpi.blockathon.Transporter%23POSTNL001: Error: 2 UNKNOWN: error executing chaincode: transaction returned with failure: ValidationException: Instance org.ebpi.blockathon.Shipment#26822061-928d-422b-8541-bed799572b7c missing required field ClientReference
+    at new createStatusError (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/grpc/src/client.js:64:15)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/grpc/src/client.js:583:15
+Unhandled error for request GET /api/queries/Q17?SearchPartner=resource%3Aorg.ebpi.blockathon.Transporter%23POSTNL001: Error: 2 UNKNOWN: error executing chaincode: transaction returned with failure: ValidationException: Instance org.ebpi.blockathon.Shipment#26822061-928d-422b-8541-bed799572b7c missing required field ClientReference
+    at new createStatusError (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/grpc/src/client.js:64:15)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/grpc/src/client.js:583:15
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3003
+Browse your REST API at http://localhost:3003/explorer
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Generated schemas for all types in business network definition
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Adding schemas for all types to Loopback ...
+Web server listening at: http://localhost:3002
+Browse your REST API at http://localhost:3002/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Web server listening at: http://localhost:3004
+Browse your REST API at http://localhost:3004/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Web server listening at: http://localhost:3001
+Browse your REST API at http://localhost:3001/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3000
+Browse your REST API at http://localhost:3000/explorer
+Unhandled error for request GET /api/queries/Q17?SearchPartner=resource%3Aorg.ebpi.blockathon.Transporter%23POSTNL001: Error: 2 UNKNOWN: error executing chaincode: transaction returned with failure: ValidationException: Instance org.ebpi.blockathon.Shipment#26822061-928d-422b-8541-bed799572b7c missing required field ClientReference
+    at new createStatusError (/Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/grpc/src/client.js:64:15)
+    at /Users/john/.nvm/versions/node/v8.10.0/lib/node_modules/composer-rest-server/node_modules/grpc/src/client.js:583:15
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovering types from business network definition ...
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3000
+Browse your REST API at http://localhost:3000/explorer
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Discovered types from business network definition
+Generating schemas for all types in business network definition ...
+Registering named query: Q17
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Generated schemas for all types in business network definition
+Adding schemas for all types to Loopback ...
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Web server listening at: http://localhost:3003
+Browse your REST API at http://localhost:3003/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org_ebpi_blockathon_Handover".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3002
+Browse your REST API at http://localhost:3002/explorer
+Web server listening at: http://localhost:3004
+Browse your REST API at http://localhost:3004/explorer
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Swagger: skipping unknown type "org.ebpi.blockathon.Shipment".
+Added schemas for all types to Loopback
+Web server listening at: http://localhost:3001
+Browse your REST API at http://localhost:3001/explorer

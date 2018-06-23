@@ -73,6 +73,9 @@ o String Destination
 o String Weight
 }
 
+transaction deleteShipments {
+}
+
 enum ShipmentState {
     o MINT
     o GOOD

@@ -11,6 +11,7 @@ import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentRet
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainShipment;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainWhere;
 import nl.ebpi.hypertrace.backend.generated.domain.Order;
+import nl.ebpi.hypertrace.backend.generated.domain.TransporterResponse;
 import nl.ebpi.hypertrace.backend.service.ShipmentService;
 import nl.ebpi.hypertrace.backend.utils.BlockchainRestUrl;
 import org.slf4j.Logger;
@@ -74,9 +75,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipment.setDocumentLocation("hier");
 		shipment.setDestination("Autoworld - Brussel");
 		products.stream().forEach(prod -> shipment.getShippedProducts().add(prod));
-		shipment.getTransporterList().add("TID2109");
-		shipment.getTransporterList().add("TID4412");
-		shipment.getTransporterList().add("POSTNL001");
+		shipment.getTransporterList().add("Transporter46618096");
+		shipment.getTransporterList().add("Transporter11030988");
+		shipment.getTransporterList().add("PostNL");
 		shipment.setWeight("10KG");
 		shipment.setClientReference(orderInfo.orderId);
 
@@ -129,5 +130,11 @@ public class ShipmentServiceImpl implements ShipmentService {
 			this.order = order;
 			this.orderId = orderId;
 		}
+	}
+
+	@Override
+	public TransporterResponse findShipments(String transporterId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
