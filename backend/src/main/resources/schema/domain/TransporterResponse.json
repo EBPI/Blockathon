@@ -1,6 +1,6 @@
 
 {
-		"shipments": [
+		"Shipments": [
 			{
 				"ShipmentId": "string",
 				"GivingParterId": "string"
