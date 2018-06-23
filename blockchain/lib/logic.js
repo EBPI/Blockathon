@@ -97,3 +97,25 @@ function uuidv4() {
     });
 }
     
+/**
+ * Sample transaction
+ * @param {org.ebpi.blockathon.deleteShipments} deleteShipments
+ * @transaction
+ */
+function dodeleteShipments() {
+    // The existing shipments 
+var aShipment;
+// Get the shipment asset registry.
+return getAssetRegistry('org.ebpi.blockathon.Shipment')
+  .then(function (shipmentAssetRegistry) {
+    // Get the factory for creating new asset instances.
+    var factory = getFactory();
+    // Remove the shipments from the shipment asset registry. Note that
+    // one vehicle is specified as a vehicle instance, and the other
+    // vehicle is specified by the ID of the vehicle.
+    return vehicleAssetRegistry.removeAll(aShipment);
+  })
+  .catch(function (error) {
+    // Add optional error handling here.
+  });
+}

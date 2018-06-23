@@ -91,16 +91,9 @@
           <con:encoding xsi:nil="true"/>
           <con:endpoint>${#Project#Douane}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="51a5f978-1077-4278-b01d-12ad37432d6b" name="PDD01">
+          <con:assertion type="Simple Contains" id="4abaa714-0673-4def-a95f-7c0b28457db4" name="Douane Amsterdam">
             <con:configuration>
-              <token>PDD01</token>
-              <ignoreCase>false</ignoreCase>
-              <useRegEx>false</useRegEx>
-            </con:configuration>
-          </con:assertion>
-          <con:assertion type="Simple Contains" id="4abaa714-0673-4def-a95f-7c0b28457db4" name="Piet de Douanier">
-            <con:configuration>
-              <token>Piet de Douanier</token>
+              <token>Douane Amsterdam</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -242,6 +235,157 @@
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
+    <con:testCase id="aced2649-d8ea-41e5-a806-85e32ef7c649" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Opvoeren Douane Bulk" searchProperties="true" disabled="true">
+      <con:description>Het opvoeren en controleren van Douane</con:description>
+      <con:settings/>
+      <con:testStep type="datasource" name="DataSource" id="af3ab68e-c391-403d-bf17-55f6ccbd5f8c">
+        <con:settings/>
+        <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:dataSource type="Excel">
+            <con:configuration>
+              <file>C:/Source/Blockathon_hyper42/test/testdata.xlsx</file>
+              <worksheet>Douane</worksheet>
+              <cell>A2</cell>
+              <ignoreEmpty>true</ignoreEmpty>
+            </con:configuration>
+          </con:dataSource>
+          <con:property>Douane</con:property>
+          <con:restartOnRun>true</con:restartOnRun>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datagen" name="DataGen" id="85289fc2-3115-470e-b901-f4589431dc65">
+        <con:settings/>
+        <con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:property type="Number">
+            <con:configuration>
+              <start>10000000</start>
+              <end>99999999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>Naam</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+          <con:property type="Number">
+            <con:configuration>
+              <start>1000</start>
+              <end>9999</end>
+              <step/>
+              <pattern/>
+              <random>true</random>
+              <persist>false</persist>
+            </con:configuration>
+            <con:name>PartnerID</con:name>
+            <con:mode>STEP</con:mode>
+            <con:shared>false</con:shared>
+          </con:property>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Opvoeren douane bulk" id="e97885c6-22cf-478f-a5ca-3f2319862648">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" id="0f25fa30-b199-4062-a4b6-397003ef9530" name="Opvoeren douane bulk" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Douane}</con:endpoint>
+          <con:request>{
+  "$class": "org.ebpi.blockathon.Douane",
+  "Name": "${DataSource#Douane}",
+  "PartnerID": "DID${DataGen#PartnerID}"
+}</con:request>
+          <con:assertion type="JsonPath Match" id="595e76b1-d41c-41e9-b3a6-c6044a15a562" name="${DataGen#Naam}">
+            <con:configuration>
+              <path>$.Name</path>
+              <content>${DataSource#Douane}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Simple Contains" id="469735e6-8cd0-4cab-8667-a14d92aef977" name="DID${DataGen#PartnerID}">
+            <con:configuration>
+              <token>DID${DataGen#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="delay" name="Wacht op verwerking" id="fdc480b9-30ee-4b8f-b1b5-2b0b9b3b934f">
+        <con:settings/>
+        <con:config>
+          <delay>${#Project#verwerkingsDelay}</delay>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="Controleren douane" id="ee826a0b-f79f-4c00-9582-fc523382c846">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" id="a65b0100-91c6-469c-934d-a8b7a5d7f14d" name="Controleren douane" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding xsi:nil="true"/>
+          <con:endpoint>${#Project#Douane}</con:endpoint>
+          <con:request/>
+          <con:assertion type="Simple Contains" id="8f8277c3-7d7f-4737-a7f2-470d45f922bb" name="DID${DataGen#PartnerID}">
+            <con:configuration>
+              <token>DID${DataGen#PartnerID}</token>
+              <ignoreCase>false</ignoreCase>
+              <useRegEx>false</useRegEx>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="datasourceloop" name="DataSource Loop" id="1c95185e-2bfa-4d5b-ae75-72079f98a4b1">
+        <con:settings/>
+        <con:config>
+          <dataSourceStep>DataSource</dataSourceStep>
+          <targetStep>DataGen</targetStep>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>c891bcad-ee16-4eaf-bef4-d1b335eb7e64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>12f8a5bf-6a6a-4dd5-b549-5459027b2d4a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0cb02ed5-afce-4d37-b8ff-f6529c757d56</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fe5de30c-50da-4a50-99a1-49b8bff81782</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f277cd1e-dacf-465a-8508-8fa967bda270</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
     <con:properties/>
     <con:reportParameters/>
   </con:testSuite>
@@ -249,7 +393,7 @@
     <con:description>PlaceOrder</con:description>
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Orders" searchProperties="true">
+    <con:testCase id="b65a0a53-8389-48de-8570-1eca0694e805" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ophalen alle Handovers" searchProperties="true">
       <con:description>Ophalen alle Orders</con:description>
       <con:settings/>
       <con:testStep type="httprequest" name="Ophalen Handover" id="43561982-c846-4cb1-8dc2-ecb7a74929e4">
@@ -426,16 +570,16 @@
           </con:settings>
           <con:endpoint>${#Project#Manufacturer}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Nike">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Converse">
             <con:configuration>
-              <token>Nike</token>
+              <token>Converse</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="NIKE001">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="MID1082">
             <con:configuration>
-              <token>NIKE001</token>
+              <token>MID1082</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -751,16 +895,16 @@
           <con:encoding xsi:nil="true"/>
           <con:endpoint>${#Project#Orderer}</con:endpoint>
           <con:request/>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="Zalando">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="De Bijenkorf">
             <con:configuration>
-              <token>Zalando</token>
+              <token>De Bijenkorf</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
           </con:assertion>
-          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="ZAL001">
+          <con:assertion type="Simple Contains" id="5183dd01-b0c0-4e6b-8aba-f7d91855e00b" name="OrdererID3227">
             <con:configuration>
-              <token>ZAL001</token>
+              <token>OrdererID3227</token>
               <ignoreCase>false</ignoreCase>
               <useRegEx>false</useRegEx>
             </con:configuration>
@@ -1907,55 +2051,55 @@ df.format(new Date());</script>
   <con:properties>
     <con:property>
       <con:name>acceptHandover</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.acceptHandover</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.acceptHandover</con:value>
     </con:property>
     <con:property>
       <con:name>deliverPackage</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.deliverPackage</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.deliverPackage</con:value>
     </con:property>
     <con:property>
       <con:name>Douane</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Douane</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Douane</con:value>
     </con:property>
     <con:property>
       <con:name>Handover</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Handover</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Handover</con:value>
     </con:property>
     <con:property>
       <con:name>Manufacturer</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Manufacturer</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Manufacturer</con:value>
     </con:property>
     <con:property>
       <con:name>Orderer</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Orderer</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Orderer</con:value>
     </con:property>
     <con:property>
       <con:name>Product</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Product</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Product</con:value>
     </con:property>
     <con:property>
       <con:name>receivePackage</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.receivePackage</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.receivePackage</con:value>
     </con:property>
     <con:property>
       <con:name>sendShipment</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.sendShipment</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.sendShipment</con:value>
     </con:property>
     <con:property>
       <con:name>Shipment</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Shipment</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Shipment</con:value>
     </con:property>
     <con:property>
       <con:name>startHandover</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.startHandover</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.startHandover</con:value>
     </con:property>
     <con:property>
       <con:name>TradePartner</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.TradePartner</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.TradePartner</con:value>
     </con:property>
     <con:property>
       <con:name>Transporter</con:name>
-      <con:value>http://192.168.0.103:3000/api/org.ebpi.blockathon.Transporter</con:value>
+      <con:value>http://hypertrace.nl:3000/api/org.ebpi.blockathon.Transporter</con:value>
     </con:property>
   </con:properties>
   <con:wssContainer/>
