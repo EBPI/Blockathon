@@ -81,6 +81,7 @@ function doAcceptHandover(acceptHandover) {
         deHandover.final = false
     }
     deHandover.stateReciever = status
+    ontvangenShipment.transporterList.
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
             return ShipmentAssetRegistry.update(ontvangenShipment);
