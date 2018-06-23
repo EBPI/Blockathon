@@ -11,6 +11,7 @@ import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentRet
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainShipment;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainWhere;
 import nl.ebpi.hypertrace.backend.generated.domain.Order;
+import nl.ebpi.hypertrace.backend.generated.domain.TransporterResponse;
 import nl.ebpi.hypertrace.backend.service.ShipmentService;
 import nl.ebpi.hypertrace.backend.utils.BlockchainRestUrl;
 import org.slf4j.Logger;
@@ -129,5 +130,11 @@ public class ShipmentServiceImpl implements ShipmentService {
 			this.order = order;
 			this.orderId = orderId;
 		}
+	}
+
+	@Override
+	public TransporterResponse findShipments(String transporterId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
