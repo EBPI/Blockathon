@@ -42,20 +42,28 @@ public class ShipmentServiceImpl implements ShipmentService {
 		List<String> shipmentIds = new ArrayList<>();
 
 		List<String> products = order.getProducts();
-		if (products == null || products.size() == 0) {
-			return shipmentIds;
+		if (products != null) {
+			shipmentIds.addAll(sendShipmentToBlockchain(order, orderId, products));
 		}
+		return shipmentIds;
+	}
+
+	private List<String> sendShipmentToBlockchain(Order order, String orderId, List<String> products) {
+		List<String> shipmentIds = new ArrayList<>();
 		int size = products.size();
 		if (size == 1) {
 			createShipmentRequest(order, orderId, products);
-		} else {
-			int part = size / 2;
-			createShipmentRequest(order, orderId, products.subList(0, part));
-			createShipmentRequest(order, orderId, products.subList(part, size));
+		} else if (size > 1) {
+			splitShipment(order, orderId, products, size);
 		}
-
 		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderId));
 		return shipmentIds;
+	}
+
+	private void splitShipment(Order order, String orderId, List<String> products, int size) {
+		int part = size / 2;
+		createShipmentRequest(order, orderId, products.subList(0, part));
+		createShipmentRequest(order, orderId, products.subList(part, size));
 	}
 
 	private void createShipmentRequest(Order order, String orderId, List<String> products) {
@@ -89,10 +97,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 	private Collection<? extends String> getShipmentIdsFromBlockchain(String orderId) {
 		try {
-			BlockChainSendShipmentQuery query = new BlockChainSendShipmentQuery();
-			BlockChainWhere where = new BlockChainWhere();
-			where.setClientReference(orderId);
-			query.setWhere(where);
+			BlockChainSendShipmentQuery query = createQuery(orderId);
 
 			// HttpEntity requestEntity = new HttpEntity();
 			ParameterizedTypeReference<List<BlockChainShipment>> returnBean = new ParameterizedTypeReference<List<BlockChainShipment>>() {
@@ -100,12 +105,19 @@ public class ShipmentServiceImpl implements ShipmentService {
 			LOG.debug(objectMapper.writeValueAsString(query));
 			ResponseEntity<List<BlockChainShipment>> exchange = restTemplate.exchange(BlockchainRestUrl.QUERY_SHIPMENT.getUrl(), HttpMethod.GET,
 					null, returnBean, objectMapper.writeValueAsString(query));
-			List<BlockChainShipment> shipments = exchange.getBody();
-			return shipments.stream().map(shipment -> shipment.getShipmentID()).collect(Collectors.toList());
+			return exchange.getBody().stream().map(shipment -> shipment.getShipmentID()).collect(Collectors.toList());
 		} catch (Exception e) {
 			LOG.error("Problem calling the blockchain", e);
 			throw new RuntimeException(e);
 		}
+	}
+
+	private BlockChainSendShipmentQuery createQuery(String orderId) {
+		BlockChainSendShipmentQuery query = new BlockChainSendShipmentQuery();
+		BlockChainWhere where = new BlockChainWhere();
+		where.setClientReference(orderId);
+		query.setWhere(where);
+		return query;
 	}
 
 }
