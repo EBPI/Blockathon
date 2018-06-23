@@ -71,7 +71,7 @@ function doAcceptHandover(acceptHandover) {
 
     var deArray = ontvangenShipment.handoverArray
     var deHandover = deArray[deArray.length - 1]
-    ontvangenShipment.confirmed =(deHandover.giving == vorigeOwner && deHandover.reciever == ikke)
+    deHandover.confirmed =(deHandover.giving == vorigeOwner && deHandover.reciever == ikke)
 
     if (acceptHandover.final && deHandover.final) {
         ontvangenShipment.completed = true
