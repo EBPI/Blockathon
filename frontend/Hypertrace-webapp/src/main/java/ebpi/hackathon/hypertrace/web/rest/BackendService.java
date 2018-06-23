@@ -28,6 +28,11 @@ public class BackendService {
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * Send a list of orders to the backend in order to create shipments
+     * @param orders the orders per manufacturer
+     * @return Message success of failure
+     */
     public String sendOrderToBackend(List<Order> orders) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -50,6 +55,11 @@ public class BackendService {
         }
     }
 
+    /**
+     * Get shipments from the backend for a specific transporter ID
+     * @param transporterId The id of the logged in transporter
+     * @return List of shipments for the given transporter ID
+     */
     public List<Shipment> getShipmentsForTransporter(String transporterId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
