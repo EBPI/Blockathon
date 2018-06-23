@@ -179,11 +179,11 @@ public class ShipmentServiceImpl implements ShipmentService {
 	private Shipment toResponseShipment(BlockChainShipmentQueryResponse blockchainShipment) {
 		Shipment shipment = new Shipment();
 		if (blockchainShipment.getHandoverArray() == null || blockchainShipment.getHandoverArray().size() == 0) {
-			shipment.setGivingParterId(blockchainShipment.getSupplier());
+			shipment.setGivingPartnerId(blockchainShipment.getSupplier());
 		} else {
 			BlockChainHandoverArray blockChainHandover = blockchainShipment.getHandoverArray().get(blockchainShipment.getHandoverArray().size() - 1);
 			blockChainHandover.getReciever();
-			shipment.setGivingParterId(blockChainHandover.getReciever());
+			shipment.setGivingPartnerId(blockChainHandover.getReciever());
 		}
 		shipment.setShipmentId(blockchainShipment.getShipmentID());
 		return shipment;

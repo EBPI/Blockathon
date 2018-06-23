@@ -3,7 +3,7 @@
 		"Shipments": [
 			{
 				"ShipmentId": "string",
-				"GivingParterId": "string"
+				"GivingPartnerId": "string"
 			}
 		]
 }
