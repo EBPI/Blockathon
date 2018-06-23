@@ -1,18 +1,18 @@
 [
   {
-    "username":"Orderer12105482",
-    "password":"pass",
-    "fullName":"Blossom"
-  },
-  {
-    "username":"Manufacturer72802976",
+    "username":"Zalando",
     "password":"pass",
     "fullName":"Bubbles"
   },
   {
-    "username":"PostNL",
+    "username":"Nike",
     "password":"pass",
     "fullName":"Buttercup"
+  },
+  {
+    "username":"PostNL",
+    "password":"pass",
+    "fullName":"Blossom"
   },
   {
     "username":"Douane59488016",
