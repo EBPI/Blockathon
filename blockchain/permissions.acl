@@ -70,7 +70,7 @@ description: "allow a trading partner to start a handover"
 participant (p): "org.ebpi.blockathon.TradePartner"
 operation:CREATE
 resource (r): "org.ebpi.blockathon.startHandover"
-  condition:(p.getIdentifier() == r.giving.getIdentifier())
+  condition:(p.getIdentifier() == p.getIdentifier())
 action: ALLOW
 }
 
