@@ -5,7 +5,8 @@ public enum BlockchainRestUrl {
 	PRODUCT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Product/{id}"),
 	PRODUCTS("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Product"),
 	ADD_SHIPMENT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/api/org.ebpi.blockathon.Shipment"),
-	SEND_SHIPMENT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT_NIKE + "/api/org.ebpi.blockathon.sendShipment");
+	SEND_SHIPMENT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT_NIKE + "/api/org.ebpi.blockathon.sendShipment"),
+	QUERY_SHIPMENT("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT_NIKE + "/api/org.ebpi.blockathon.Shipment?filter={query}");
 
 	private final String url;
 

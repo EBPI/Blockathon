@@ -12,5 +12,6 @@
 	],
 	"Destination": "autoworld - Brussel",
 	"Customer": "resource:org.ebpi.blockathon.Orderer#OrdererID3108",
-	"Supplier": "resource:org.ebpi.blockathon.Manufacturer#MID2386"
+	"Supplier": "resource:org.ebpi.blockathon.Manufacturer#MID2386",
+	"ClientReference": "a2c8213e-ed36-43c9-85c9-c39f64eeacbc"
 }
