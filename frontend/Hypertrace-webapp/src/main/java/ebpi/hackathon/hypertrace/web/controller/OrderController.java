@@ -87,11 +87,7 @@ public class OrderController {
     }
 
     @RequestMapping("/manufacturer")
-    public String getQr(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
-        String id = userUtils.getUserIdFromCookie(request);
-        String url = backendService.getQr(id, shipmentId);
-        System.out.println("url for receiving shipment from " + partnerId + ": " + url);
-        model.put("url", url);
-        return "handover";
+    public String getQrSelect(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
+        return "handover-select";
     }
 }
