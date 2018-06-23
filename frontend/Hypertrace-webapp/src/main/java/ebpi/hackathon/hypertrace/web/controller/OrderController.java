@@ -95,13 +95,8 @@ public class OrderController {
     }
 
     @RequestMapping("/manufacturerselect")
-    public String acceptHandover(@RequestParam("selection") String selection, @RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
-        String result;
-        if (selection.equals("accept")) {
-            result = "Handover accepted!";
-        } else {
-            result = "handover declined!";
-        }
+    public String acceptHandover(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
+        String result = "Handover accepted!";
         model.put("homeMessage", result);
         return "home";
     }
