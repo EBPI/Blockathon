@@ -59,7 +59,7 @@ description: "Allow all partners to update the shipment"
 participant (p):"org.ebpi.blockathon.TradePartner"
   operation: UPDATE
   resource (r): "org.ebpi.blockathon.Shipment"
-  condition: (true)
+  condition: (r.transporterList.includes(p.getIdentifier(),0))
   action: ALLOW
 }
 

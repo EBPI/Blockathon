@@ -76,6 +76,7 @@ o String Weight
 enum ShipmentState {
     o MINT
     o GOOD
+    o OK
     o WET
     o WATER_DAMAGE
     o TEARED
@@ -90,7 +91,7 @@ enum ShipmentState {
 transaction startHandover {
 --> Shipment shipment
 --> TradePartner nextHandler
-o ShipmentState state
+o ShipmentState state default = OK
 o Boolean final default = false
 }
 
@@ -103,7 +104,7 @@ o Boolean final default = false
 
 transaction deliverPackage{
 --> Shipment shipment
-o ShipmentState state
+o ShipmentState state default = OK
 o String receiver
 }
 
