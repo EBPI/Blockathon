@@ -1,8 +1,13 @@
 package nl.ebpi.hypertrace.backend.service.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 import javax.sql.DataSource;
 import nl.ebpi.hypertrace.backend.generated.domain.Order;
 import nl.ebpi.hypertrace.backend.service.OrderService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +34,9 @@ public class OrderServiceImplTest {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
 	@Test
 	public void testCreateOrder() throws Exception {
 		Order order = new Order();
@@ -35,7 +45,16 @@ public class OrderServiceImplTest {
 		order.getProducts().add("auto001");
 		order.getProducts().add("auto002");
 
-		orderService.createOrder(order);
+		RowMapper<String> rowMapper = new RowMapper<String>() {
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString("MANUFACTURER");
+			}
+		};
+		String orderId = orderService.createOrder(order);
+		List<String> result = jdbcTemplate.query("select * from ORDER_BASE where id = ?", Collections.singletonList(orderId).toArray(), rowMapper);
+		Assert.assertEquals(1, result.size());
+		Assert.assertEquals("MID2386", result.get(0));
 	}
 
 	@Configuration
