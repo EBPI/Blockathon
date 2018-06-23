@@ -58,17 +58,22 @@ function doStartHandover(startHandover) {
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
     newHandover.stateReciever = "undefined"
-    return getAssetRegistry('org.ebpi.blockathon.Shipment')
-        .then(function (ShipmentAssetRegistry) {
-            return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
-        })
-        .then(function(Shipment) {
-            Shipment.handoverArray.push(newHandover)
+    var ontvangenShipment =  startHandover.shipment
+
+    ontvangenShipment.handoverArray.push(newHandover)
+
+    // return getAssetRegistry('org.ebpi.blockathon.Shipment')
+    //     .then(function (ShipmentAssetRegistry) {
+    //         return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
+    //     })
+    //     .then(function(Shipment) {
+    //         Shipment.handoverArray.push(newHandover)
+    //
             return getAssetRegistry('org.ebpi.hackathon.Shipment')
                 .then(function (ShipmentAssetRegistry) {
-                    return ShipmentAssetRegistry.update(Shipment);
+                    return ShipmentAssetRegistry.update(ontvangenShipment);
                 })
-        })
+        // })
 }
 
 
