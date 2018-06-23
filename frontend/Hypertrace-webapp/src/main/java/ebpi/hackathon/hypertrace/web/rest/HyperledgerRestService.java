@@ -45,16 +45,16 @@ public class HyperledgerRestService {
         URI url;
         switch (user.getType()) {
             case "orderer":
-                url = new URI(String.format(HYPERLEDGER_REST_ADMIN, ORDERER_PARAM));
+                url = new URI(String.format(HYPERLEDGER_REST_ORDERER, ORDERER_PARAM));
                 break;
             case "manufacturer":
-                url = new URI(String.format(HYPERLEDGER_REST_ADMIN, MANUFACTURER_PARAM));
+                url = new URI(String.format(HYPERLEDGER_REST_MANUFACTURER, MANUFACTURER_PARAM));
                 break;
             case "transporter":
-                url = new URI(String.format(HYPERLEDGER_REST_ADMIN, TRANSPORTER_PARAM));
+                url = new URI(String.format(HYPERLEDGER_REST_TRANSPORTER, TRANSPORTER_PARAM));
                 break;
             case "customs":
-                url = new URI(String.format(HYPERLEDGER_REST_ADMIN, CUSTOMS_PARAM));
+                url = new URI(String.format(HYPERLEDGER_REST_CUSTOMS, CUSTOMS_PARAM));
                 break;
             default:
                 throw new RuntimeException("Participant unknown");
