@@ -1,7 +1,7 @@
 package ebpi.hackathon.hypertrace.web.controller;
 
-import com.google.gson.Gson;
 import ebpi.hackathon.hypertrace.web.domein.Order;
+import ebpi.hackathon.hypertrace.web.rest.BackendService;
 import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Controller
@@ -19,14 +18,18 @@ public class OrderController {
     private HyperledgerRestService ledgerService;
 
     @Autowired
+    private BackendService backendService;
+
+    @Autowired
     private UserUtils userUtils;
 
     @RequestMapping("/order")
-    public String placeOrder(@RequestParam("productId") String productId, @RequestParam("creator") String creator, @RequestParam("quantity") String quantity, HttpServletRequest request) {
+    public String placeOrder(@RequestParam("productId") String productId, @RequestParam("creator") String creator, @RequestParam("quantity") String quantity, HttpServletRequest request, Map<String, Object> model) {
         String ordererId = userUtils.getUserIdFromCookie(request);
         List<Order> orders = parseOrders(productId, creator, quantity, ordererId);
-        System.out.println(new Gson().toJson(orders));
-        return "home";
+        String message = backendService.sendOrderToBackend(orders);
+        model.put("loggedInMessage", model.put("loggedInMessage", message));
+        return "ordererLoggedIn";
     }
 
     private List<Order> parseOrders(String productId, String manufacturer, String quantity, String ordererId) {
@@ -55,17 +58,21 @@ public class OrderController {
         List<Order> ordersByManufacturer = new ArrayList<>();
         for (String manufacturer : manufacturers) {
             Order orderManufacturer = new Order();
+            boolean filledOrder = false;
             for (Order order : orders) {
-                if (order.getManufacturer().equals(manufacturer)) {
+                if (!order.getManufacturer().equals(manufacturer)) {
                     orderManufacturer.setManufacturer(manufacturer);
                     orderManufacturer.setOrderer(order.getOrderer());
                     if (orderManufacturer.getProducts() == null) {
                         orderManufacturer.setProducts(new ArrayList<>());
                     }
                     orderManufacturer.getProducts().addAll(order.getProducts());
+                    filledOrder = true;
                 }
             }
-            ordersByManufacturer.add(orderManufacturer);
+            if (filledOrder) {
+                ordersByManufacturer.add(orderManufacturer);
+            }
         }
         return ordersByManufacturer;
     }
