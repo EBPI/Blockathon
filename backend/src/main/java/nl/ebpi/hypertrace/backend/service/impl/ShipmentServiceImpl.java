@@ -3,11 +3,15 @@ package nl.ebpi.hypertrace.backend.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.hash.Hashing;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentQuery;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentRequest;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainSendShipmentReturn;
 import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainShipment;
+import nl.ebpi.hypertrace.backend.generated.blockchain.BlockChainWhere;
 import nl.ebpi.hypertrace.backend.generated.domain.Order;
 import nl.ebpi.hypertrace.backend.service.ShipmentService;
 import nl.ebpi.hypertrace.backend.utils.BlockchainRestUrl;
@@ -36,7 +40,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 
 	@Override
-	public List<String> sendShipments(Order order) {
+	public List<String> sendShipments(Order order, String orderId) {
 		List<String> shipmentIds = new ArrayList<>();
 
 		List<String> products = order.getProducts();
@@ -45,17 +49,18 @@ public class ShipmentServiceImpl implements ShipmentService {
 		}
 		int size = products.size();
 		if (size == 1) {
-			shipmentIds.add(createShipmentRequest(order, products));
+			createShipmentRequest(order, orderId, products);
 		} else {
 			int part = size / 2;
-			shipmentIds.add(createShipmentRequest(order, products.subList(0, part)));
-			shipmentIds.add(createShipmentRequest(order, products.subList(part, size)));
+			createShipmentRequest(order, orderId, products.subList(0, part));
+			createShipmentRequest(order, orderId, products.subList(part, size));
 		}
 
+		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderId));
 		return shipmentIds;
 	}
 
-	private String createShipmentRequest(Order order, List<String> products) {
+	private void createShipmentRequest(Order order, String orderId, List<String> products) {
 		BlockChainSendShipmentRequest shipment = new BlockChainSendShipmentRequest();
 		shipment.setCustomer(order.getOrderer());
 		shipment.setDocumentHash("hashing");
@@ -66,15 +71,39 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipment.getTransporterList().add("TID4412");
 		shipment.getTransporterList().add("POSTNL001");
 		shipment.setWeight("10KG");
+		shipment.setClientReference(orderId);
 
+		sendToBlockchain(shipment);
+	}
+
+	private void sendToBlockchain(BlockChainSendShipmentRequest shipment) {
 		HttpEntity<BlockChainSendShipmentRequest> requestEntity = new HttpEntity<>(shipment);
 		ParameterizedTypeReference<BlockChainSendShipmentReturn> returnBean = new ParameterizedTypeReference<BlockChainSendShipmentReturn>() {
 		};
 		try {
 			LOG.debug(objectMapper.writeValueAsString(shipment));
-			ResponseEntity<BlockChainSendShipmentReturn> exchange = restTemplate.exchange(BlockchainRestUrl.SEND_SHIPMENT.getUrl(), HttpMethod.POST,
-					requestEntity, returnBean, "");
-			return exchange.getBody().getTransactionId();
+			restTemplate.exchange(BlockchainRestUrl.SEND_SHIPMENT.getUrl(), HttpMethod.POST, requestEntity, returnBean, "");
+		} catch (Exception e) {
+			LOG.error("Problem calling the blockchain", e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	private Collection<? extends String> getShipmentIdsFromBlockchain(String orderId) {
+		try {
+			BlockChainSendShipmentQuery query = new BlockChainSendShipmentQuery();
+			BlockChainWhere where = new BlockChainWhere();
+			where.setClientReference(orderId);
+			query.setWhere(where);
+
+			// HttpEntity requestEntity = new HttpEntity();
+			ParameterizedTypeReference<List<BlockChainShipment>> returnBean = new ParameterizedTypeReference<List<BlockChainShipment>>() {
+			};
+			LOG.debug(objectMapper.writeValueAsString(query));
+			ResponseEntity<List<BlockChainShipment>> exchange = restTemplate.exchange(BlockchainRestUrl.QUERY_SHIPMENT.getUrl(), HttpMethod.GET,
+					null, returnBean, objectMapper.writeValueAsString(query));
+			List<BlockChainShipment> shipments = exchange.getBody();
+			return shipments.stream().map(shipment -> shipment.getShipmentID()).collect(Collectors.toList());
 		} catch (Exception e) {
 			LOG.error("Problem calling the blockchain", e);
 			throw new RuntimeException(e);

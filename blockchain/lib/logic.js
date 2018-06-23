@@ -62,7 +62,7 @@ function doStartHandover(startHandover) {
     console.log("logt ie uberhaubt wel")
 console.log(ontvangenShipment.ShipmentID)
     ontvangenShipment.handoverArray.push(newHandover)
-
+console.log(ontvangenShipment.handoverArray)
     // return getAssetRegistry('org.ebpi.blockathon.Shipment')
     //     .then(function (ShipmentAssetRegistry) {
     //         return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
@@ -70,7 +70,7 @@ console.log(ontvangenShipment.ShipmentID)
     //     .then(function(Shipment) {
     //         Shipment.handoverArray.push(newHandover)
     //
-            return getAssetRegistry('org.ebpi.hackathon.Shipment')
+            return getAssetRegistry('org.ebpi.blockathon.Shipment')
                 .then(function (ShipmentAssetRegistry) {
                     return ShipmentAssetRegistry.update(ontvangenShipment);
                 })

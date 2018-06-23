@@ -10,12 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/hypertrace")
 public class OrderController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
@@ -30,7 +28,7 @@ public class OrderController {
 	public @ResponseBody OrderConfirmation placeOrder(@RequestBody Order order) {
 		LOG.debug("creating order {}", order);
 		String orderId = orderService.createOrder(order);
-		List<String> createdShipments = shipmentService.sendShipments(order);
+		List<String> createdShipments = shipmentService.sendShipments(order, orderId);
 
 		OrderConfirmation orderConfirmation = new OrderConfirmation();
 		orderConfirmation.setOrderId(orderId);

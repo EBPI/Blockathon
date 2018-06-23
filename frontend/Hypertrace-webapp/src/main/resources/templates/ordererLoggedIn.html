@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hypertrace - Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css" th:src="@{webjars/bootstrap/4.1.1/css/bootstrap.min.css}"
+          type="text/css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" th:src="@{css/custom.css}" type="text/css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<!--/*/ <th:block th:include="fragments/navbar-loggedin.html">
+        </th:block> /*/-->
+        
+<div class="container">
+
+    <div class="basic-template">
+        <h1>
+            <span th:text="'Welcome ' + ${loggedInMessage}"></span>
+        </h1>
+    </div>
+
+</div> <!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="webjars/jquery/3.1.1/jquery.min.js" th:src="@{webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"
+        th:src="@{webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

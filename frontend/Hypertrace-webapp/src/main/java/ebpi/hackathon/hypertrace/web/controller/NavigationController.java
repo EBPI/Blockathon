@@ -41,7 +41,7 @@ public class NavigationController {
      */
     @RequestMapping("/")
     public String home(Map<String, Object> model, HttpServletRequest request) {
-        if (request.getCookies() == null || request.getCookies().length != 4) {
+        if (request.getCookies() == null || request.getCookies().length < 4) {
             String message = "Welcome to the Blockathon Hypertrace web application! You are currently not signed in.";
             model.put("homeMessage", message);
             return "home";
@@ -80,20 +80,25 @@ public class NavigationController {
         // clear cookies
         user = loginCheck(user);
 
-        if (user != null) {
-            user.setType(type);
-            String id = ledgerService.getParticipant(user);
-            System.out.println("Found ID in ledger: " + id);
-            if (id != null) {
-                response.addCookie(new Cookie("id", id));
-                response.addCookie(new Cookie("username", user.getUsername()));
-                response.addCookie(new Cookie("fullName", user.getFullName()));
-                response.addCookie(new Cookie("type", user.getType()));
-                return loggedIn(model, user);
+        try {
+            if (user != null) {
+                user.setType(type);
+                String id = ledgerService.getParticipant(user);
+                System.out.println("Found ID in ledger: " + id);
+                if (id != null) {
+                    response.addCookie(new Cookie("id", id));
+                    response.addCookie(new Cookie("username", user.getUsername()));
+                    response.addCookie(new Cookie("fullName", user.getFullName()));
+                    response.addCookie(new Cookie("type", user.getType()));
+                    return loggedIn(model, user);
+                }
             }
+            model.put("loginError", "Something went wrong during sign in, did you use the correct credentials?");
+            return "login";
+        } catch (Exception e) {
+            model.put("loginError", "Network error. Please contact an admin.");
+            return "login";
         }
-        model.put("loginError", "Something went wrong during sign in, did you use the correct credentials?");
-        return "login";
     }
 
     /**
@@ -127,7 +132,18 @@ public class NavigationController {
     @RequestMapping("/loggedIn")
     public String loggedIn(Map<String, Object> model, User user) {
         model.put("loggedInMessage", user.getType() + " " + user.getUsername() + " (" + user.getFullName() + ")!");
-        return "homeLoggedIn";
+        switch (user.getType()) {
+            case "orderer":
+                return "ordererLoggedIn";
+            case "manufacturer":
+                return "manufacturerLoggedIn";
+            case "transporter":
+                return "transporterLoggedIn";
+            case "customs":
+                return "customsLoggedIn";
+            default:
+                throw new RuntimeException("Participant unknown");
+        }
     }
 
     /**
@@ -209,9 +225,17 @@ public class NavigationController {
     private User getUserFromCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         User loggedIn = new User();
-        loggedIn.setUsername(cookies[1].getValue());
-        loggedIn.setFullName(cookies[2].getValue());
-        loggedIn.setType(cookies[3].getValue());
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("username")) {
+                loggedIn.setUsername(cookie.getValue());
+            }
+            if (cookie.getName().equals("fullName")) {
+                loggedIn.setFullName(cookie.getValue());
+            }
+            if (cookie.getName().equals("type")) {
+                loggedIn.setType(cookie.getValue());
+            }
+        }
         return loggedIn;
     }
 }
