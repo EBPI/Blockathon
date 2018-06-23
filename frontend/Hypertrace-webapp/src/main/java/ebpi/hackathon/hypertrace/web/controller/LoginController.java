@@ -2,6 +2,7 @@ package ebpi.hackathon.hypertrace.web.controller;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import ebpi.hackathon.hypertrace.web.domein.Product;
 import ebpi.hackathon.hypertrace.web.domein.User;
 import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
 import org.apache.commons.io.IOUtils;
@@ -137,7 +138,8 @@ public class LoginController {
         model.put("loggedInMessage", user.getType() + " " + user.getUsername() + " (" + user.getFullName() + ")!");
         switch (user.getType()) {
             case "orderer":
-                ledgerService.getProducts();
+                List<Product> products = ledgerService.getProducts();
+                model.put("products", products);
                 return "ordererLoggedIn";
             case "manufacturer":
                 return "manufacturerLoggedIn";

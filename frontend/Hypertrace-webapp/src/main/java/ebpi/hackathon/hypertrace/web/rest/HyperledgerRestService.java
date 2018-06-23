@@ -3,6 +3,7 @@ package ebpi.hackathon.hypertrace.web.rest;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import ebpi.hackathon.hypertrace.web.domein.Participant;
+import ebpi.hackathon.hypertrace.web.domein.Product;
 import ebpi.hackathon.hypertrace.web.domein.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -80,15 +82,19 @@ public class HyperledgerRestService {
      * @return list of products
      * @throws URISyntaxException syntax exception that occurs when parcing URI's, nothing of interest here
      */
-    public String getProducts() {
-        URI url = null;
+    public List<Product> getProducts() {
         try {
+            URI url;
             url = new URI(String.format(HYPERLEDGER_REST_ORDERER, PRODUCT_PARAM));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            String productJson = restTemplate.getForEntity(url, String.class).getBody();
+            System.out.println(productJson);
+            Type listType = new TypeToken<ArrayList<Product>>() {
+            }.getType();
+            return new Gson().fromJson(productJson, listType);
         }
-        String productJson = restTemplate.getForEntity(url, String.class).getBody();
-        System.out.println(productJson);
-        return null;
+        catch (Exception e) {
+            System.out.println("Error gathering products: " + e);
+            return Collections.emptyList();
+        }
     }
 }
