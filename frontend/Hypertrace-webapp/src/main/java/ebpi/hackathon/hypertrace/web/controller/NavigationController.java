@@ -35,13 +35,14 @@ public class NavigationController {
     /**
      * Homepage for non logged-in user
      *
-     * @param model models to insert into the thymeleaf template
+     * @param model   models to insert into the thymeleaf template
+     * @param request HttpServletRequest used for getting cookie values
      * @return homepage non logged-in user
      */
     @RequestMapping("/")
-    public String home(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+    public String home(Map<String, Object> model, HttpServletRequest request) {
         if (request.getCookies() == null || request.getCookies().length != 4) {
-            String message = "This text is inserted from within the code with Thymeleaf!";
+            String message = "Welcome to the Blockathon Hypertrace web application! You are currently not signed in.";
             model.put("homeMessage", message);
             return "home";
         } else {
@@ -70,6 +71,7 @@ public class NavigationController {
      * @param user     username and password from user
      * @param type     role selection from login
      * @param model    redirect model for thymeleaf
+     * @param request  HttpServletRequest used for getting cookie values
      * @param response HttpServletResponse used for setting cookie values
      * @return logged in home or same page
      */
@@ -87,11 +89,11 @@ public class NavigationController {
                 response.addCookie(new Cookie("username", user.getUsername()));
                 response.addCookie(new Cookie("fullName", user.getFullName()));
                 response.addCookie(new Cookie("type", user.getType()));
+                return loggedIn(model, user);
             }
-            return loggedIn(model, user);
-        } else {
-            return home(model, request, response);
         }
+        model.put("loginError", "Something went wrong during sign in, did you use the correct credentials?");
+        return "login";
     }
 
     /**
@@ -109,7 +111,7 @@ public class NavigationController {
         List<User> users = new Gson().fromJson(usersJson, listType);
         for (User existing : users) {
             if (existing.getFullName() != null && existing.getUsername().equals(user.getUsername()) && (existing.getPassword().equals(user.getPassword()))) {
-                return user;
+                return existing;
             }
         }
         return null;
@@ -119,11 +121,12 @@ public class NavigationController {
      * Homepage for logged-in user
      *
      * @param model models to insert into the thymeleaf template
+     * @param user  User object for logged in user.
      * @return homepage logged-in user
      */
     @RequestMapping("/loggedIn")
     public String loggedIn(Map<String, Object> model, User user) {
-        model.put("loggedInMessage", user.getType() + " " + user.getUsername() + "!");
+        model.put("loggedInMessage", user.getType() + " " + user.getUsername() + " (" + user.getFullName() + ")!");
         return "homeLoggedIn";
     }
 
@@ -154,7 +157,7 @@ public class NavigationController {
     /**
      * Order status for company
      *
-     * @param model
+     * @param model models to insert into the thymeleaf template
      * @return status page for transport
      */
     @RequestMapping("/statusTransport")
@@ -167,11 +170,13 @@ public class NavigationController {
     /**
      * Logout page
      *
-     * @param model models to insert into the thymeleaf template
+     * @param model    models to insert into the thymeleaf template
+     * @param request  HttpServletRequest used for getting cookie values
+     * @param response HttpServletResponse used for setting cookie values
      * @return homepage without cookies
      */
     @RequestMapping("/logout")
-    public String logout(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
+    public String logout(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
         removeCookies(request, response);
         String message = "You have succesfully logged out.";
         model.put("homeMessage", message);
@@ -185,11 +190,13 @@ public class NavigationController {
      * @param response used for setting all cookies ready for deletion in response
      */
     private void removeCookies(HttpServletRequest request, HttpServletResponse response) {
-        for (Cookie cookie : request.getCookies()) {
-            cookie.setValue("");
-            cookie.setMaxAge(0);
-            cookie.setPath("/");
-            response.addCookie(cookie);
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                cookie.setValue("");
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
         }
     }
 
