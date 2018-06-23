@@ -46,6 +46,7 @@ function doSendShipment(sendShipment) {
  */
 function doStartHandover(startHandover) {
     const HandoverID = uuidv4()
+    let factory = getFactory();
     let newHandover = factory.newResource('org.ebpi.blockathon', 'Handover', HandoverID);
     const givingParty = getCurrentParticipant();
     const givingId = givingParty.PartnerID;

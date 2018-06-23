@@ -1,6 +1,6 @@
 {
   "name": "hypertrace",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "Track & Trace for supply chains",
   "scripts": {
     "test": "mocha --recursive"
