@@ -10,7 +10,6 @@
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
     color: #00ff00;
-    font-size: 
 }
 
 /* All fonts to Exo 2, except brand font. Brand font to Bungee */
@@ -74,3 +73,73 @@ img.team {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+.btn {
+	border-radius: 5px;
+}
+
+.radio-online {
+	clear: both;
+	float: left;
+}
+
+.btn {
+	font-weight: 700;
+}
+
+.btn-primary {
+	color: #1C0529;
+	background-color: #00ff00;
+	border-color: #00ff00;
+    transition: 0.6s;
+}
+
+.btn-primary:hover {
+   	color: #1C0529;
+	background-color: #00FF00;
+	border-color: #00FF00;
+    box-shadow: 0px 10px 30px 2px rgba(0, 0, 0, 0.1);
+    transition: 0.6s;
+}
+
+
+.login-form > form >.form-group b {
+    margin-bottom: 12px;
+    position: relative;
+    top: -1px;
+    clear: both;
+    display: block;  
+}
+
+.login-form > form .form-group:nth-child(3) > label{
+    
+}
+
+ /* Customize the label (the radio-inline) */
+.radio-inline {
+  display: block;
+  position: relative;
+  float: left;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Spacing for button */
+.radio-inline input {
+  position: absolute;
+    left: 16px;
+    top: 5px;
+}
+
+.login-form {
+	max-width: 468px;
+	margin: 0 auto;
+}
+
+h1 {
+	margin-bottom: 2.5rem;
+}
