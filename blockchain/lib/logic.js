@@ -46,6 +46,7 @@ function doSendShipment(sendShipment) {
  */
 function doStartHandover(startHandover) {
     const HandoverID = uuidv4()
+    let factory = getFactory();
     let newHandover = factory.newResource('org.ebpi.blockathon', 'Handover', HandoverID);
     const givingParty = getCurrentParticipant();
     const givingId = givingParty.PartnerID;
@@ -56,10 +57,10 @@ function doStartHandover(startHandover) {
     newHandover.reciever = factory.newRelationship('org.ebpi.blockathon', 'TradePartner', recivingId);
     newHandover.confirmed = false
     newHandover.stateGiving = startHandover.state
-    newHandover.stateReciever = ShipmentState.undefined
+    newHandover.stateReciever = "undefined"
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
-            return ShipmentAssetRegistry.get(startHandover.Shipment.ShipmentID);
+            return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
         })
         .then(function(Shipment) {
             Shipment.handoverArray.push(newHandover)
