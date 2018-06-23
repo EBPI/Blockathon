@@ -18,5 +18,17 @@
     "username":"Douane59488016",
     "password":"pass",
     "fullName":"Professor"
+  },
+
+  {
+    "username":"Transporter11030988",
+    "password":"pass",
+    "fullName":"QuickDriver"
+  },
+  {
+    "username":"Transporter46618096",
+    "password":"pass",
+    "fullName":"FastShip"
   }
+
 ]
