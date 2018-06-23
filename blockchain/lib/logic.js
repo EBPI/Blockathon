@@ -60,7 +60,7 @@ function doStartHandover(startHandover) {
     newHandover.stateReciever = "undefined"
     return getAssetRegistry('org.ebpi.blockathon.Shipment')
         .then(function (ShipmentAssetRegistry) {
-            return ShipmentAssetRegistry.get(startHandover.Shipment.ShipmentID);
+            return ShipmentAssetRegistry.get(startHandover.shipment.ShipmentID);
         })
         .then(function(Shipment) {
             Shipment.handoverArray.push(newHandover)
