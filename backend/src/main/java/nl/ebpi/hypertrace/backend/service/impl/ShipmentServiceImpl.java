@@ -43,32 +43,32 @@ public class ShipmentServiceImpl implements ShipmentService {
 
 		List<String> products = order.getProducts();
 		if (products != null) {
-			shipmentIds.addAll(sendShipmentToBlockchain(order, orderId, products));
+			shipmentIds.addAll(sendShipmentToBlockchain(new OrderInformation(order, orderId), products));
 		}
 		return shipmentIds;
 	}
 
-	private List<String> sendShipmentToBlockchain(Order order, String orderId, List<String> products) {
+	private List<String> sendShipmentToBlockchain(OrderInformation orderInfo, List<String> products) {
 		List<String> shipmentIds = new ArrayList<>();
 		int size = products.size();
 		if (size == 1) {
-			createShipmentRequest(order, orderId, products);
+			createShipmentRequest(orderInfo, products);
 		} else if (size > 1) {
-			splitShipment(order, orderId, products, size);
+			splitShipment(orderInfo, products, size);
 		}
-		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderId));
+		shipmentIds.addAll(getShipmentIdsFromBlockchain(orderInfo.orderId));
 		return shipmentIds;
 	}
 
-	private void splitShipment(Order order, String orderId, List<String> products, int size) {
+	private void splitShipment(OrderInformation orderInfo, List<String> products, int size) {
 		int part = size / 2;
-		createShipmentRequest(order, orderId, products.subList(0, part));
-		createShipmentRequest(order, orderId, products.subList(part, size));
+		createShipmentRequest(orderInfo, products.subList(0, part));
+		createShipmentRequest(orderInfo, products.subList(part, size));
 	}
 
-	private void createShipmentRequest(Order order, String orderId, List<String> products) {
+	private void createShipmentRequest(OrderInformation orderInfo, List<String> products) {
 		BlockChainSendShipmentRequest shipment = new BlockChainSendShipmentRequest();
-		shipment.setCustomer(order.getOrderer());
+		shipment.setCustomer(orderInfo.order.getOrderer());
 		shipment.setDocumentHash("hashing");
 		shipment.setDocumentLocation("hier");
 		shipment.setDestination("Autoworld - Brussel");
@@ -77,7 +77,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		shipment.getTransporterList().add("TID4412");
 		shipment.getTransporterList().add("POSTNL001");
 		shipment.setWeight("10KG");
-		shipment.setClientReference(orderId);
+		shipment.setClientReference(orderInfo.orderId);
 
 		sendToBlockchain(shipment);
 	}
@@ -120,4 +120,13 @@ public class ShipmentServiceImpl implements ShipmentService {
 		return query;
 	}
 
+	private static class OrderInformation {
+		public Order order;
+		public String orderId;
+
+		public OrderInformation(Order order, String orderId) {
+			this.order = order;
+			this.orderId = orderId;
+		}
+	}
 }
