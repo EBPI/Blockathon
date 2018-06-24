@@ -1,60 +1,25 @@
 package ebpi.hackathon.hypertrace.web.domein;
 
 public class Handover {
-    private String HandoverId;
-    private TradePartner giving;
-    private TradePartner receiver;
-    private String confirmed;
-    private String stateGiving;
-    private String stateReceiver;
+    private String shipment;
+    private String nextHandler;
     private boolean finalHandover;
 
-    public String getHandoverId() {
-        return HandoverId;
+
+    public String getShipment() {
+        return shipment;
     }
 
-    public void setHandoverId(String handoverId) {
-        HandoverId = handoverId;
+    public void setShipment(String shipment) {
+        this.shipment = shipment;
     }
 
-    public TradePartner getGiving() {
-        return giving;
+    public String getNextHandler() {
+        return nextHandler;
     }
 
-    public void setGiving(TradePartner giving) {
-        this.giving = giving;
-    }
-
-    public TradePartner getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(TradePartner receiver) {
-        this.receiver = receiver;
-    }
-
-    public String getConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(String confirmed) {
-        this.confirmed = confirmed;
-    }
-
-    public String getStateGiving() {
-        return stateGiving;
-    }
-
-    public void setStateGiving(String stateGiving) {
-        this.stateGiving = stateGiving;
-    }
-
-    public String getStateReceiver() {
-        return stateReceiver;
-    }
-
-    public void setStateReceiver(String stateReceiver) {
-        this.stateReceiver = stateReceiver;
+    public void setNextHandler(String nextHandler) {
+        this.nextHandler = nextHandler;
     }
 
     public boolean isFinalHandover() {

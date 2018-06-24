@@ -2,10 +2,12 @@ package ebpi.hackathon.hypertrace.web.rest;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import ebpi.hackathon.hypertrace.web.domein.Handover;
 import ebpi.hackathon.hypertrace.web.domein.Participant;
 import ebpi.hackathon.hypertrace.web.domein.Product;
 import ebpi.hackathon.hypertrace.web.domein.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,6 +32,7 @@ public class HyperledgerRestService {
     private static final String TRANSPORTER_PARAM = "Transporter";
     private static final String CUSTOMS_PARAM = "Douane";
     private static final String PRODUCT_PARAM = "Product";
+    private static final String HANDOVER_PARAM = "Handover";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -91,10 +94,21 @@ public class HyperledgerRestService {
             Type listType = new TypeToken<ArrayList<Product>>() {
             }.getType();
             return new Gson().fromJson(productJson, listType);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error gathering products: " + e);
             return Collections.emptyList();
+        }
+    }
+
+    public void startHandoverManufacturer(Handover handover) {
+        try {
+            URI url;
+            url = new URI(String.format(HYPERLEDGER_REST_MANUFACTURER, HANDOVER_PARAM));
+            String handoverJson = new Gson().toJson(handover);
+            restTemplate.postForEntity(url, handoverJson, String.class);
+            System.out.println(handoverJson);
+        } catch (Exception e) {
+            System.out.println("Error doing handover: " + e);
         }
     }
 }

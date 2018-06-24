@@ -1,5 +1,6 @@
 package ebpi.hackathon.hypertrace.web.controller;
 
+import ebpi.hackathon.hypertrace.web.domein.Handover;
 import ebpi.hackathon.hypertrace.web.domein.Order;
 import ebpi.hackathon.hypertrace.web.rest.BackendService;
 import ebpi.hackathon.hypertrace.web.rest.HyperledgerRestService;
@@ -96,6 +97,13 @@ public class OrderController {
 
     @RequestMapping("/manufacturerselect")
     public String acceptHandover(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request, Map<String, Object> model) {
+        Handover handover = new Handover();
+        handover.setFinalHandover(false);
+        handover.setNextHandler(receiver);
+        handover.setShipment(shipment);
+
+        ledgerService.startHandoverManufacturer(handover);
+
         String result = "Handover accepted!";
         model.put("homeMessage", result);
         return "home";
