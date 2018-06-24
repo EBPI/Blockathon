@@ -116,7 +116,7 @@ public class HyperledgerRestService {
 	public void startHandoverDeliverer(AcceptHandover handover) {
 		try {
 			URI url;
-			url = new URI(String.format(HYPERLEDGER_REST_MANUFACTURER, ACCEPT_HANDOVER_PARAM));
+			url = new URI(String.format(HYPERLEDGER_REST_TRANSPORTER, ACCEPT_HANDOVER_PARAM));
 			String handoverJson = new Gson().toJson(handover);
 			restTemplate.postForEntity(url, handoverJson, String.class);
 			System.out.println(handoverJson);
