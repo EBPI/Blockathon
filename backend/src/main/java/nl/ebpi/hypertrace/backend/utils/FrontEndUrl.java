@@ -2,7 +2,8 @@ package nl.ebpi.hypertrace.backend.utils;
 
 public enum FrontEndUrl {
 
-	RECEIVER_QRCODE("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/manufacturer?receiver={receiver}&shipment={shipment}");
+	RECEIVER_QRCODE("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/manufacturer?receiver={receiver}&shipment={shipment}&deliverer={deliverer}"),
+	DELIVERER_QRCODE("http://" + Constants.IP_ADDRESS + ":" + Constants.PORT + "/receiver?deliverer={deliverer}&shipment={shipment}");
 
 	private final String url;
 

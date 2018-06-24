@@ -17,10 +17,19 @@ public class QRCodeController {
 	private static final Logger LOG = LoggerFactory.getLogger(QRCodeController.class);
 
 	@RequestMapping(value = "/receiver/qrcode", consumes = MediaType.ALL_VALUE, produces = MediaType.IMAGE_JPEG_VALUE)
-	public @ResponseBody byte[] placeOrder(@RequestParam String receiver, @RequestParam String shipment) {
-		LOG.debug("creating {} - {}", receiver, shipment);
+	public @ResponseBody byte[] createQRForReceiver(@RequestParam String receiver, @RequestParam String shipment, @RequestParam String deliverer) {
+		LOG.debug("creating qr for receiver {} - {}", receiver, shipment);
 
-		String url = FrontEndUrl.RECEIVER_QRCODE.getUrl().replace("{receiver}", receiver).replace("{shipment}", shipment);
+		String url = FrontEndUrl.RECEIVER_QRCODE.getUrl().replace("{receiver}", receiver).replace("{shipment}", shipment).replace("{deliverer}", deliverer);
+
+		return QRCode.from(url).to(ImageType.JPG).stream().toByteArray();
+	}
+
+	@RequestMapping(value = "/deliverer/qrcode", consumes = MediaType.ALL_VALUE, produces = MediaType.IMAGE_JPEG_VALUE)
+	public @ResponseBody byte[] createQRForDeliverer(@RequestParam String deliverer, @RequestParam String shipment) {
+		LOG.debug("creating qr for deliverer {} - {}", deliverer, shipment);
+
+		String url = FrontEndUrl.RECEIVER_QRCODE.getUrl().replace("{deliverer}", deliverer).replace("{shipment}", shipment);
 		return QRCode.from(url).to(ImageType.JPG).stream().toByteArray();
 	}
 }
