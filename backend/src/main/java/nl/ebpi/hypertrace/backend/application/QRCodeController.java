@@ -29,7 +29,7 @@ public class QRCodeController {
 	public @ResponseBody byte[] createQRForDeliverer(@RequestParam String deliverer, @RequestParam String shipment) {
 		LOG.debug("creating qr for deliverer {} - {}", deliverer, shipment);
 
-		String url = FrontEndUrl.RECEIVER_QRCODE.getUrl().replace("{deliverer}", deliverer).replace("{shipment}", shipment);
+		String url = FrontEndUrl.DELIVERER_QRCODE.getUrl().replace("{deliverer}", deliverer).replace("{shipment}", shipment);
 		return QRCode.from(url).to(ImageType.JPG).stream().toByteArray();
 	}
 }
