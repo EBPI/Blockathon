@@ -117,10 +117,6 @@ img.product {
     display: block;  
 }
 
-.login-form > form .form-group:nth-child(3) > label{
-    
-}
-
  /* Customize the label (the radio-inline) */
 .radio-inline {
   display: block;
@@ -231,5 +227,5 @@ h1 {
  
 /* form spacing on handover */               
 form > div.row > div.col-sm {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
