@@ -146,7 +146,7 @@ public class OrderController {
         return "handoverSelectDeliverer";
     }
 
-    @RequestMapping("/handoverdoneDeliverer")
+    @RequestMapping("/handoverdonedeliverer")
     public String handoverDoneDeliverer(@RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer, HttpServletRequest request,
                                         Map<String, Object> model) {
         AcceptHandover handover = new AcceptHandover();
