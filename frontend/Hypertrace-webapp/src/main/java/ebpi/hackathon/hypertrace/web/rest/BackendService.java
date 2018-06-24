@@ -20,7 +20,8 @@ public class BackendService {
 	private static final String BACKEND_SERVICE_IP = "http://192.168.0.101:8070";
 	private static final URI BACKEND_SERVICE_ORDER = URI.create(BACKEND_SERVICE_IP + "/order");
 	private static final URI BACKEND_SERVICE_SHIPMENT = URI.create(BACKEND_SERVICE_IP + "/shipment");
-	private static final URI BACKEND_SERVICE_QR = URI.create(BACKEND_SERVICE_IP + "/receiver/qrcode");
+	private static final URI BACKEND_SERVICE_QR_RECEIVER = URI.create(BACKEND_SERVICE_IP + "/receiver/qrcode");
+	private static final URI BACKEND_SERVICE_QR_DELIVERER = URI.create(BACKEND_SERVICE_IP + "/deliverer/qrcode");
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -80,7 +81,7 @@ public class BackendService {
 	 * @return uri for backend call
 	 */
 	public String getQrForReceiver(String receiver, String shipment, String deliverer) {
-		String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR.toString())
+		String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR_RECEIVER.toString())
 				.queryParam("receiver", receiver)
 				.queryParam("shipment", shipment)
 				.queryParam("deliverer", deliverer)
@@ -97,7 +98,7 @@ public class BackendService {
 	 * @return uri for backend call
 	 */
 	public String getQrForDeliverer(String shipment, String deliverer) {
-		String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR.toString())
+		String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR_DELIVERER.toString())
 				.queryParam("shipment", shipment)
 				.queryParam("deliverer", deliverer)
 				.toUriString();
