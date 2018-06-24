@@ -139,16 +139,15 @@ public class OrderController {
     }
 
     @RequestMapping("/reveiver")
-    public String getQrSelectDeliverer(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer,
+    public String getQrSelectDeliverer(@RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer,
                                        HttpServletRequest request, Map<String, Object> model) {
-        model.put("receiverId", receiver);
         model.put("shipmentId", shipment);
         model.put("delivererId", deliverer);
         return "handoverSelectDeliverer";
     }
 
     @RequestMapping("/handoverdoneDeliverer")
-    public String handoverDoneDeliverer(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer, HttpServletRequest request,
+    public String handoverDoneDeliverer(@RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer, HttpServletRequest request,
                                         Map<String, Object> model) {
         AcceptHandover handover = new AcceptHandover();
         handover.setFinalHandover(false);
