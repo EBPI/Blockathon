@@ -92,13 +92,13 @@ public class OrderController {
         String id = userUtils.getUserIdFromCookie(request);
         String url = backendService.getQrForReceiver(id, shipmentId, partnerId);
         System.out.println("url for receiving shipment from " + partnerId + ": " + url);
-        model.put("handoverMessage", "Please let the receiver scan and accept the order.");
+        model.put("handoverMessage", "Please let the deliverer scan and accept the order.");
         model.put("url", url);
         return "handover";
     }
 
     @RequestMapping("/manufacturer")
-    public String getQrSelect(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliver") String deliverer,
+    public String getQrSelect(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer,
                               HttpServletRequest request, Map<String, Object> model) {
         model.put("receiverId", receiver);
         model.put("shipmentId", shipment);
@@ -132,14 +132,14 @@ public class OrderController {
 
         ledgerService.startHandoverDeliverer(handover);
         String url = backendService.getQrForDeliverer(shipment, deliverer);
-        model.put("handoverMessage", "Please let the deliverer scan and accept the order.");
+        model.put("handoverMessage", "Please let the receiver scan and accept the order.");
         model.put("url", url);
 
         return "handover";
     }
 
     @RequestMapping("/deliverer")
-    public String getQrSelectDeliverer(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliver") String deliverer,
+    public String getQrSelectDeliverer(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer,
                                        HttpServletRequest request, Map<String, Object> model) {
         model.put("receiverId", receiver);
         model.put("shipmentId", shipment);
