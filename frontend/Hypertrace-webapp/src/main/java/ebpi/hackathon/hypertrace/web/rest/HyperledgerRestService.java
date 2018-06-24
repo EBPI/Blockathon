@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class HyperledgerRestService {
 
-	private static final String HYPERLEDGER_REST_IP = "http://192.168.0.103";
+	private static final String HYPERLEDGER_REST_IP = "http://www.hypertrace.nl";
 	private static final String HYPERLEDGER_REST_ADMIN = HYPERLEDGER_REST_IP + ":3000/api/org.ebpi.blockathon.%s";
 	private static final String HYPERLEDGER_REST_MANUFACTURER = HYPERLEDGER_REST_IP + ":3001/api/org.ebpi.blockathon.%s";
 	private static final String HYPERLEDGER_REST_TRANSPORTER = HYPERLEDGER_REST_IP + ":3002/api/org.ebpi.blockathon.%s";
