@@ -30,15 +30,18 @@
         <form action="#" th:action="@{/handoverDone}" method="post">
             <div class="row">
                 <div class="col-sm">
-                    <input class="form-control" th:value="'ReceiverID: ' + ${receiverId}" name="receiver" title="receiver"
+                    <b>ReveiverId</b>
+                    <input class="form-control" th:value="${receiverId}" name="receiver" title="receiver"
                            required="required" readonly>
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" th:value="'DelivererID: ' + ${delivererId}" name="deliverer" title="deliverer"
+                    <b>DelivererId</b>
+                    <input class="form-control" th:value="${delivererId}" name="deliverer" title="deliverer"
                            required="required" readonly>
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" th:value="'ShipmentID: ' + ${shipmentId}" name="shipment" title="shipment"
+                    <b>ShipmentId</b>
+                    <input class="form-control" th:value="${shipmentId}" name="shipment" title="shipment"
                            required="required" readonly>
                 </div>
                 <div class="col-sm">
