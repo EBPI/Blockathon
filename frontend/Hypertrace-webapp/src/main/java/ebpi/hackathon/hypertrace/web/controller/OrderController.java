@@ -1,5 +1,6 @@
 package ebpi.hackathon.hypertrace.web.controller;
 
+import ebpi.hackathon.hypertrace.web.domein.AcceptHandover;
 import ebpi.hackathon.hypertrace.web.domein.Handover;
 import ebpi.hackathon.hypertrace.web.domein.Order;
 import ebpi.hackathon.hypertrace.web.rest.BackendService;
@@ -87,7 +88,7 @@ public class OrderController {
 	public String getQr(@RequestParam("givingPartnerId") String partnerId, @RequestParam("shipmentId") String shipmentId, HttpServletRequest request,
 			Map<String, Object> model) {
 		String id = userUtils.getUserIdFromCookie(request);
-		String url = backendService.getQr(id, shipmentId, partnerId);
+		String url = backendService.getQrForReceiver(id, shipmentId, partnerId);
 		System.out.println("url for receiving shipment from " + partnerId + ": " + url);
 		model.put("url", url);
 		return "handover";
@@ -98,22 +99,38 @@ public class OrderController {
 			HttpServletRequest request, Map<String, Object> model) {
 		model.put("receiverId", receiver);
 		model.put("shipmentId", shipment);
-		model.put("deliverer", deliverer);
-		return "handoverSelect";
+		model.put("delivererId", deliverer);
+		return "handoverSelectReceiver";
 	}
 
 	@RequestMapping("/manufacturerselect")
-	public String acceptHandover(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, HttpServletRequest request,
+	public String acceptHandover(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer, HttpServletRequest request,
 			Map<String, Object> model) {
 		Handover handover = new Handover();
 		handover.setFinalHandover(false);
 		handover.setNextHandler(receiver);
 		handover.setShipment(shipment);
 
-		ledgerService.startHandoverManufacturer(handover);
+		ledgerService.startHandoverReceiver(handover);
+		String url = backendService.getQrForDeliverer(shipment, deliverer);
 
-		String result = "Handover accepted!";
-		model.put("homeMessage", result);
+		model.put("receiverId", receiver);
+		model.put("shipmentId", shipment);
+		model.put("delivererId", deliverer);
+		return "handoverSelectReceiver";
+	}
+
+	@RequestMapping("/handoverdone")
+	public String handoverDone(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer, HttpServletRequest request,
+								 Map<String, Object> model) {
+		AcceptHandover handover = new AcceptHandover();
+		handover.setFinalHandover(false);
+		handover.setPreviousHandler(deliverer);
+		handover.setShipment(shipment);
+
+		ledgerService.startHandoverDeliverer(handover);
+
+		model.put("homeMessage", "Handover completed!");
 		return "home";
 	}
 }
