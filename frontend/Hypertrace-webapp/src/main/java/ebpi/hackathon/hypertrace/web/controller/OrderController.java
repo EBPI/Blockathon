@@ -138,7 +138,7 @@ public class OrderController {
         return "handover";
     }
 
-    @RequestMapping("/deliverer")
+    @RequestMapping("/reveiver")
     public String getQrSelectDeliverer(@RequestParam("receiver") String receiver, @RequestParam("shipment") String shipment, @RequestParam("deliverer") String deliverer,
                                        HttpServletRequest request, Map<String, Object> model) {
         model.put("receiverId", receiver);
