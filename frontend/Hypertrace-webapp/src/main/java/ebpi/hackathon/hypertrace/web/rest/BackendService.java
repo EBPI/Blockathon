@@ -72,18 +72,32 @@ public class BackendService {
 	}
 
 	/**
-	 * Get qr code uri
+	 * Get qr code uri for receiver
 	 *
 	 * @param receiver receiver of order
+	 * @param deliverer deliverer of order
 	 * @param shipment shipment to be validated
-	 * @param partnerId
 	 * @return uri for backend call
 	 */
-	public String getQr(String receiver, String shipment, String deliverer) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.TEXT_PLAIN);
+	public String getQrForReceiver(String receiver, String shipment, String deliverer) {
 		String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR.toString())
 				.queryParam("receiver", receiver)
+				.queryParam("shipment", shipment)
+				.queryParam("deliverer", deliverer)
+				.toUriString();
+		System.out.println(uri);
+		return uri;
+	}
+
+	/**
+	 * Get qr code uri for deliverer
+	 *
+	 * @param deliverer deliverer of order
+	 * @param shipment shipment to be validated
+	 * @return uri for backend call
+	 */
+	public String getQrForDeliverer(String shipment, String deliverer) {
+		String uri = UriComponentsBuilder.fromHttpUrl(BACKEND_SERVICE_QR.toString())
 				.queryParam("shipment", shipment)
 				.queryParam("deliverer", deliverer)
 				.toUriString();

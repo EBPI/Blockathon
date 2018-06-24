@@ -27,14 +27,18 @@
         <h1>
             Handover select page
         </h1>
-        <form action="#" th:action="@{/manufacturerselect}" method="post">
+        <form action="#" th:action="@{/handoverDone}" method="post">
             <div class="row">
                 <div class="col-sm">
                     <input class="form-control" th:value="'ReceiverID: ' + ${receiverId}" name="receiver" title="receiver"
                            required="required" readonly>
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" th:value="'ShipmentIdID: ' + ${shipmentId}" name="shipment" title="shipment"
+                    <input class="form-control" th:value="'DelivererID: ' + ${deliverId}" name="deliverer" title="deliverer"
+                           required="required" readonly>
+                </div>
+                <div class="col-sm">
+                    <input class="form-control" th:value="'ShipmentID: ' + ${shipmentId}" name="shipment" title="shipment"
                            required="required" readonly>
                 </div>
                 <div class="col-sm">
