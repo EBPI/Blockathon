@@ -82,6 +82,8 @@ img.product {
 	float: left;
 }
 
+/* button styling */
+
 .btn {
 	font-weight: 700;
 	border-radius: 5px;
@@ -99,6 +101,13 @@ img.product {
     transition: 0.6s;
 }
 
+.btn:not(:disabled):not(.disabled).active, .btn:not(:disabled):not(.disabled):active, .show > .btn.dropdown-toggle {
+    color: #1C0529;
+    background-color: #00FF00;
+    border-color: #00C400;
+    box-shadow: 0px 10px 30px 2px rgba(0, 0, 0, 0.2);
+    transition: 0.6s;
+}
 
 .login-form > form >.form-group b {
     margin-bottom: 12px;
@@ -133,15 +142,20 @@ img.product {
     top: 5px;
 }
 
+/* minimize maximum stretch of page from elements*/
+
 .login-form {
 	max-width: 468px;
 	margin: 0 auto;
 	margin-top: 26px;
 }
 
+/* spacing h1 element */
 h1 {
-	margin-bottom: 2.5rem;
+	margin-bottom: 2rem;
 }
+
+/* logo glitch effect AWESOME */
 
 .glitch {
     line-height: 1;
@@ -206,9 +220,16 @@ h1 {
             animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both infinite
 }
 
+
+/* warning wrong login styling */
 .text-danger {
 	color: #ec1538 !important;
     background-color: #ffffff;
     padding: 10px 20px;
     border-radius: 5px;
+}    
+ 
+/* form spacing on handover */               
+form > div.row > div.col-sm {
+	margin-bottom: 30px;
 }
