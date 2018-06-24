@@ -10,6 +10,7 @@
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
     color: #00ff00;
+    margin: 8px 18px 8px 8px;
 }
 
 /* All fonts to Exo 2, except brand font. Brand font to Bungee */
@@ -29,6 +30,10 @@
     transition: 0.3s;
 }
 
+.navbar-nav {
+	margin-left: 20px;
+	}
+
 /* change the color of active or hovered links */
 .navbar-custom .nav-item:hover .nav-link {
     color: #00ff00;
@@ -38,6 +43,7 @@
 .navbar-custom .nav-item.active .nav-link {
     color: #ffffff;
     background-color: #1C0529;
+    margin-top: 6px;
 }
 
 *.basic-template {
@@ -136,6 +142,7 @@ img.product {
 .login-form {
 	max-width: 468px;
 	margin: 0 auto;
+	margin-top: 26px;
 }
 
 h1 {
@@ -203,4 +210,11 @@ h1 {
 }
 .glitch:hover::after {
             animation: glitch .3s cubic-bezier(.25, .46, .45, .94) reverse both infinite
+}
+
+.text-danger {
+	color: #ec1538 !important;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
